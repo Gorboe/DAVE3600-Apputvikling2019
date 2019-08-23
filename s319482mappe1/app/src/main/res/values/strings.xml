@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">MatteApp</string>
+    <string name="btn_start_game">Start spill</string>
+    <string name="btn_statistics">Se statistikk</string>
+    <string name="btn_preferences">Preferanser</string>
+
+    <!-- GAME STRINGS -->
+    <string name="btn_1">1</string>
+    <string name="btn_2">2</string>
+    <string name="btn_3">3</string>
+    <string name="btn_4">4</string>
+    <string name="btn_5">5</string>
+    <string name="btn_6">6</string>
+    <string name="btn_7">7</string>
+    <string name="btn_8">8</string>
+    <string name="btn_9">9</string>
+    <string name="btn_answer">Enter answer</string>
+    <string name="btn_back">&lt;-</string>
+
+    <string-array name="questions">
+        <item>Dette er spørsmål 1 blablabla. 2+2</item>
+        <item>Dette er spørsmål 2 blablabla. 3+5</item>
+        <item>Dette er spørsmål 3 blablabla. 8+4</item>
+        <item>Dette er spørsmål 4 blablabla. 2+2</item>
+        <item>Dette er spørsmål 5 blablabla. 3+5</item>
+        <item>Dette er spørsmål 6 blablabla. 8+4</item>
+        <item>Dette er spørsmål 7 blablabla. 2+2</item>
+        <item>Dette er spørsmål 8 blablabla. 3+5</item>
+        <item>Dette er spørsmål 9 blablabla. 8+4</item>
+        <item>Dette er spørsmål 10 blablabla. 2+2</item>
+        <item>Dette er spørsmål 11 blablabla. 3+5</item>
+        <item>Dette er spørsmål 12 blablabla. 8+4</item>
+        <item>Dette er spørsmål 13 blablabla. 2+2</item>
+        <item>Dette er spørsmål 14 blablabla. 3+5</item>
+        <item>Dette er spørsmål 15 blablabla. 8+4</item>
+        <item>Dette er spørsmål 16 blablabla. 2+2</item>
+        <item>Dette er spørsmål 17 blablabla. 3+5</item>
+        <item>Dette er spørsmål 18 blablabla. 8+4</item>
+        <item>Dette er spørsmål 19 blablabla. 2+2</item>
+        <item>Dette er spørsmål 20 blablabla. 3+5</item>
+        <item>Dette er spørsmål 21 blablabla. 8+4</item>
+        <item>Dette er spørsmål 22 blablabla. 2+2</item>
+        <item>Dette er spørsmål 23 blablabla. 3+5</item>
+        <item>Dette er spørsmål 24 blablabla. 8+4</item>
+        <item>Dette er spørsmål 25 blablabla. 8+4</item>
+    </string-array>
+
+    <integer-array name="answers">
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>4</item>
+        <item>8</item>
+        <item>12</item>
+        <item>12</item>
+    </integer-array>
+</resources>
