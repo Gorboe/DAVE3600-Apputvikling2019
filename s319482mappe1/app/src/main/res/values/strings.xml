@@ -17,6 +17,7 @@
     <string name="btn_answer">Enter answer</string>
     <string name="btn_back">&lt;-</string>
 
+    <!-- GAME QUESTIONS -->
     <string-array name="questions">
         <item>Dette er spørsmål 1 blablabla. 2+2</item>
         <item>Dette er spørsmål 2 blablabla. 3+5</item>
@@ -45,6 +46,7 @@
         <item>Dette er spørsmål 25 blablabla. 8+4</item>
     </string-array>
 
+    <!-- GAME ANSWERS -->
     <integer-array name="answers">
         <item>4</item>
         <item>8</item>

@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="colorGreen">#008000</color>
+    <color name="colorRed">#FF0000</color>
+
     <color name="default_text_box_background">#bfbfbf</color>
 </resources>

@@ -16,8 +16,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private final StringBuilder answer = new StringBuilder();
     private TextView inputField;
     private TextView questionField;
+    private TextView correctBox;
+    private TextView wrongBox;
     private String[] questions;
     private int[] answers;
+    private int questionCount = 0;
+
+    private int correct_count = 0;
+    private int wrong_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         questions = getResources().getStringArray(R.array.questions);
         answers = getResources().getIntArray(R.array.answers);
 
+        correctBox = findViewById(R.id.correctBox);
+        wrongBox = findViewById(R.id.wrongBox);
+
         initializeButtons();
         loadRandomQuestion();
+        System.out.println("This is the pref amount: " + Database.getInstance().getPreferred_amount_of_questions());
     }
 
     private void initializeButtons(){
@@ -58,13 +68,25 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn_back.setOnClickListener(this);
     }
 
-    //TODO: remove temporary random
+
+    //TODO: NUMBER OF RIGHT AND WRONG ANSWERS SHOULD BE SHOWN ON SCREEN AT ALL TIMES
+    //TODO: ADD SAVE STATISTICS OF PREVIOUS GAMES
+    //TODO: END GAME BUTTON WITH A NEW DIALOG BOX ASKING IF USER REALLY WANNA END GAME
+    //TODO: MSG TO USER IF ALL QUESTIONS USED
+    //TODO: LAYOUT!!
+    //TODO: CREATE ICON
     int random;
     private void loadRandomQuestion(){
-        //TODO: make randomized!
-        random = ThreadLocalRandom.current().nextInt(0,25); //[0, 24] t:0,25
+        boolean uniqueQuestion = false;
+        while (!uniqueQuestion){
+            random = ThreadLocalRandom.current().nextInt(0,25); //[0, 24] t:[0,25)
+            if(questions[random] != null){
+                uniqueQuestion = true;
+            }
+        }
 
         questionField.setText(questions[random]);
+        questions[random] = null;
     }
 
     @Override
@@ -107,12 +129,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void checkAnswer(){
-        //TODO: fix randomized
+        questionCount++;
         if(answer.toString().equals(answers[random]+"")){
-            System.out.println("RIKTIG!");
+            String temp = ++correct_count + "";
+            correctBox.setText(temp);
         }else{
-            System.out.println("FEIL!");
+            String temp = ++wrong_count + "";
+            wrongBox.setText(temp);
         }
+
+        if(Database.getInstance().getPreferred_amount_of_questions() == questionCount){
+            System.out.println("GAME IS DONE!");
+
+            //TODO: save game in statistics using current correct_count and wrong_count
+            Database.getInstance().addGameStatistic(correct_count, wrong_count);
+
+            //TEMP!!!!!
+            String temp = "GAME IS NOW OVER!!!! THIS IS A TEMP SOLUTION! :)";
+            questionField.setText(temp);
+            return;//TODO: msg to user that game is done!
+        }
+
+        loadRandomQuestion();
     }
 
     private void removeLast(){
