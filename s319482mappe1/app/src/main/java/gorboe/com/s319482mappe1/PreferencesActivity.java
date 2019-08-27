@@ -25,7 +25,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_10_questions = findViewById(R.id.btn_10_questions);
         btn_25_questions = findViewById(R.id.btn_25_questions);
 
-        //TODO: 5, 10, 25 questions
         //TODO: norwegian, german
 
         btn_5_questions.setOnClickListener(new View.OnClickListener() {

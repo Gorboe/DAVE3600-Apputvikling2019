@@ -6,9 +6,9 @@ public class Database {
     private static Database INSTANCE = null;
     private int preferred_amount_of_questions;
     private ArrayList<GameStatistic> previous_games_collection;
+    private int currentlySelectedStat;
 
     private Database(){
-        //TODO: create database, use this to store preferences and other useful stuff.
         preferred_amount_of_questions = 5;
         previous_games_collection = new ArrayList<>();
     }
@@ -34,5 +34,13 @@ public class Database {
 
     public ArrayList<GameStatistic> getPrevious_games_collection() {
         return previous_games_collection;
+    }
+
+    public void selectedStat(int position){
+        currentlySelectedStat = position;
+    }
+
+    public void deleteStat(){
+        previous_games_collection.remove(currentlySelectedStat);
     }
 }
