@@ -2,10 +2,14 @@ package gorboe.com.s319482mappe1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Locale;
 
 public class PreferencesActivity extends AppCompatActivity {
 
@@ -13,6 +17,14 @@ public class PreferencesActivity extends AppCompatActivity {
     private Button btn_5_questions;
     private Button btn_10_questions;
     private Button btn_25_questions;
+
+    //language buttons
+    private Button btn_norwegian;
+    private Button btn_german;
+    private Locale locale;
+
+    //todo:temp
+    private TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,10 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_10_questions = findViewById(R.id.btn_10_questions);
         btn_25_questions = findViewById(R.id.btn_25_questions);
 
+        btn_norwegian = findViewById(R.id.btn_norwegian);
+        btn_german = findViewById(R.id.btn_german);
+
+        test = findViewById(R.id.test);
         //TODO: norwegian, german
 
         btn_5_questions.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +64,26 @@ public class PreferencesActivity extends AppCompatActivity {
             public void onClick(View v){
                 Database.getInstance().setPreferred_amount_of_questions(25);
                 loadCurrentPreferences();
+            }
+        });
+
+        btn_german.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //
+                System.out.println("PRESSING GERMAN BUTTON");
+                setLocale("de");
+                recreate();
+            }
+        });
+
+        btn_norwegian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                //
+                System.out.println("PRESSING NORWEGIAN BUTTON");
+                setLocale("nb");
+                recreate();
             }
         });
 
@@ -77,5 +113,17 @@ public class PreferencesActivity extends AppCompatActivity {
 
         //preferred
         preferred_amount.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+    }
+
+    private void setLocale(String lang){
+        locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        //temp
+        //locale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0); //current language on phone
+        //temp.setText(locale.getLanguage());
     }
 }

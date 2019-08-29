@@ -1,21 +1,21 @@
 <resources>
     <string name="app_name">MatteApp</string>
-    <string name="btn_start_game">Start spill</string>
+    <string name="btn_start_game">E-Startgame</string>
     <string name="btn_statistics">Se statistikk</string>
-    <string name="btn_preferences">Preferanser</string>
+    <string name="btn_preferences">Prefrences</string>
 
     <!-- GAME STRINGS -->
-    <string name="btn_1">1</string>
-    <string name="btn_2">2</string>
-    <string name="btn_3">3</string>
-    <string name="btn_4">4</string>
-    <string name="btn_5">5</string>
-    <string name="btn_6">6</string>
-    <string name="btn_7">7</string>
-    <string name="btn_8">8</string>
-    <string name="btn_9">9</string>
+    <string name="btn_1" translatable="false">1</string>
+    <string name="btn_2" translatable="false">2</string>
+    <string name="btn_3" translatable="false">3</string>
+    <string name="btn_4" translatable="false">4</string>
+    <string name="btn_5" translatable="false">5</string>
+    <string name="btn_6" translatable="false">6</string>
+    <string name="btn_7" translatable="false">7</string>
+    <string name="btn_8" translatable="false">8</string>
+    <string name="btn_9" translatable="false">9</string>
     <string name="btn_answer">Enter answer</string>
-    <string name="btn_back">&lt;-</string>
+    <string name="btn_back" translatable="false">&lt;-</string>
 
     <!-- GAME QUESTIONS -->
     <string-array name="questions">

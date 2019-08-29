@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MatteApp</string>
+    <string name="btn_answer">skriv inn svar</string>
+    <string name="btn_preferences">preferanser</string>
+    <string name="btn_start_game">start spill</string>
+    <string name="btn_statistics">statistikk</string>
+</resources>
