@@ -5,4 +5,5 @@
     <string name="btn_preferences">prfransen</string>
     <string name="btn_start_game">srtspiel</string>
     <string name="btn_statistics">statstikken</string>
+    <string name="question_amount">amunten aus questions</string>
 </resources>

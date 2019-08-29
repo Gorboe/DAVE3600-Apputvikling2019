@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">MatteApp</string>
+
+    <!-- Main-->
     <string name="btn_start_game">E-Startgame</string>
-    <string name="btn_statistics">Se statistikk</string>
+    <string name="btn_statistics">watch stats</string>
     <string name="btn_preferences">Prefrences</string>
+
+    <!-- Preferences -->
+    <string name="question_amount">Amount of questions per game</string>
 
     <!-- GAME STRINGS -->
     <string name="btn_1" translatable="false">1</string>

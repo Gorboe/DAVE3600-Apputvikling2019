@@ -2,6 +2,7 @@ package gorboe.com.s319482mappe1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,8 +24,6 @@ public class PreferencesActivity extends AppCompatActivity {
     private Button btn_german;
     private Locale locale;
 
-    //todo:temp
-    private TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_norwegian = findViewById(R.id.btn_norwegian);
         btn_german = findViewById(R.id.btn_german);
 
-        test = findViewById(R.id.test);
+
         //TODO: norwegian, german
 
         btn_5_questions.setOnClickListener(new View.OnClickListener() {
@@ -125,5 +124,10 @@ public class PreferencesActivity extends AppCompatActivity {
         //temp
         //locale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0); //current language on phone
         //temp.setText(locale.getLanguage());
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

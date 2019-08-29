@@ -5,4 +5,5 @@
     <string name="btn_preferences">preferanser</string>
     <string name="btn_start_game">start spill</string>
     <string name="btn_statistics">statistikk</string>
+    <string name="question_amount">Antall spørsmål per spill</string>
 </resources>

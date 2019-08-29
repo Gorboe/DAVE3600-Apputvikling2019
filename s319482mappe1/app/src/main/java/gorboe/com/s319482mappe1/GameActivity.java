@@ -157,4 +157,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         answer.deleteCharAt(answer.length()-1);
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }
