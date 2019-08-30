@@ -4,41 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btn_start_game"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="288dp"
+        android:layout_height="136dp"
+        android:drawableStart="@drawable/play_arrow"
         android:text="@string/btn_start_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.203" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <Button
         android:id="@+id/btn_statistics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_statistics"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:background="@drawable/statistics"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintStart_toEndOf="@+id/btn_start_game"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418" />
+        app:layout_constraintVertical_bias="0.453" />
 
     <Button
         android:id="@+id/btn_preferences"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:text="@string/btn_preferences"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintHorizontal_bias="0.378"
+        app:layout_constraintStart_toEndOf="@+id/btn_start_game"
+        app:layout_constraintTop_toBottomOf="@+id/btn_statistics"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
