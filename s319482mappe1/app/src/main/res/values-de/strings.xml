@@ -6,4 +6,5 @@
     <string name="btn_start_game">Spiel beginnen</string>
     <string name="btn_statistics">statstikken</string>
     <string name="question_amount">Anzahl der Fragen pro Spiel</string>
+    <string name="what_langauge">blablabla tysksprache</string>
 </resources>
