@@ -2,9 +2,37 @@
 <resources>
     <string name="app_name">MatteApp</string>
     <string name="btn_answer">Antworten</string>
-    <string name="btn_preferences">prfransen</string>
     <string name="btn_start_game">Spiel beginnen</string>
-    <string name="btn_statistics">statstikken</string>
     <string name="question_amount">Anzahl der Fragen pro Spiel</string>
-    <string name="what_langauge">blablabla tysksprache</string>
+    <string name="what_langauge">Wählen Sie die Sprache aus, indem Sie auf die Flagge tippen</string>
+    <string name="delete_text">Möchten Sie diese Statistik wirklich löschen?</string>
+
+    <!-- GAME QUESTIONS -->
+    <string-array name="questions">
+        <item>Dies sind Fragen 1.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 2.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 3.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 4.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 5.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 6.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 7.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 8.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 9.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 10.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 11.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 12.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 13.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 14.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 15.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 16.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 17.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 18.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 19.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 20.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 21.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 22.\nWas ist 2 + 2?</item>
+        <item>Dies sind Fragen 23.\nWas ist 3 + 5?</item>
+        <item>Dies sind Fragen 24.\nWas ist 8 + 4?</item>
+        <item>Dies sind Fragen 25.\nWas ist 8 + 4?</item>
+    </string-array>
 </resources>

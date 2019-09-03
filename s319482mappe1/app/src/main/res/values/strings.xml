@@ -1,14 +1,15 @@
 <resources>
-    <string name="app_name">MatteApp</string>
+    <string name="app_name">QuickMafs</string>
 
     <!-- Main-->
-    <string name="btn_start_game">E-Startgame</string>
-    <string name="btn_statistics">watch stats</string>
-    <string name="btn_preferences">Prefrences</string>
+    <string name="btn_start_game">Start spill</string>
+
+    <!-- Statistic -->
+    <string name="delete_text">Er du sikker på at du ønsker å slette denne statistikken?</string>
 
     <!-- Preferences -->
-    <string name="question_amount">Amount of questions per game</string>
-    <string name="what_langauge">Velg språk ved å trykke her</string>
+    <string name="question_amount">Antall spørsmål per spill</string>
+    <string name="what_langauge">Velg språk ved å trykke på flagget</string>
     <string name="option_5" translatable="false">5</string>
     <string name="option_10" translatable="false">10</string>
     <string name="option_25" translatable="false">25</string>

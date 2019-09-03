@@ -8,11 +8,23 @@
     tools:context=".PreferencesActivity">
 
     <Button
+        android:id="@+id/btn_25_questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/option_25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_10_questions"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
         android:id="@+id/btn_5_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:text="@string/option_5"
         app:layout_constraintEnd_toStartOf="@+id/btn_10_questions"
@@ -23,68 +35,66 @@
         android:id="@+id/btn_10_questions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="@string/option_10"
         app:layout_constraintEnd_toStartOf="@+id/btn_25_questions"
         app:layout_constraintStart_toEndOf="@+id/btn_5_questions"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <Button
-        android:id="@+id/btn_25_questions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/option_25"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_10_questions"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:text="@string/question_amount"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_5_questions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="307dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        android:text="@string/what_langauge"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_norwegian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_german"
         android:layout_width="150dp"
         android:layout_height="98dp"
         android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/german_button_deactivated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_norwegian"
         app:layout_constraintTop_toBottomOf="@+id/btn_25_questions"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintVertical_bias="0.951" />
 
     <Button
         android:id="@+id/btn_norwegian"
         android:layout_width="152dp"
         android:layout_height="98dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/norwegian_button_deactivated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_german"
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_5_questions"
-        app:layout_constraintVertical_bias="0.495" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="342dp" />
+        app:layout_constraintVertical_bias="0.949" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
