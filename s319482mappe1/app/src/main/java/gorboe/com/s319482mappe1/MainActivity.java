@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_start_game;
+    private Button btn_start_game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
