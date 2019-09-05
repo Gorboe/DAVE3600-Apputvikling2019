@@ -22,7 +22,6 @@ public class PreferencesActivity extends AppCompatActivity {
     //language buttons
     private Button btn_norwegian;
     private Button btn_german;
-    private Locale locale;
 
 
     @Override
@@ -115,7 +114,7 @@ public class PreferencesActivity extends AppCompatActivity {
     }
 
     private void setLocale(String lang){
-        locale = new Locale(lang);
+        Locale locale = new Locale(lang);
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;

@@ -1,5 +1,6 @@
 package gorboe.com.s319482mappe1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,13 +10,15 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button btn_start_game;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //buttons
-        Button btn_start_game = findViewById(R.id.btn_start_game);
+        btn_start_game = findViewById(R.id.btn_start_game);
         Button btn_statistics = findViewById(R.id.btn_statistics);
         Button btn_preferences = findViewById(R.id.btn_preferences);
 
@@ -57,5 +60,18 @@ public class MainActivity extends AppCompatActivity {
     //start preferences activity
     public void preferencesActivity(){
         startActivity(new Intent(this, PreferencesActivity.class));
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        //btn_start_game.setText(savedInstanceState.getString("START_GAME_KEY"));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //outState.putString("START_GAME_KEY", btn_start_game.getText().toString());
+
+        super.onSaveInstanceState(outState);
     }
 }

@@ -7,6 +7,7 @@ public class Database {
     private int preferred_amount_of_questions;
     private ArrayList<GameStatistic> previous_games_collection;
     private int currentlySelectedStat;
+    private String locale;
 
     private Database(){
         preferred_amount_of_questions = 5;
@@ -18,6 +19,14 @@ public class Database {
             INSTANCE = new Database();
 
         return INSTANCE;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public int getPreferred_amount_of_questions() {

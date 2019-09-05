@@ -6,6 +6,8 @@
     <string name="question_amount">Anzahl der Fragen pro Spiel</string>
     <string name="what_langauge">Wählen Sie die Sprache aus, indem Sie auf die Flagge tippen</string>
     <string name="delete_text">Möchten Sie diese Statistik wirklich löschen?</string>
+    <string name="right">Recht:</string>
+    <string name="wrong">Falsch:</string>
 
     <!-- GAME QUESTIONS -->
     <string-array name="questions">

@@ -27,6 +27,8 @@
     <string name="btn_0" translatable="false">0</string>
     <string name="btn_answer">Sjekk svar</string>
     <string name="btn_back" translatable="false">DEL</string>
+    <string name="right">Riktig:</string>
+    <string name="wrong">Galt:</string>
 
     <!-- GAME QUESTIONS -->
     <string-array name="questions">
