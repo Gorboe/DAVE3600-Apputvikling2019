@@ -2,10 +2,13 @@ package gorboe.com.s319482mappe1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
 
@@ -114,15 +118,16 @@ public class PreferencesActivity extends AppCompatActivity {
     }
 
     private void setLocale(String lang){
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
+        storePreferredLanguage(lang);
+        Database.getInstance().setLocale(getBaseContext());
         //temp
         //locale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0); //current language on phone
         //temp.setText(locale.getLanguage());
+    }
+
+    private void storePreferredLanguage(String lang){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        preferences.edit().putString("language_key", lang).apply(); //stores current language
     }
 
     @Override

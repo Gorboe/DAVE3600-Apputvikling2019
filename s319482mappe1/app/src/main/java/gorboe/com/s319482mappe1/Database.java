@@ -1,13 +1,19 @@
 package gorboe.com.s319482mappe1;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.preference.PreferenceManager;
+
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Database {
     private static Database INSTANCE = null;
     private int preferred_amount_of_questions;
     private ArrayList<GameStatistic> previous_games_collection;
     private int currentlySelectedStat;
-    private String locale;
 
     private Database(){
         preferred_amount_of_questions = 5;
@@ -21,12 +27,13 @@ public class Database {
         return INSTANCE;
     }
 
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
+    public void setLocale(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Locale locale = new Locale(preferences.getString("language_key", "no"));
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
     public int getPreferred_amount_of_questions() {

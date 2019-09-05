@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,8 +16,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //buttons
         btn_start_game = findViewById(R.id.btn_start_game);
@@ -64,14 +68,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        //Database.getInstance().setLang(savedInstanceState.getString("LANGUAGE"));
+        //Database.getInstance().setPreferred_amount_of_questions(savedInstanceState.getInt("QUESTIONS"));
+        //Database.getInstance().setLocale(getBaseContext());
         super.onRestoreInstanceState(savedInstanceState);
-        //btn_start_game.setText(savedInstanceState.getString("START_GAME_KEY"));
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //outState.putString("START_GAME_KEY", btn_start_game.getText().toString());
-
+        //outState.putInt("QUESTIONS", Database.getInstance().getPreferred_amount_of_questions());
+        //outState.putString("LANGUAGE", Database.getInstance().getLang());
         super.onSaveInstanceState(outState);
     }
 }

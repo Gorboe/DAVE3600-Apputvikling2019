@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
