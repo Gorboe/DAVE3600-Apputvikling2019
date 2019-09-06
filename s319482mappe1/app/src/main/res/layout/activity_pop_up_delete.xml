@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGreen"
+    android:background="@drawable/rectangleborder"
     tools:context=".PopUpDeleteActivity">
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/circletextbox"
+        android:drawableTop="@drawable/close"
+        android:onClick="closePopUp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_delete"

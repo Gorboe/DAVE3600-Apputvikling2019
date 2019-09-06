@@ -38,4 +38,5 @@
     </string-array>
     <string name="newgame">Neues Spiel</string>
     <string name="mainmenu">Hauptmenü</string>
+    <string name="exit_game_text">Möchten Sie das Spiel wirklich beenden?</string>
 </resources>

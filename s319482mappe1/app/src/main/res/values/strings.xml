@@ -18,6 +18,9 @@
     <string name="newgame">Nytt Spill</string>
     <string name="mainmenu">Hovedmeny</string>
 
+    <!-- POP UP EXIT GAME -->
+    <string name="exit_game_text">Er du sikker på at du vil avslutte spillet?</string>
+
     <!-- GAME STRINGS -->
     <string name="btn_1" translatable="false">1</string>
     <string name="btn_2" translatable="false">2</string>

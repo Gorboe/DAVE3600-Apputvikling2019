@@ -155,7 +155,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        //todo: popup with are you sure you wanna leave
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, PopUpExitGameActivity.class));
     }
 }
