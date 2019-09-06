@@ -14,6 +14,10 @@
     <string name="option_10" translatable="false">10</string>
     <string name="option_25" translatable="false">25</string>
 
+    <!-- POP UP GAME COMPLETE STRINGS -->
+    <string name="newgame">Nytt Spill</string>
+    <string name="mainmenu">Hovedmeny</string>
+
     <!-- GAME STRINGS -->
     <string name="btn_1" translatable="false">1</string>
     <string name="btn_2" translatable="false">2</string>
@@ -25,7 +29,7 @@
     <string name="btn_8" translatable="false">8</string>
     <string name="btn_9" translatable="false">9</string>
     <string name="btn_0" translatable="false">0</string>
-    <string name="btn_answer">Sjekk svar</string>
+    <string name="btn_answer" translatable="false">OK</string>
     <string name="btn_back" translatable="false">DEL</string>
     <string name="right">Riktig:</string>
     <string name="wrong">Galt:</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MatteApp</string>
-    <string name="btn_answer">Antworten</string>
     <string name="btn_start_game">Spiel beginnen</string>
     <string name="question_amount">Anzahl der Fragen pro Spiel</string>
     <string name="what_langauge">Wählen Sie die Sprache aus, indem Sie auf die Flagge tippen</string>
@@ -37,4 +36,6 @@
         <item>Dies sind Fragen 24.\nWas ist 8 + 4?</item>
         <item>Dies sind Fragen 25.\nWas ist 8 + 4?</item>
     </string-array>
+    <string name="newgame">Neues Spiel</string>
+    <string name="mainmenu">Hauptmenü</string>
 </resources>

@@ -138,15 +138,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(Database.getInstance().getPreferred_amount_of_questions() == questionCount){
-            System.out.println("GAME IS DONE!");
-
-            //TODO: save game in statistics using current correct_count and wrong_count
             Database.getInstance().addGameStatistic(correct_count, wrong_count);
-
-            //TEMP!!!!!
-            String temp = "GAME IS NOW OVER!!!! THIS IS A TEMP SOLUTION! :)";
-            questionField.setText(temp);
-            return;//TODO: msg to user that game is done!
+            startActivity(new Intent(this, PopUpGameCompleteActivity.class));
+            return;
         }
 
         loadRandomQuestion();
@@ -161,6 +155,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
+        //todo: popup with are you sure you wanna leave
         startActivity(new Intent(this, MainActivity.class));
     }
 }
