@@ -70,10 +70,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //TODO: END GAME BUTTON WITH A NEW DIALOG BOX ASKING IF USER REALLY WANNA END GAME
     //TODO: MSG TO USER IF ALL QUESTIONS USED
     //TODO: LAYOUT!!
     //TODO: CREATE ICON
+    //TODO: SAVE STATE WHEN SCREEN ROTATES. RIKTIG OG GALE SVAR + QUESTIONCOUNT
     int random;
     private void loadRandomQuestion(){
         boolean uniqueQuestion = false;

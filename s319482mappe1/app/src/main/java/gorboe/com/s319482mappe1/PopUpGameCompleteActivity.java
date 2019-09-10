@@ -3,6 +3,7 @@ package gorboe.com.s319482mappe1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -16,9 +17,20 @@ public class PopUpGameCompleteActivity extends AppCompatActivity {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int orientation = getResources().getConfiguration().orientation;
+        int width;
+        int height;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            // In landscape
+            width = (int)(displayMetrics.widthPixels * 0.5);
+            height = (int)(displayMetrics.heightPixels * 0.5);
+        } else {
+            // In portrait
+            width = (int)(displayMetrics.widthPixels * 0.8);
+            height = (int)(displayMetrics.heightPixels * 0.3);
+        }
 
-        int width = (int)(displayMetrics.widthPixels * 0.8);
-        int height = (int)(displayMetrics.heightPixels * 0.3);
+
 
         getWindow().setLayout(width, height);
     }

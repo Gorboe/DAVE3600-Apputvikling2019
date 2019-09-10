@@ -29,7 +29,7 @@ public class Database {
 
     public void setLocale(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        Locale locale = new Locale(preferences.getString("language_key", "no")); //no is default if no set language is found
+        Locale locale = new Locale(preferences.getString("language_key", "no")); //"no" is default if no set language is found
         Locale.setDefault(locale);
         Configuration config = new Configuration();
         config.locale = locale;
