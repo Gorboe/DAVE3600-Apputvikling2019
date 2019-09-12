@@ -39,4 +39,7 @@
     <string name="newgame">Neues Spiel</string>
     <string name="mainmenu">Hauptmenü</string>
     <string name="exit_game_text">Möchten Sie das Spiel wirklich beenden?</string>
+    <string name="gameover">Spiel ist aus</string>
+    <string name="delete">Löschen</string>
+    <string name="warning">Möchten Sie diese Statistik wirklich löschen?</string>
 </resources>
