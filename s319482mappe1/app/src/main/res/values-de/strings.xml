@@ -4,7 +4,6 @@
     <string name="btn_start_game">Spiel beginnen</string>
     <string name="question_amount">Anzahl der Fragen pro Spiel</string>
     <string name="what_langauge">Wählen Sie die Sprache aus, indem Sie auf die Flagge tippen</string>
-    <string name="delete_text">Möchten Sie diese Statistik wirklich löschen?</string>
     <string name="right">Recht:</string>
     <string name="wrong">Falsch:</string>
 
@@ -42,4 +41,6 @@
     <string name="gameover">Spiel ist aus</string>
     <string name="delete">Löschen</string>
     <string name="warning">Möchten Sie diese Statistik wirklich löschen?</string>
+    <string name="date">Datum:</string>
+    <string name="time">Zeit:</string>
 </resources>

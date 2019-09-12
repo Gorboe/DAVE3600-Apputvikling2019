@@ -14,6 +14,7 @@ public class PopUpDeleteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Database.getInstance().setLocale(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_delete);
 

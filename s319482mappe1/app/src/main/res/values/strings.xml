@@ -5,7 +5,8 @@
     <string name="btn_start_game">Start spill</string>
 
     <!-- Statistic -->
-    <string name="delete_text">Er du sikker på at du ønsker å slette denne statistikken?</string>
+    <string name="date">Dato:</string>
+    <string name="time">Tid:</string>
 
     <!-- Preferences -->
     <string name="question_amount">Antall spørsmål per spill</string>

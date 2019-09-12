@@ -44,8 +44,8 @@ public class Database {
         this.preferred_amount_of_questions = preferred_amount_of_questions;
     }
 
-    public void addGameStatistic(int correct_answer, int wrong_answer){
-        previous_games_collection.add(new GameStatistic(correct_answer, wrong_answer));
+    public void addGameStatistic(int correct_answer, int wrong_answer, Context context){
+        previous_games_collection.add(new GameStatistic(correct_answer, wrong_answer, context));
     }
 
     public ArrayList<GameStatistic> getPrevious_games_collection() {

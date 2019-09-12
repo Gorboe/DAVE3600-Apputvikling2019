@@ -28,11 +28,8 @@ public class StatisticsActivity extends AppCompatActivity {
         statistics = Database.getInstance().getPrevious_games_collection();
 
 
-
         ArrayAdapter<GameStatistic> arrayAdapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1,
-                        statistics);
-
+                (this, android.R.layout.simple_list_item_1, statistics);
 
         statisticsList.setAdapter(arrayAdapter);
 

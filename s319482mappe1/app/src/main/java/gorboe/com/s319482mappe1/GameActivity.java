@@ -2,8 +2,11 @@ package gorboe.com.s319482mappe1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -138,12 +141,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(Database.getInstance().getPreferred_amount_of_questions() == questionCount){
-            Database.getInstance().addGameStatistic(correct_count, wrong_count);
+            Database.getInstance().addGameStatistic(correct_count, wrong_count, getBaseContext());
             startActivity(new Intent(this, PopUpGameCompleteActivity.class));
             return;
         }
 
         loadRandomQuestion();
+    }
+
+    private void storeStatistics(String lang){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        //TODO: LOADS....
+        //preferences.edit().putString("language_key", lang).apply(); //stores current language
     }
 
     private void removeLast(){
