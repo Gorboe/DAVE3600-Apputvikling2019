@@ -27,6 +27,14 @@ public class Database {
         return INSTANCE;
     }
 
+    public boolean isGerman(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        if(preferences.getString("language_key", "no").equals("de")){
+            return true;
+        }
+        return false;
+    }
+
     public void setLocale(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         Locale locale = new Locale(preferences.getString("language_key", "no")); //"no" is default if no set language is found

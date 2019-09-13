@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -30,6 +31,7 @@ public class PreferencesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
 
@@ -42,7 +44,7 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_norwegian = findViewById(R.id.btn_norwegian);
         btn_german = findViewById(R.id.btn_german);
 
-
+        setSelectedLanguage(Database.getInstance().isGerman(getBaseContext()));
         //TODO: norwegian, german
 
         btn_5_questions.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +74,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_german.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //
                 System.out.println("PRESSING GERMAN BUTTON");
                 setLocale("de");
                 recreate();
@@ -82,7 +83,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_norwegian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //
                 System.out.println("PRESSING NORWEGIAN BUTTON");
                 setLocale("nb");
                 recreate();
@@ -107,6 +107,16 @@ public class PreferencesActivity extends AppCompatActivity {
         //preferred language
     }
 
+    private void setSelectedLanguage(boolean isGerman){
+        if(isGerman){
+            //tysk active
+            btn_german.setBackground(getBaseContext().getDrawable(R.drawable.german_button_activated));
+        }else{
+            //norsk active
+            btn_norwegian.setBackground(getBaseContext().getDrawable(R.drawable.norwegian_button_activated));
+        }
+    }
+
     private void setButtonColors(Button preferred_amount){
         //reset colors
         btn_5_questions.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -114,7 +124,7 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_25_questions.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
         //preferred
-        preferred_amount.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        preferred_amount.setBackgroundColor(getResources().getColor(R.color.selected));
     }
 
     private void setLocale(String lang){
@@ -132,6 +142,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        finish(); //not on stack
         startActivity(new Intent(this, MainActivity.class));
     }
 }
