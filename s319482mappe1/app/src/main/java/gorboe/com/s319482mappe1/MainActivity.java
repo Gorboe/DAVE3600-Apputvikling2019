@@ -16,6 +16,17 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_start_game;
 
+    //TODO LIST!!
+    //TODO: Remove every System.out.prinln and go thru comments
+    //TODO: Remove the click lisseners and use the onAction/onClick xml method, this will clean up the code
+    //TODO: Background picture on the main activity, fix overall layout, colors.
+    //TODO: Questions should be fixed and remove the text so its just the questions f.ek 2 + 2 = ?
+    //TODO: New flags activated picture? also Norsk(norwegish) Deutsch(Tysk) so its easy to understand for both
+    //TODO: Find new settings icon? current one got bad resolution
+    //TODO: Fix preferences landscape mode!
+    //TODO: ICON instead of the text in actionbar.
+    //TODO: Rapport
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is

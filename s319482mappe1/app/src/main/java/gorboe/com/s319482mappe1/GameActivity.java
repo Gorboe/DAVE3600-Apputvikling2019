@@ -75,8 +75,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn_back.setOnClickListener(this);
     }
 
-    //TODO: CREATE ICON
-    //TODO: SAVE STATE WHEN SCREEN ROTATES. RIKTIG OG GALE SVAR + QUESTIONCOUNT
     int random;
     private void loadRandomQuestion(){
         boolean uniqueQuestion = false;
