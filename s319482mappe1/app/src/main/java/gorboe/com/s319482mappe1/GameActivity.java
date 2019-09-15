@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
@@ -142,17 +144,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         if(Database.getInstance().getPreferred_amount_of_questions() == questionCount){
             Database.getInstance().addGameStatistic(correct_count, wrong_count, getBaseContext());
+            Database.getInstance().storeStatistics(getBaseContext()); //permanent store
             startActivity(new Intent(this, PopUpGameCompleteActivity.class));
             return;
         }
 
         loadRandomQuestion();
-    }
-
-    private void storeStatistics(String lang){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        //TODO: LOADS....
-        //preferences.edit().putString("language_key", lang).apply(); //stores current language
     }
 
     private void removeLast(){

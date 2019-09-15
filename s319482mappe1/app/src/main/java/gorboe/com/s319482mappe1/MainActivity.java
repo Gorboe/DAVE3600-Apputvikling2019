@@ -10,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_start_game;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is
+        Database.getInstance().retrieveStatistics(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

@@ -5,9 +5,12 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.util.ArraySet;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class Database {
     private static Database INSTANCE = null;
@@ -42,6 +45,50 @@ public class Database {
         Configuration config = new Configuration();
         config.locale = locale;
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+    }
+
+    public void storeStatistics(Context context){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        int i = 0;
+        System.out.println("COLLECTION COUNT: " + Database.getInstance().getPrevious_games_collection().size());
+        System.out.println("CORRECT ANSWER BEFORE STORE: " + getPrevious_games_collection().get(0).storeString()[2]);
+        for(GameStatistic stat: Database.getInstance().getPrevious_games_collection()){
+            preferences.edit().putString("date" + i, stat.storeString()[0]).apply();
+            preferences.edit().putString("time" + i, stat.storeString()[1]).apply();
+            preferences.edit().putString("correct_answer" + i, stat.storeString()[2]).apply();
+            preferences.edit().putString("wrong_answer" + i, stat.storeString()[3]).apply();
+            i++;
+        }
+        preferences.edit().putString("stats_count", String.valueOf(Database.getInstance().getPrevious_games_collection().size())).apply();
+
+        System.out.println("Stored! All");
+        System.out.println("STATS COUNT: " + preferences.getString("stats_count", "fail"));
+        System.out.println("CORRECT ANSWER: " + preferences.getString("correct_answer0", "fail"));
+        System.out.println("WRONG ANSWER: " + preferences.getString("wrong_answer0", "fail"));
+        System.out.println("DATE: " + preferences.getString("date0", "fail"));
+        System.out.println("TIME: " + preferences.getString("time0", "fail"));
+    }
+
+    public void retrieveStatistics(Context context){
+        if(!previous_games_collection.isEmpty()){
+            return;
+        }
+        System.out.println("LOADING DATA!");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        int stats_count = Integer.parseInt(preferences.getString("stats_count", String.valueOf(0)));
+        if(stats_count == 0){
+            return;
+        }
+        System.out.println("STATS COUNT: " + stats_count);
+        for(int i = 0; i < stats_count; i++){
+            int correct_answer = Integer.parseInt(preferences.getString("correct_answer" + i, String.valueOf(-1)));
+            System.out.println("CORRECT ANSWER: " + correct_answer);
+            int wrong_answer = Integer.parseInt(preferences.getString("wrong_answer" + i, String.valueOf(-1)));
+            String time = preferences.getString("time" + i, null);
+            String date = preferences.getString("date" + i, null);
+            previous_games_collection.add(new GameStatistic(correct_answer, wrong_answer, time, date, context));
+        }
     }
 
     public int getPreferred_amount_of_questions() {
