@@ -45,7 +45,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_german = findViewById(R.id.btn_german);
 
         setSelectedLanguage(Database.getInstance().isGerman(getBaseContext()));
-        //TODO: norwegian, german
 
         btn_5_questions.setOnClickListener(new View.OnClickListener() {
             @Override

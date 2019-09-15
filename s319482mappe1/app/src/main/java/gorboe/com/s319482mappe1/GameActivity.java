@@ -1,5 +1,6 @@
 package gorboe.com.s319482mappe1;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -74,9 +75,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn_back.setOnClickListener(this);
     }
 
-
-    //TODO: MSG TO USER IF ALL QUESTIONS USED
-    //TODO: LAYOUT!!
     //TODO: CREATE ICON
     //TODO: SAVE STATE WHEN SCREEN ROTATES. RIKTIG OG GALE SVAR + QUESTIONCOUNT
     int random;
@@ -162,5 +160,28 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, PopUpExitGameActivity.class));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("correct_count", String.valueOf(correct_count));
+        outState.putString("wrong_count", String.valueOf(wrong_count));
+        outState.putString("question_count", String.valueOf(questionCount));
+        outState.putString("input_field", inputField.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        correct_count = Integer.parseInt(savedInstanceState.getString("correct_count", "-1"));
+        wrong_count = Integer.parseInt(savedInstanceState.getString("wrong_count", "-1"));
+        questionCount = Integer.parseInt(savedInstanceState.getString("question_count", "-1"));
+        answer.append(savedInstanceState.getString("input_field", "fail"));
+        inputField.setText(answer);
+        String correct = correct_count + "";
+        String wrong = wrong_count + "";
+        correctBox.setText(correct);
+        wrongBox.setText(wrong);
     }
 }
