@@ -10,7 +10,8 @@
 
     <!-- Preferences -->
     <string name="question_amount">Antall spørsmål per spill</string>
-    <string name="what_langauge">Velg språk ved å trykke på flagget</string>
+    <string name="lang_norsk">Norsk(Norwegisch)</string>
+    <string name="lang_tysk">Tysk(Deutsch)</string>
     <string name="option_5" translatable="false">5</string>
     <string name="option_10" translatable="false">10</string>
     <string name="option_25" translatable="false">25</string>

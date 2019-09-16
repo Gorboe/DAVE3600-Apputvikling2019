@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO LIST!!
     //TODO: Remove every System.out.prinln and go thru comments
+
     //TODO: Remove the click lisseners and use the onAction/onClick xml method, this will clean up the code
     //TODO: Background picture on the main activity, fix overall layout, colors.
     //TODO: Questions should be fixed and remove the text so its just the questions f.ek 2 + 2 = ?
@@ -78,21 +79,5 @@ public class MainActivity extends AppCompatActivity {
     //start preferences activity
     public void preferencesActivity(){
         startActivity(new Intent(this, PreferencesActivity.class));
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        //Database.getInstance().setLang(savedInstanceState.getString("LANGUAGE"));
-        //Database.getInstance().setPreferred_amount_of_questions(savedInstanceState.getInt("QUESTIONS"));
-        //Database.getInstance().setLocale(getBaseContext());
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        //outState.putString("START_GAME_KEY", btn_start_game.getText().toString());
-        //outState.putInt("QUESTIONS", Database.getInstance().getPreferred_amount_of_questions());
-        //outState.putString("LANGUAGE", Database.getInstance().getLang());
-        super.onSaveInstanceState(outState);
     }
 }

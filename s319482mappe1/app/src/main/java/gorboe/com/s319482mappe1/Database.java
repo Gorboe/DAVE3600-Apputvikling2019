@@ -3,14 +3,9 @@ package gorboe.com.s319482mappe1;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
-import android.util.ArraySet;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
 public class Database {
     private static Database INSTANCE = null;
@@ -71,8 +66,8 @@ public class Database {
         for(int i = 0; i < stats_count; i++){
             int correct_answer = Integer.parseInt(preferences.getString("correct_answer" + i, String.valueOf(-1)));
             int wrong_answer = Integer.parseInt(preferences.getString("wrong_answer" + i, String.valueOf(-1)));
-            String time = preferences.getString("time" + i, null);
-            String date = preferences.getString("date" + i, null);
+            String time = preferences.getString("time" + i, "error");
+            String date = preferences.getString("date" + i, "error");
             previous_games_collection.add(new GameStatistic(correct_answer, wrong_answer, time, date, context));
         }
     }

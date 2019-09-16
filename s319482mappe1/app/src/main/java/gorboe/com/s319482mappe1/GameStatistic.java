@@ -29,14 +29,6 @@ public class GameStatistic {
         this.date = date;
     }
 
-    public int getCorrect_answer() {
-        return correct_answer;
-    }
-
-    public int getWrong_answer() {
-        return wrong_answer;
-    }
-
     public String toString(){
         Database.getInstance().setLocale(context);
 
@@ -46,6 +38,7 @@ public class GameStatistic {
                context.getResources().getString(R.string.wrong) + " " + wrong_answer;
     }
 
+    //used when storing data to shared preferences
     public String[] storeString(){
         String[] strings = new String[4];
         strings[0] = date;

@@ -101,9 +101,6 @@ public class PreferencesActivity extends AppCompatActivity {
         }else{
             setButtonColors(btn_25_questions);
         }
-
-
-        //preferred language
     }
 
     private void setSelectedLanguage(boolean isGerman){
@@ -129,9 +126,6 @@ public class PreferencesActivity extends AppCompatActivity {
     private void setLocale(String lang){
         storePreferredLanguage(lang);
         Database.getInstance().setLocale(getBaseContext());
-        //temp
-        //locale = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration()).get(0); //current language on phone
-        //temp.setText(locale.getLanguage());
     }
 
     private void storePreferredLanguage(String lang){

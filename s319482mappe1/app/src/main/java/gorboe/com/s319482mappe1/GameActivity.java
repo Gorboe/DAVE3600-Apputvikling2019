@@ -27,7 +27,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private String[] questions;
     private int[] answers;
     private int questionCount = 0;
-
     private int correct_count = 0;
     private int wrong_count = 0;
 
@@ -47,7 +46,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         initializeButtons();
         loadRandomQuestion();
-        System.out.println("This is the pref amount: " + Database.getInstance().getPreferred_amount_of_questions());
     }
 
     private void initializeButtons(){

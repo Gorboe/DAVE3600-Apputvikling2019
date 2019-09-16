@@ -48,6 +48,7 @@ public class PopUpDeleteActivity extends AppCompatActivity {
 
     private void deleteStat(){
         Database.getInstance().deleteStat();
+        Database.getInstance().storeStatistics(getBaseContext());
         startActivity(new Intent(this, StatisticsActivity.class));
     }
 
