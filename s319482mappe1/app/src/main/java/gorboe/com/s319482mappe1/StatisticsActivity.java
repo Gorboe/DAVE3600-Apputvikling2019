@@ -37,7 +37,7 @@ public class StatisticsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                Database.getInstance().selectedStat(position);
+                Database.getInstance().selectedStat(position); 
                 startActivity(new Intent(StatisticsActivity.this, PopUpDeleteActivity.class));
             }
         });

@@ -73,7 +73,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_german.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                System.out.println("PRESSING GERMAN BUTTON");
                 setLocale("de");
                 recreate();
             }
@@ -82,7 +81,6 @@ public class PreferencesActivity extends AppCompatActivity {
         btn_norwegian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                System.out.println("PRESSING NORWEGIAN BUTTON");
                 setLocale("nb");
                 recreate();
             }
@@ -105,10 +103,10 @@ public class PreferencesActivity extends AppCompatActivity {
 
     private void setSelectedLanguage(boolean isGerman){
         if(isGerman){
-            //tysk active
+            //german active
             btn_german.setBackground(getBaseContext().getDrawable(R.drawable.german_button_activated));
         }else{
-            //norsk active
+            //norwegian active
             btn_norwegian.setBackground(getBaseContext().getDrawable(R.drawable.norwegian_button_activated));
         }
     }
