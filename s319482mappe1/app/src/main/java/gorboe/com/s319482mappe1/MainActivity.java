@@ -10,10 +10,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_start_game;
 
-    //TODO LIST!!
-    //TODO: Background picture on the main activity, fix overall layout, colors.
-    //TODO: Rapport
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Database.getInstance().setLocale(getBaseContext()); //set language to what shared preferences is

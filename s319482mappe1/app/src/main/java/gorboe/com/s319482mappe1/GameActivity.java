@@ -135,6 +135,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void checkAnswer(){
+        if(answer.length() == 0){
+            return; //no numbers given, dont check answer
+        }
         questionCount++;
         if(answer.toString().equals(answers[random]+"")){
             String temp = ++correct_count + "";
@@ -150,7 +153,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, PopUpGameCompleteActivity.class));
             return;
         }
+        
+        //empty the input box and ready it for next question
+        answer.delete(0, answer.length());
+        inputField.setText(answer);
 
+        //next question
         loadRandomQuestion();
     }
 
