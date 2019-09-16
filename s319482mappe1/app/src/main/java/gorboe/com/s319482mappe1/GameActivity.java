@@ -43,6 +43,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         correctBox = findViewById(R.id.correctBox);
         wrongBox = findViewById(R.id.wrongBox);
+        correctBox.setText("0");
+        wrongBox.setText("0");
 
         initializeButtons();
         loadRandomQuestion();
@@ -122,6 +124,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_0:
                 answer.append("0");
                 break;
+
             case R.id.btn_answer:
                 checkAnswer();
                 break;

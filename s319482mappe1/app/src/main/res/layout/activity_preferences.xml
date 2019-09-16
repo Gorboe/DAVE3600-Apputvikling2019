@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:text="@string/question_amount"
@@ -85,13 +85,10 @@
         android:layout_height="98dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="25dp"
         android:background="@drawable/german_button_deactivated"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_norwegian"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_norwegian"
-        app:layout_constraintTop_toBottomOf="@+id/btn_25_questions"
-        app:layout_constraintVertical_bias="0.951" />
+        app:layout_constraintStart_toEndOf="@+id/btn_norwegian" />
 
     <Button
         android:id="@+id/btn_norwegian"
@@ -105,6 +102,6 @@
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_5_questions"
-        app:layout_constraintVertical_bias="0.949" />
+        app:layout_constraintVertical_bias="0.722" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
