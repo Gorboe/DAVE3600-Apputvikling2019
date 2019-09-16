@@ -58,6 +58,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         Button btn_7 = findViewById(R.id.btn_7);
         Button btn_8 = findViewById(R.id.btn_8);
         Button btn_9 = findViewById(R.id.btn_9);
+        Button btn_0 = findViewById(R.id.btn_0);
         Button btn_answer = findViewById(R.id.btn_answer);
         Button btn_back = findViewById(R.id.btn_back);
         btn_1.setOnClickListener(this);
@@ -69,6 +70,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         btn_7.setOnClickListener(this);
         btn_8.setOnClickListener(this);
         btn_9.setOnClickListener(this);
+        btn_0.setOnClickListener(this);
         btn_answer.setOnClickListener(this);
         btn_back.setOnClickListener(this);
     }
@@ -116,6 +118,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_9:
                 answer.append("9");
+                break;
+            case R.id.btn_0:
+                answer.append("0");
                 break;
             case R.id.btn_answer:
                 checkAnswer();

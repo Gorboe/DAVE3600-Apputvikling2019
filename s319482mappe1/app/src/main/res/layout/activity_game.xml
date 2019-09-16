@@ -18,7 +18,7 @@
         android:background="@android:color/transparent"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

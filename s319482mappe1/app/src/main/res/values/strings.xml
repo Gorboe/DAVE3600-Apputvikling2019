@@ -46,31 +46,31 @@
 
     <!-- GAME QUESTIONS -->
     <string-array name="questions">
-        <item>Dette er spørsmål 1 blablabla. 2+2</item>
-        <item>Dette er spørsmål 2 blablabla. 3+5</item>
-        <item>Dette er spørsmål 3 blablabla. 8+4</item>
-        <item>Dette er spørsmål 4 blablabla. 2+2</item>
-        <item>Dette er spørsmål 5 blablabla. 3+5</item>
-        <item>Dette er spørsmål 6 blablabla. 8+4</item>
-        <item>Dette er spørsmål 7 blablabla. 2+2</item>
-        <item>Dette er spørsmål 8 blablabla. 3+5</item>
-        <item>Dette er spørsmål 9 blablabla. 8+4</item>
-        <item>Dette er spørsmål 10 blablabla. 2+2</item>
-        <item>Dette er spørsmål 11 blablabla. 3+5</item>
-        <item>Dette er spørsmål 12 blablabla. 8+4</item>
-        <item>Dette er spørsmål 13 blablabla. 2+2</item>
-        <item>Dette er spørsmål 14 blablabla. 3+5</item>
-        <item>Dette er spørsmål 15 blablabla. 8+4</item>
-        <item>Dette er spørsmål 16 blablabla. 2+2</item>
-        <item>Dette er spørsmål 17 blablabla. 3+5</item>
-        <item>Dette er spørsmål 18 blablabla. 8+4</item>
-        <item>Dette er spørsmål 19 blablabla. 2+2</item>
-        <item>Dette er spørsmål 20 blablabla. 3+5</item>
-        <item>Dette er spørsmål 21 blablabla. 8+4</item>
-        <item>Dette er spørsmål 22 blablabla. 2+2</item>
-        <item>Dette er spørsmål 23 blablabla. 3+5</item>
-        <item>Dette er spørsmål 24 blablabla. 8+4</item>
-        <item>Dette er spørsmål 25 blablabla. 8+4</item>
+        <item>2 + 2 = ?</item>
+        <item>3 + 5 = ?</item>
+        <item>8 + 4 = ?</item>
+        <item>10 + 12 = ?</item>
+        <item>33 + 5 = ?</item>
+        <item>81 + 4 = ?</item>
+        <item>9 + 6 = ?</item>
+        <item>36 + 4 = ?</item>
+        <item>101 + 4 = ?</item>
+        <item>50 + 51 = ?</item>
+        <item>29 + 31 = ?</item>
+        <item>47 + 13 = ?</item>
+        <item>16 + 16 = ?</item>
+        <item>19 + 21 = ?</item>
+        <item>23 + 17 = ?</item>
+        <item>9 + 9 = ?</item>
+        <item>10 + 23 = ?</item>
+        <item>81 + 7 = ?</item>
+        <item>36 + 36 = ?</item>
+        <item>42 + 40 = ?</item>
+        <item>72 + 20 = ?</item>
+        <item>91 + 10 = ?</item>
+        <item>34 + 27 = ?</item>
+        <item>67 + 29 = ?</item>
+        <item>57 + 32 = ?</item>
     </string-array>
 
     <!-- GAME ANSWERS -->
@@ -78,27 +78,27 @@
         <item>4</item>
         <item>8</item>
         <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>4</item>
-        <item>8</item>
-        <item>12</item>
-        <item>12</item>
+        <item>22</item>
+        <item>38</item>
+        <item>85</item>
+        <item>15</item>
+        <item>40</item>
+        <item>105</item>
+        <item>101</item>
+        <item>60</item>
+        <item>60</item>
+        <item>32</item>
+        <item>40</item>
+        <item>40</item>
+        <item>18</item>
+        <item>33</item>
+        <item>88</item>
+        <item>72</item>
+        <item>82</item>
+        <item>92</item>
+        <item>101</item>
+        <item>61</item>
+        <item>96</item>
+        <item>89</item>
     </integer-array>
 </resources>

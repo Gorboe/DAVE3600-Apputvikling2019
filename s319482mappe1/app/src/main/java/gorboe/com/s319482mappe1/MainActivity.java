@@ -1,31 +1,17 @@
 package gorboe.com.s319482mappe1;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.Set;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btn_start_game;
 
     //TODO LIST!!
-    //TODO: Remove every System.out.prinln and go thru comments
-
-    //TODO: Remove the click lisseners and use the onAction/onClick xml method, this will clean up the code
     //TODO: Background picture on the main activity, fix overall layout, colors.
-    //TODO: Questions should be fixed and remove the text so its just the questions f.ek 2 + 2 = ?
-    //TODO: New flags activated picture? also Norsk(norwegish) Deutsch(Tysk) so its easy to understand for both
-    //TODO: Find new settings icon? current one got bad resolution
-    //TODO: Fix preferences landscape mode!
-    //TODO: ICON instead of the text in actionbar.
     //TODO: Rapport
 
     @Override
