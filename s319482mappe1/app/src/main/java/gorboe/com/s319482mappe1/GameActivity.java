@@ -153,7 +153,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, PopUpGameCompleteActivity.class));
             return;
         }
-        
+
         //empty the input box and ready it for next question
         answer.delete(0, answer.length());
         inputField.setText(answer);

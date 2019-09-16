@@ -42,4 +42,9 @@ public class PopUpExitGameActivity extends AppCompatActivity {
     public void closePopUp(View view) {
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }
