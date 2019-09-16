@@ -180,6 +180,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         outState.putString("wrong_count", String.valueOf(wrong_count));
         outState.putString("question_count", String.valueOf(questionCount));
         outState.putString("input_field", inputField.getText().toString());
+        outState.putString("question", questionField.getText().toString());
+        outState.putString("random", String.valueOf(random));
         super.onSaveInstanceState(outState);
     }
 
@@ -190,6 +192,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         wrong_count = Integer.parseInt(savedInstanceState.getString("wrong_count", "-1"));
         questionCount = Integer.parseInt(savedInstanceState.getString("question_count", "-1"));
         answer.append(savedInstanceState.getString("input_field", "fail"));
+        questionField.setText(savedInstanceState.getString("question"));
+        random = Integer.parseInt(savedInstanceState.getString("random", "-1"));
         inputField.setText(answer);
         String correct = correct_count + "";
         String wrong = wrong_count + "";
