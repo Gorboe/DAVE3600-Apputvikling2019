@@ -26,6 +26,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.mymenu, menu);
-        return super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.nav_order:
+                //order_activity
+                //startActivity(new Intent(this, blabla.class));
+                break;
+            case R.id.nav_restaurant:
+                //
+                break;
+            case R.id.nav_friends:
+                //
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

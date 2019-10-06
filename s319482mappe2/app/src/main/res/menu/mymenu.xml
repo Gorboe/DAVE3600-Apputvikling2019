@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <item android:id="@+id/a"
+    <item android:id="@+id/nav_order"
         android:title="eqw"
         android:icon="@drawable/order_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
-    <item android:id="@+id/b"
+    <item android:id="@+id/nav_restaurant"
         android:title="ewq"
         android:icon="@drawable/restaurant_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
-    <item android:id="@+id/c"
+    <item android:id="@+id/nav_friends"
         android:title="rqrq"
         android:icon="@drawable/friends_icon"
-        android:showAsAction="always"
+        android:showAsAction="always|withText"
         tools:ignore="AppCompatResource" />
 </menu>
