@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:id="@+id/a"
+        android:title="eqw"
+        android:icon="@drawable/order_icon"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/b"
+        android:title="ewq"
+        android:icon="@drawable/restaurant_icon"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+
+    <item android:id="@+id/c"
+        android:title="rqrq"
+        android:icon="@drawable/friends_icon"
+        android:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+</menu>
