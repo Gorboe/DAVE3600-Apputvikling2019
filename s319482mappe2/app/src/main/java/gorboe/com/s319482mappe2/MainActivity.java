@@ -1,7 +1,9 @@
 package gorboe.com.s319482mappe2;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
+
     }
 
     @Override
@@ -33,14 +36,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_order:
-                //order_activity
-                //startActivity(new Intent(this, blabla.class));
+                startActivity(new Intent(this, OrderActivity.class));
                 break;
             case R.id.nav_restaurant:
-                //
+                startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
-                //
+                startActivity(new Intent(this, FriendsActivity.class));
                 break;
 
         }
