@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">s319482mappe2</string>
+    <string name="app_name">Restaurantapp</string>
+    <string name="order_list_heading">Dine Bestillinger: </string>
 </resources>
