@@ -64,6 +64,9 @@ public class CreateRestaurantActivity extends AppCompatActivity {
     }
 
     public void deleteRestaurant(View view) {
-
+        if(existing_restaurant != null){
+            db.deleteRestaurant(existing_restaurant.getRestaurantID());
+        }
+        startActivity(new Intent(this, RestaurantActivity.class));
     }
 }
