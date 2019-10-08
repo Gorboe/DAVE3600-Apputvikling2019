@@ -2,17 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <item android:title=" "
-        android:showAsAction="always"
-        tools:ignore="AppCompatResource"/>
-
     <item android:id="@+id/nav_order"
         android:title="eqw"
         android:icon="@drawable/order_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
-    <item android:title="  "
+    <item android:title=""
         android:showAsAction="always"
         tools:ignore="AppCompatResource"/>
 
@@ -22,7 +18,7 @@
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
-    <item android:title="    "
+    <item android:title=""
         android:showAsAction="always"
         tools:ignore="AppCompatResource"/>
 
@@ -34,7 +30,7 @@
 
     <item
         android:showAsAction="always"
-        android:title=" "
+        android:title=""
         tools:ignore="AppCompatResource" />
 
     <item android:id="@+id/nav_settings"
@@ -45,6 +41,6 @@
 
     <item
         android:showAsAction="always"
-        android:title="                         "
+        android:title=""
         tools:ignore="AppCompatResource" />
 </menu>

@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_friends:
                 startActivity(new Intent(this, FriendsActivity.class));
                 break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
 
         }
         return super.onOptionsItemSelected(item);
