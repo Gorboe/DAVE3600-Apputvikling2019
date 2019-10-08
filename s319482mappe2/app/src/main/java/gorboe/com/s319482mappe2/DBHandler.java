@@ -94,6 +94,7 @@ public class DBHandler extends SQLiteOpenHelper {
         restaurant.setNumber(c.getString(c.getColumnIndex(RESTAURANT_NUMBER)));
         restaurant.setType(c.getString(c.getColumnIndex(RESTAURANT_TYPE)));
 
+        db.close();
         return restaurant;
     }
 
@@ -117,9 +118,32 @@ public class DBHandler extends SQLiteOpenHelper {
 
                 restaurants.add(restaurant);
             }while(c.moveToNext());
+            c.close();
+            db.close();
         }
 
         return restaurants;
+    }
+
+    public void deleteRestaurant(long restaurant_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_RESTAURANTS, KEY_RESTAURANT + " = ?",
+                new String[]{ String.valueOf(restaurant_id) });
+        db.close();
+    }
+
+    public int updateRestaurant(Restaurant restaurant){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(RESTAURANT_NAME, restaurant.getName());
+        values.put(RESTAURANT_ADDRESS, restaurant.getAddress());
+        values.put(RESTAURANT_NUMBER, restaurant.getNumber());
+        values.put(RESTAURANT_TYPE, restaurant.getType());
+        int changed = db.update(TABLE_RESTAURANTS, values, KEY_RESTAURANT + " = ?",
+                new String[] { String.valueOf(restaurant.getRestaurantID()) });
+        db.close();
+        return changed;
     }
 
     /**FRIENDS METHODS**/
