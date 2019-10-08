@@ -155,4 +155,70 @@ public class DBHandler extends SQLiteOpenHelper {
         db.insert(TABLE_FRIENDS, null, values);
         db.close();
     }
+
+    public Friend getFriend(long friend_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_FRIENDS + " WHERE " + KEY_FRIEND
+                + " = " + friend_id;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+        if(c != null){
+            c.moveToFirst();
+        }
+
+        Friend friend = new Friend();
+        friend.setFriendID(c.getInt(c.getColumnIndex(KEY_FRIEND)));
+        friend.setName(c.getString(c.getColumnIndex(FRIEND_NAME)));
+        friend.setNumber(c.getString(c.getColumnIndex(FRIEND_NUMBER)));
+
+        db.close();
+        return friend;
+    }
+
+    public List<Friend> getAllFriends(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Friend> friends = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_FRIENDS;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                Friend friend = new Friend();
+                friend.setFriendID(c.getInt(c.getColumnIndex(KEY_FRIEND)));
+                friend.setName(c.getString(c.getColumnIndex(FRIEND_NAME)));
+                friend.setNumber(c.getString(c.getColumnIndex(FRIEND_NUMBER)));
+
+                friends.add(friend);
+            }while(c.moveToNext());
+            c.close();
+            db.close();
+        }
+
+        return friends;
+    }
+
+    public void deleteFriend(long friend_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(TABLE_FRIENDS, KEY_FRIEND + " = ?",
+                new String[]{ String.valueOf(friend_id) });
+        db.close();
+    }
+
+    public int updateFriend(Friend friend){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FRIEND_NAME, friend.getName());
+        values.put(FRIEND_NUMBER, friend.getNumber());
+
+        int changed = db.update(TABLE_FRIENDS, values, KEY_FRIEND + " = ?",
+                new String[] { String.valueOf(friend.getFriendID()) });
+        db.close();
+        return changed;
+    }
 }
