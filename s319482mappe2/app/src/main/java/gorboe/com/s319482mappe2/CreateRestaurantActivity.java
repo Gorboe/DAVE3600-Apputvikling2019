@@ -2,6 +2,7 @@ package gorboe.com.s319482mappe2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ public class CreateRestaurantActivity extends AppCompatActivity {
     private EditText number_field;
     private EditText type_field;
     private DBHandler db;
+    private Restaurant restaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,18 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         number_field = findViewById(R.id.restaurant_number);
         type_field = findViewById(R.id.restaurant_type);
         db = new DBHandler(this);
+
+        tryGetRestaurant();
+    }
+
+    public void tryGetRestaurant(){
+        Intent intent = getIntent();
+        long restaurant_id = intent.getLongExtra("selected_restaurant_ID", -1);
+        
+        if(restaurant_id != -1){
+            restaurant = db.getRestaurant(restaurant_id);
+            System.out.println("RESTAURANTNAME: " + restaurant.getName());
+        }
     }
 
     public void addRestaurantToDatabase(View view) {

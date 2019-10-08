@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
-
     }
 
     @Override

@@ -38,8 +38,9 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                System.out.println("CLICKED!!");
-                System.out.println(restaurants.get(position).getRestaurantID());
+                Intent intent = new Intent(RestaurantActivity.this, CreateRestaurantActivity.class);
+                intent.putExtra("selected_restaurant_ID", restaurants.get(position).getRestaurantID());
+                startActivity(intent);
             }
         });
     }
