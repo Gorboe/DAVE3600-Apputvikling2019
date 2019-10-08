@@ -11,7 +11,7 @@ import gorboe.com.s319482mappe2.enteties.Restaurant;
 
 public class CreateRestaurantActivity extends AppCompatActivity {
 
-    private EditText navn_field;
+    private EditText name_field;
     private EditText address_field;
     private EditText number_field;
     private EditText type_field;
@@ -23,7 +23,7 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_restaurant);
 
-        navn_field = findViewById(R.id.restaurant_name);
+        name_field = findViewById(R.id.restaurant_name);
         address_field = findViewById(R.id.restaurant_address);
         number_field = findViewById(R.id.restaurant_number);
         type_field = findViewById(R.id.restaurant_type);
@@ -35,15 +35,18 @@ public class CreateRestaurantActivity extends AppCompatActivity {
     public void tryGetRestaurant(){
         Intent intent = getIntent();
         long restaurant_id = intent.getLongExtra("selected_restaurant_ID", -1);
-        
+
         if(restaurant_id != -1){
             restaurant = db.getRestaurant(restaurant_id);
-            System.out.println("RESTAURANTNAME: " + restaurant.getName());
+            name_field.setText(restaurant.getName());
+            address_field.setText(restaurant.getAddress());
+            number_field.setText(restaurant.getNumber());
+            type_field.setText(restaurant.getType());
         }
     }
 
     public void addRestaurantToDatabase(View view) {
-        Restaurant restaurant = new Restaurant(navn_field.getText().toString(),
+        Restaurant restaurant = new Restaurant(name_field.getText().toString(),
                                                address_field.getText().toString(),
                                                number_field.getText().toString(),
                                                type_field.getText().toString());
