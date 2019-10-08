@@ -33,6 +33,14 @@ public class DBHandler extends SQLiteOpenHelper {
     private static String FRIEND_NAME = "name";
     private static String FRIEND_NUMBER = "number";
 
+    //Order table
+    private static String TABLE_ORDERS = "Orders";
+    private static String KEY_ORDER = "_orderID";
+
+
+    //OrderPersonDetails table
+    private static String TABLE_ORDER_PERSON_DETAILS = "OrderPersonDetails";
+
     public DBHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
