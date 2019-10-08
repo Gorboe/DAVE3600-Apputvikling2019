@@ -19,8 +19,8 @@ public class CreateFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_friend);
 
-        navn_field = findViewById(R.id.restaurant_name);
-        number_field = findViewById(R.id.restaurant_number);
+        navn_field = findViewById(R.id.friend_name);
+        number_field = findViewById(R.id.friend_number);
         db = new DBHandler(this);
     }
 
