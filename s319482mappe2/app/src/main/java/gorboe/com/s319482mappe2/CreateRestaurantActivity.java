@@ -16,7 +16,7 @@ public class CreateRestaurantActivity extends AppCompatActivity {
     private EditText number_field;
     private EditText type_field;
     private DBHandler db;
-    private Restaurant restaurant;
+    private Restaurant existing_restaurant;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +37,33 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         long restaurant_id = intent.getLongExtra("selected_restaurant_ID", -1);
 
         if(restaurant_id != -1){
-            restaurant = db.getRestaurant(restaurant_id);
-            name_field.setText(restaurant.getName());
-            address_field.setText(restaurant.getAddress());
-            number_field.setText(restaurant.getNumber());
-            type_field.setText(restaurant.getType());
+            existing_restaurant = db.getRestaurant(restaurant_id);
+            name_field.setText(existing_restaurant.getName());
+            address_field.setText(existing_restaurant.getAddress());
+            number_field.setText(existing_restaurant.getNumber());
+            type_field.setText(existing_restaurant.getType());
         }
     }
 
-    public void addRestaurantToDatabase(View view) {
+    public void saveRestaurant(View view) {
         Restaurant restaurant = new Restaurant(name_field.getText().toString(),
-                                               address_field.getText().toString(),
-                                               number_field.getText().toString(),
-                                               type_field.getText().toString());
-        db.addRestaurant(restaurant);
-        System.out.println("RESTAURANT ADDED TO DB");
+                address_field.getText().toString(),
+                number_field.getText().toString(),
+                type_field.getText().toString());
+
+        if(existing_restaurant != null){
+            restaurant.setRestaurantID(existing_restaurant.getRestaurantID());
+            db.updateRestaurant(restaurant);
+            System.out.println("RESTAURANT WAS EDITED");
+        }else{
+            db.addRestaurant(restaurant);
+            System.out.println("RESTAURANT ADDED TO DB");
+        }
+
+        startActivity(new Intent(this, RestaurantActivity.class));
+    }
+
+    public void deleteRestaurant(View view) {
+
     }
 }
