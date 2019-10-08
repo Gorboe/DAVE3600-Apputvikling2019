@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe2.enteties;
 
+import androidx.annotation.NonNull;
+
 public class Restaurant {
 
     private long _restaurantID;
@@ -65,5 +67,11 @@ public class Restaurant {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name + "       " + type;
     }
 }
