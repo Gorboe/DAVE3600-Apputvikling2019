@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/orderList"
+        android:id="@+id/friendList"
         android:layout_width="267dp"
         android:layout_height="291dp"
         android:layout_marginStart="8dp"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.815" />
+        app:layout_constraintVertical_bias="0.51" />
 
     <TextView
         android:id="@+id/textView"
@@ -47,5 +47,5 @@
         android:onClick="startCreateFriendActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orderList" />
+        app:layout_constraintTop_toBottomOf="@+id/friendList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

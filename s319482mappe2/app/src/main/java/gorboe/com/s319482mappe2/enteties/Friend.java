@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe2.enteties;
 
+import androidx.annotation.NonNull;
+
 public class Friend {
     private long _friendID;
     private String name;
@@ -42,5 +44,11 @@ public class Friend {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name + "     " + number;
     }
 }
