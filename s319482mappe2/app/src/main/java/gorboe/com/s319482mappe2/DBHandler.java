@@ -2,9 +2,13 @@ package gorboe.com.s319482mappe2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import gorboe.com.s319482mappe2.enteties.Friend;
 import gorboe.com.s319482mappe2.enteties.Restaurant;
@@ -59,6 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**RESTAURANT METHODS**/
     public void addRestaurant(Restaurant restaurant){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -70,6 +75,54 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public Restaurant getRestaurant(long restaurant_id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_RESTAURANTS + " WHERE " + KEY_RESTAURANT
+                + " = " + restaurant_id;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+        if(c != null){
+            c.moveToFirst();
+        }
+
+        Restaurant restaurant = new Restaurant();
+        restaurant.setRestaurantID(c.getInt(c.getColumnIndex(KEY_RESTAURANT)));
+        restaurant.setName(c.getString(c.getColumnIndex(RESTAURANT_NAME)));
+        restaurant.setAddress(c.getString(c.getColumnIndex(RESTAURANT_ADDRESS)));
+        restaurant.setNumber(c.getString(c.getColumnIndex(RESTAURANT_NUMBER)));
+        restaurant.setType(c.getString(c.getColumnIndex(RESTAURANT_TYPE)));
+
+        return restaurant;
+    }
+
+    public List<Restaurant> getAllRestaurants(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Restaurant> restaurants = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_RESTAURANTS;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                Restaurant restaurant = new Restaurant();
+                restaurant.setRestaurantID(c.getInt(c.getColumnIndex(KEY_RESTAURANT)));
+                restaurant.setName(c.getString(c.getColumnIndex(RESTAURANT_NAME)));
+                restaurant.setAddress(c.getString(c.getColumnIndex(RESTAURANT_ADDRESS)));
+                restaurant.setNumber(c.getString(c.getColumnIndex(RESTAURANT_NUMBER)));
+                restaurant.setType(c.getString(c.getColumnIndex(RESTAURANT_TYPE)));
+
+                restaurants.add(restaurant);
+            }while(c.moveToNext());
+        }
+
+        return restaurants;
+    }
+
+    /**FRIENDS METHODS**/
     public void addFriend(Friend friend){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
