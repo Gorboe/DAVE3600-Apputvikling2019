@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.enteties.Friend;
@@ -37,15 +38,15 @@ public class DBHandler extends SQLiteOpenHelper {
     //Order table
     private static String TABLE_ORDERS = "Orders";
     private static String KEY_ORDER = "_orderID";
-    private static String ORDER_RESTAURANT_KEY = "_restaurantID";//private static String ORDER_RESTAURANT = "restaurant"; //restaurants...
+    private static String ORDER_RESTAURANT_KEY = "restaurantFK";//private static String ORDER_RESTAURANT = "restaurant"; //restaurants...
     private static String ORDER_DATE = "date";
     private static String ORDER_TIME = "time";
     //friends...
 
     //OrderPersonDetails
     private static String TABLE_ORDER_PERSON_DETAILS = "OrderPersonDetails";
-    private static String KEY_ORDER_PERSON_DETAILS = "_orderID"; //KEY_ORDER
-    private static String ORDER_PERSON_DETAILS_FRIEND_KEY = "_friendID"; //KEY_FRIEND
+    private static String KEY_ORDER_PERSON_DETAILS = "orderFK"; //KEY_ORDER
+    private static String KEY_ORDER_PERSON_DETAILS_FRIEND = "friendFK"; //KEY_FRIEND
 
     public DBHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -71,14 +72,14 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //ORDER TABLE
         String CREATE_ORDER_TABLE = "CREATE TABLE " + TABLE_ORDERS + "(" + KEY_ORDER +
-                " INTEGER PRIMARY KEY," + ORDER_DATE + " TEXT," +
+                " INTEGER PRIMARY KEY," + ORDER_RESTAURANT_KEY + " TEXT," + ORDER_DATE + " TEXT," +
                 ORDER_TIME + " TEXT" + ")";
         Log.d("SQL", CREATE_ORDER_TABLE);
         db.execSQL(CREATE_ORDER_TABLE);
 
         //ORDER PERSON DETAILS TABLE
         String CREATE_ORDER_PERSON_DETAILS_TABLE = "CREATE TABLE " + TABLE_ORDER_PERSON_DETAILS +
-                "(" + KEY_ORDER + " INTEGER PRIMARY KEY," + KEY_FRIEND + " TEXT" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
+                "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + " INTEGER PRIMARY KEY" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
         Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
         db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
@@ -99,21 +100,26 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
         values.put(ORDER_DATE, order.getDate());
         values.put(ORDER_TIME, order.getTime());
-        addOrderPersonDetails(order);
+
+        System.out.println("VALUES: " + values);
+        System.out.println("Friends: " + order.getFriends());
         db.insert(TABLE_ORDERS, null, values);
+        addOrderPersonDetails(order);
+        db.close();
     }
 
     private void addOrderPersonDetails(Order order){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ORDER_PERSON_DETAILS, order.get_orderID()); //so we get equal amount of ORDERIDS? //TODO:TEST this
         //loop over friends list
         for(Friend friend: order.getFriends()){
             //TODO: OR PUT HERE...
-            values.put(ORDER_PERSON_DETAILS_FRIEND_KEY, friend.getFriendID());
+            values.put(KEY_ORDER_PERSON_DETAILS, "CORRECTKEY!!"); //so we get equal amount of ORDERIDS? //TODO:TEST this
+            values.put(KEY_ORDER_PERSON_DETAILS_FRIEND, friend.getFriendID());
+            System.out.println("IN FOR LOOP");
+            //insert here
+            db.insert(TABLE_ORDER_PERSON_DETAILS, null, values);
         }
-        db.insert(TABLE_ORDER_PERSON_DETAILS, null, values);
-        db.close();
     }
 
     /**RESTAURANT METHODS**/
