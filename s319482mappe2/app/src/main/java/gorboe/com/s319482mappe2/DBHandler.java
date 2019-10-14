@@ -45,6 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     //OrderPersonDetails
     private static String TABLE_ORDER_PERSON_DETAILS = "OrderPersonDetails";
+    private static String PRIMARY_KEY_ORDER_PERSON_DETAILS = "OrderPersonDetailsPK";
     private static String KEY_ORDER_PERSON_DETAILS = "orderFK"; //KEY_ORDER
     private static String KEY_ORDER_PERSON_DETAILS_FRIEND = "friendFK"; //KEY_FRIEND
 
@@ -79,7 +80,10 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //ORDER PERSON DETAILS TABLE
         String CREATE_ORDER_PERSON_DETAILS_TABLE = "CREATE TABLE " + TABLE_ORDER_PERSON_DETAILS +
-                "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + " INTEGER PRIMARY KEY" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
+                "(" + KEY_ORDER_PERSON_DETAILS + " INTEGER NOT NULL," +
+                      KEY_ORDER_PERSON_DETAILS_FRIEND + " INTEGER NOT NULL," +
+                "CONSTRAINT  " + PRIMARY_KEY_ORDER_PERSON_DETAILS + " PRIMARY KEY " +
+                "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + ")" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
         Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
         db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
