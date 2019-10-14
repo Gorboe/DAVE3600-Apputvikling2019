@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.enteties.Friend;
+import gorboe.com.s319482mappe2.enteties.Order;
 import gorboe.com.s319482mappe2.enteties.Restaurant;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -36,10 +37,15 @@ public class DBHandler extends SQLiteOpenHelper {
     //Order table
     private static String TABLE_ORDERS = "Orders";
     private static String KEY_ORDER = "_orderID";
+    private static String ORDER_RESTAURANT_KEY = "_restaurantID";//private static String ORDER_RESTAURANT = "restaurant"; //restaurants...
+    private static String ORDER_DATE = "date";
+    private static String ORDER_TIME = "time";
+    //friends...
 
-
-    //OrderPersonDetails table
+    //OrderPersonDetails
     private static String TABLE_ORDER_PERSON_DETAILS = "OrderPersonDetails";
+    private static String KEY_ORDER_PERSON_DETAILS = "_orderID"; //KEY_ORDER
+    private static String ORDER_PERSON_DETAILS_FRIEND_KEY = "_friendID"; //KEY_FRIEND
 
     public DBHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -62,13 +68,52 @@ public class DBHandler extends SQLiteOpenHelper {
                 FRIEND_NUMBER + " TEXT" + ")";
         Log.d("SQL", CREATE_FRIENDS_TABLE);
         db.execSQL(CREATE_FRIENDS_TABLE);
+
+        //ORDER TABLE
+        String CREATE_ORDER_TABLE = "CREATE TABLE " + TABLE_ORDERS + "(" + KEY_ORDER +
+                " INTEGER PRIMARY KEY," + ORDER_DATE + " TEXT," +
+                ORDER_TIME + " TEXT" + ")";
+        Log.d("SQL", CREATE_ORDER_TABLE);
+        db.execSQL(CREATE_ORDER_TABLE);
+
+        //ORDER PERSON DETAILS TABLE
+        String CREATE_ORDER_PERSON_DETAILS_TABLE = "CREATE TABLE " + TABLE_ORDER_PERSON_DETAILS +
+                "(" + KEY_ORDER + " INTEGER PRIMARY KEY," + KEY_FRIEND + " TEXT" + ")";
+        Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
+        db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDER_PERSON_DETAILS);
         onCreate(db);
+    }
+
+    /**ORDER METHODS**/
+    public void addOrder(Order order){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
+        values.put(ORDER_DATE, "a date");
+        values.put(ORDER_TIME, "a time");
+        addOrderPersonDetails(order);
+        db.insert(TABLE_ORDERS, null, values);
+    }
+
+    private void addOrderPersonDetails(Order order){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_ORDER_PERSON_DETAILS, order.get_orderID()); //so we get equal amount of ORDERIDS? //TODO:TEST this
+        //loop over friends list
+        for(Friend friend: order.getFriends()){
+            //TODO: OR PUT HERE...
+            values.put(ORDER_PERSON_DETAILS_FRIEND_KEY, friend.getFriendID());
+        }
+        db.insert(TABLE_ORDER_PERSON_DETAILS, null, values);
+        db.close();
     }
 
     /**RESTAURANT METHODS**/
