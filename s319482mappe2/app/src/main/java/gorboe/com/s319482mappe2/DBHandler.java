@@ -103,18 +103,18 @@ public class DBHandler extends SQLiteOpenHelper {
 
         System.out.println("VALUES: " + values);
         System.out.println("Friends: " + order.getFriends());
-        db.insert(TABLE_ORDERS, null, values);
-        addOrderPersonDetails(order);
+        long orderID = db.insert(TABLE_ORDERS, null, values);
+        addOrderPersonDetails(order, orderID);
         db.close();
     }
 
-    private void addOrderPersonDetails(Order order){
+    private void addOrderPersonDetails(Order order, long orderID){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //loop over friends list
         for(Friend friend: order.getFriends()){
             //TODO: OR PUT HERE...
-            values.put(KEY_ORDER_PERSON_DETAILS, "CORRECTKEY!!"); //so we get equal amount of ORDERIDS? //TODO:TEST this
+            values.put(KEY_ORDER_PERSON_DETAILS, orderID); //so we get equal amount of ORDERIDS? //TODO:TEST this
             values.put(KEY_ORDER_PERSON_DETAILS_FRIEND, friend.getFriendID());
             System.out.println("IN FOR LOOP");
             //insert here
