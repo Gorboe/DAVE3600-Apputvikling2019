@@ -39,7 +39,14 @@ public class MainActivity extends AppCompatActivity {
         initializeOrderList();
 
         //TODO: TEMP!!
-        db.getOrder(1);
+        Order order = db.getOrder(1);
+        System.out.println("ID: " + order.get_orderID());
+        System.out.println("DATE: " + order.getDate());
+        System.out.println("TIME: " + order.getTime());
+        System.out.println("RESTAURANT: " + order.getRestaurant());
+        for(Friend friend: order.getFriends()){
+            System.out.println("FRIEND: " + friend);
+        }
     }
 
     public void initializeOrderList(){

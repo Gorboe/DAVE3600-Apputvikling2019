@@ -126,17 +126,43 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public List<Order> getAllOrders(){
-
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Order> orders = new ArrayList<>();
+        
         return null;
     }
 
     public Order getOrder(long orderID){
-        getFriendsInOrder(orderID);
-        return null;
+        List<Friend> friends = getFriendsInOrder(orderID);
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_ORDERS + " WHERE " + KEY_ORDER
+                + " = " + orderID;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+        if(c != null){
+            c.moveToFirst();
+        }else{
+            return null;
+        }
+
+        Order order = new Order();
+        order.set_orderID(c.getInt(c.getColumnIndex(KEY_ORDER)));
+        order.setDate(c.getString(c.getColumnIndex(ORDER_DATE)));
+        order.setTime(c.getString(c.getColumnIndex(ORDER_TIME)));
+        order.setRestaurant(getRestaurant(c.getInt(c.getColumnIndex(ORDER_RESTAURANT_KEY))));
+        order.setFriends(friends);
+
+        c.close();
+        db.close();
+        return order;
     }
 
     private List<Friend> getFriendsInOrder(long orderID){
         SQLiteDatabase db = this.getReadableDatabase();
+        List<Friend> friends = new ArrayList<>();
         String friendIDquery = "SELECT " + KEY_ORDER_PERSON_DETAILS_FRIEND + " FROM "
                 + TABLE_ORDER_PERSON_DETAILS + " WHERE " + KEY_ORDER_PERSON_DETAILS +
                 " = " + orderID;
@@ -144,15 +170,30 @@ public class DBHandler extends SQLiteOpenHelper {
         System.out.println("QUERY: " + friendIDquery);
 
         Cursor c = db.rawQuery(friendIDquery, null);
+
+        //check cursor //TODO: CASE 0 FRIENDS
         if(c != null){
             c.moveToFirst();
+        }else{
+            return null;
         }
 
-        System.out.println("FRIEND KEY: " + c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND)));
-        
+        if(!c.moveToNext()){ //TODO: CASE 1 FRIENDS
+            c.moveToFirst();
+            long id = c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND)); //TODO: fix this..mye unødvendig kode her?
+            friends.add(getFriend(id));
+            return friends;
+        }
+        c.moveToPrevious();
 
+        do{ //TODO: CASE FRIENDS >= 2
+            long id = c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND));
+            friends.add(getFriend(id));
+        } while(c.moveToNext());
 
-        return null;
+        c.close();
+        db.close();
+        return friends;
     }
 
     /**RESTAURANT METHODS**/
@@ -177,6 +218,8 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(query, null);
         if(c != null){
             c.moveToFirst();
+        }else {
+            return null;
         }
 
         Restaurant restaurant = new Restaurant();
@@ -186,6 +229,7 @@ public class DBHandler extends SQLiteOpenHelper {
         restaurant.setNumber(c.getString(c.getColumnIndex(RESTAURANT_NUMBER)));
         restaurant.setType(c.getString(c.getColumnIndex(RESTAURANT_TYPE)));
 
+        c.close();
         db.close();
         return restaurant;
     }
