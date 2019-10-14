@@ -25,16 +25,21 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: create icons vector in drawable...
     private ListView orderList;
+    private DBHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         orderList = findViewById(R.id.orderList);
+        db = new DBHandler(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
         initializeOrderList();
+
+        //TODO: TEMP!!
+        db.getOrder(1);
     }
 
     public void initializeOrderList(){

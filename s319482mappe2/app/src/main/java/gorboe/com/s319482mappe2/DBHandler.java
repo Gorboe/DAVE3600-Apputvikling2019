@@ -117,13 +117,42 @@ public class DBHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         //loop over friends list
         for(Friend friend: order.getFriends()){
-            //TODO: OR PUT HERE...
-            values.put(KEY_ORDER_PERSON_DETAILS, orderID); //so we get equal amount of ORDERIDS? //TODO:TEST this
+            values.put(KEY_ORDER_PERSON_DETAILS, orderID);
             values.put(KEY_ORDER_PERSON_DETAILS_FRIEND, friend.getFriendID());
             System.out.println("IN FOR LOOP");
             //insert here
             db.insert(TABLE_ORDER_PERSON_DETAILS, null, values);
         }
+    }
+
+    public List<Order> getAllOrders(){
+
+        return null;
+    }
+
+    public Order getOrder(long orderID){
+        getFriendsInOrder(orderID);
+        return null;
+    }
+
+    private List<Friend> getFriendsInOrder(long orderID){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String friendIDquery = "SELECT " + KEY_ORDER_PERSON_DETAILS_FRIEND + " FROM "
+                + TABLE_ORDER_PERSON_DETAILS + " WHERE " + KEY_ORDER_PERSON_DETAILS +
+                " = " + orderID;
+
+        System.out.println("QUERY: " + friendIDquery);
+
+        Cursor c = db.rawQuery(friendIDquery, null);
+        if(c != null){
+            c.moveToFirst();
+        }
+
+        System.out.println("FRIEND KEY: " + c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND)));
+        
+
+
+        return null;
     }
 
     /**RESTAURANT METHODS**/
