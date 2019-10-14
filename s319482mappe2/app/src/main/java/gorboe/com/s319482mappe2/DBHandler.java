@@ -78,7 +78,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         //ORDER PERSON DETAILS TABLE
         String CREATE_ORDER_PERSON_DETAILS_TABLE = "CREATE TABLE " + TABLE_ORDER_PERSON_DETAILS +
-                "(" + KEY_ORDER + " INTEGER PRIMARY KEY," + KEY_FRIEND + " TEXT" + ")";
+                "(" + KEY_ORDER + " INTEGER PRIMARY KEY," + KEY_FRIEND + " TEXT" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
         Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
         db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
@@ -97,8 +97,8 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
-        values.put(ORDER_DATE, "a date");
-        values.put(ORDER_TIME, "a time");
+        values.put(ORDER_DATE, order.getDate());
+        values.put(ORDER_TIME, order.getTime());
         addOrderPersonDetails(order);
         db.insert(TABLE_ORDERS, null, values);
     }

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateFriendActivity"></activity>
+        <activity android:name=".CreateOrderActivity"></activity>
+        <activity android:name=".CreateFriendActivity" />
         <activity android:name=".CreateRestaurantActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".FriendsActivity" />

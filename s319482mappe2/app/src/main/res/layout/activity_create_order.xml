@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateOrderActivity">
+
+    <ListView
+        android:id="@+id/order_friendList"
+        android:layout_width="260dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_friends"
+        app:layout_constraintVertical_bias="0.302" />
+
+    <Button
+        android:id="@+id/order_add_friend"
+        android:layout_width="62dp"
+        android:layout_height="57dp"
+        android:background="@drawable/add_icon"
+        android:onClick="addFriend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.337"
+        app:layout_constraintStart_toEndOf="@+id/order_friends"
+        app:layout_constraintTop_toTopOf="@+id/order_friends" />
+
+    <EditText
+        android:id="@+id/order_date"
+        android:layout_width="138dp"
+        android:layout_height="39dp"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.079" />
+
+    <EditText
+        android:id="@+id/order_time"
+        android:layout_width="138dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="24dp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_date" />
+
+    <Spinner
+        android:id="@+id/order_restaurants"
+        android:layout_width="149dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_time" />
+
+    <Spinner
+        android:id="@+id/order_friends"
+        android:layout_width="149dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="128dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_time" />
+</androidx.constraintlayout.widget.ConstraintLayout>
