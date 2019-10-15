@@ -1,6 +1,7 @@
 package gorboe.com.s319482mappe2.enteties;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 

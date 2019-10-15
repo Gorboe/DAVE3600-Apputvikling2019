@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                System.out.println("pressed: " + position);
+                Intent intent = new Intent(MainActivity.this, CreateOrderActivity.class);
+                intent.putExtra("selected_order_ID", orders.get(position).get_orderID());
+                startActivity(intent);
             }
         });
     }
