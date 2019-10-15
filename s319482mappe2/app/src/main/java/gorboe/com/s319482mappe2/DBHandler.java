@@ -125,18 +125,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    private void deleteOrder(long orderID){
+    public void deleteOrder(long orderID){
         SQLiteDatabase db = this.getReadableDatabase();
 
         db.delete(TABLE_ORDERS, KEY_ORDER + " = ?",
                 new String[]{ String.valueOf(orderID) });
-        db.delete(TABLE_ORDER_PERSON_DETAILS, KEY_ORDER + " = ?",
+
+        db.delete(TABLE_ORDER_PERSON_DETAILS, KEY_ORDER_PERSON_DETAILS + " = ?",
                 new String[]{ String.valueOf(orderID) });
 
         db.close();
     }
 
-    private int updateOrder(Order order){
+    public int updateOrder(Order order){
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
 

@@ -134,7 +134,6 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void saveOrder(View view) {
-        //TODO: make it possible to edit existing order..
         List<Friend> friends = new ArrayList<>();
 
         //add all selected friends
@@ -145,11 +144,20 @@ public class CreateOrderActivity extends AppCompatActivity {
         Order order = new Order((Restaurant)order_restaurants.getSelectedItem(), order_date.getText().toString(),
                 order_time.getText().toString(), friends);
 
-        db.addOrder(order);
+        if(existing_order != null){
+            order.set_orderID(existing_order.get_orderID());
+            db.updateOrder(order);
+        }else {
+            db.addOrder(order);
+        }
+
         startActivity(new Intent(this, MainActivity.class));
     }
 
     public void deleteOrder(View view) {
-        //TODO: create this, and the delete order method in db.
+        if(existing_order != null){
+            db.deleteOrder(existing_order.get_orderID());
+        }
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
