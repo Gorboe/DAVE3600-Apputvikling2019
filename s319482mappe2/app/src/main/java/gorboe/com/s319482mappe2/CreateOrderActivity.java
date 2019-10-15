@@ -88,6 +88,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                 order_time.getText().toString(), friends);
 
         db.addOrder(order);
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     public void deleteOrder(View view) {

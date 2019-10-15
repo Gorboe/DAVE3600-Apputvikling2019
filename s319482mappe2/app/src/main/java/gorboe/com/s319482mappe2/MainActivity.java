@@ -39,18 +39,18 @@ public class MainActivity extends AppCompatActivity {
         initializeOrderList();
 
         //TODO: TEMP!!
-        Order order = db.getOrder(1);
+        /*Order order = db.getOrder(1);
         System.out.println("ID: " + order.get_orderID());
         System.out.println("DATE: " + order.getDate());
         System.out.println("TIME: " + order.getTime());
         System.out.println("RESTAURANT: " + order.getRestaurant());
         for(Friend friend: order.getFriends()){
             System.out.println("FRIEND: " + friend);
-        }
+        }*/
     }
 
     public void initializeOrderList(){
-        final List<Order> orders = new ArrayList<>(); //db.getAllOrders..
+        final List<Order> orders = db.getAllOrders();
 
         ArrayAdapter<Order> arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, orders);

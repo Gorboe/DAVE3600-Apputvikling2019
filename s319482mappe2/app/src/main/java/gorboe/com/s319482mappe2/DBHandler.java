@@ -125,11 +125,38 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
+    private void deleteOrder(long orderID){
+
+    }
+
+    /**
+     * This is just to get all orders to display in ListView. Therefor we do not need to extract
+     * friends list for the order.
+     * **/
     public List<Order> getAllOrders(){
         SQLiteDatabase db = this.getReadableDatabase();
         List<Order> orders = new ArrayList<>();
-        
-        return null;
+
+        String query = "SELECT * FROM " + TABLE_ORDERS;
+
+        Log.d("SQL", query);
+
+        Cursor c = db.rawQuery(query, null);
+
+        if(c.moveToFirst()){
+            do{
+                Order order = new Order();
+                order.set_orderID(c.getInt(c.getColumnIndex(KEY_ORDER)));
+                order.setDate(c.getString(c.getColumnIndex(ORDER_DATE)));
+                order.setTime(c.getString(c.getColumnIndex(ORDER_TIME)));
+                order.setRestaurant(getRestaurant(c.getInt(c.getColumnIndex(ORDER_RESTAURANT_KEY))));
+                orders.add(order);
+            }while(c.moveToNext());
+            c.close();
+            db.close();
+        }
+
+        return orders;
     }
 
     public Order getOrder(long orderID){

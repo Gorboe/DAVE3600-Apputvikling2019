@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe2.enteties;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class Order {
@@ -66,5 +68,11 @@ public class Order {
 
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return restaurant.getName() + "\t" + restaurant.getType() + "\nDate: " + date + "\nTime: " + time;
     }
 }
