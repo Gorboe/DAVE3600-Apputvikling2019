@@ -126,12 +126,32 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     private void deleteOrder(long orderID){
+        SQLiteDatabase db = this.getReadableDatabase();
 
+        db.delete(TABLE_ORDERS, KEY_ORDER + " = ?",
+                new String[]{ String.valueOf(orderID) });
+        db.delete(TABLE_ORDER_PERSON_DETAILS, KEY_ORDER + " = ?",
+                new String[]{ String.valueOf(orderID) });
+
+        db.close();
+    }
+
+    private int updateOrder(Order order){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(ORDER_DATE, order.getDate());
+        values.put(ORDER_TIME, order.getTime());
+        values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
+        int changed = db.update(TABLE_ORDERS, values, KEY_ORDER + " = ?",
+                new String[] { String.valueOf(order.get_orderID()) });
+        db.close();
+        return changed;
     }
 
     /**
      * This is just to get all orders to display in ListView. Therefor we do not need to extract
-     * friends list for the order.
+     * friends list for the order, as we do not display that in the ListView.
      * **/
     public List<Order> getAllOrders(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -194,29 +214,24 @@ public class DBHandler extends SQLiteOpenHelper {
                 + TABLE_ORDER_PERSON_DETAILS + " WHERE " + KEY_ORDER_PERSON_DETAILS +
                 " = " + orderID;
 
-        System.out.println("QUERY: " + friendIDquery);
-
         Cursor c = db.rawQuery(friendIDquery, null);
 
-        //check cursor //TODO: CASE 0 FRIENDS
-        if(c != null){
+        if(!c.moveToFirst()){
+            //CASE: 0 friends, this will just return empty friend list
+        } else if(!c.moveToNext()){
+            //CASE: 1 friend
             c.moveToFirst();
-        }else{
-            return null;
-        }
-
-        if(!c.moveToNext()){ //TODO: CASE 1 FRIENDS
-            c.moveToFirst();
-            long id = c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND)); //TODO: fix this..mye unødvendig kode her?
-            friends.add(getFriend(id));
-            return friends;
-        }
-        c.moveToPrevious();
-
-        do{ //TODO: CASE FRIENDS >= 2
             long id = c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND));
             friends.add(getFriend(id));
-        } while(c.moveToNext());
+        }else{
+            //CASE: friends >= 2
+            c.moveToPrevious(); //because moveToNext() was called above but returned true. c.moveToFirst() also works
+            do{
+                long id = c.getInt(c.getColumnIndex(KEY_ORDER_PERSON_DETAILS_FRIEND));
+                friends.add(getFriend(id));
+            } while(c.moveToNext());
+        }
+
 
         c.close();
         db.close();
