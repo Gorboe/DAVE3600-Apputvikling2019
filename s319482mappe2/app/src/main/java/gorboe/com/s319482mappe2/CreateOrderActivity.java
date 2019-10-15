@@ -75,11 +75,29 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void initializeFriendDropDown(){
-        List<Friend> friends = db.getAllFriends();
+        List<Friend> allFriends = db.getAllFriends();
+        ArrayAdapter<Friend> adapter;
+
         if(existing_order != null){
-            //TODO: remove friends that are already selected?
+            List<Friend> notSelectedFriends = new ArrayList<>();
+            boolean isSelected = false;
+            for(int i = 0; i < allFriends.size(); i++){
+                for(int j = 0; j < existing_order.getFriends().size(); j++){
+                    if(allFriends.get(i).getFriendID() == existing_order.getFriends().get(j).getFriendID()){
+                        j = existing_order.getFriends().size();
+                        isSelected = true;
+                    }
+                }
+                if(!isSelected){
+                    notSelectedFriends.add(allFriends.get(i));
+                }
+                isSelected = false;
+            }
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notSelectedFriends);
+        }else{
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, allFriends);
         }
-        ArrayAdapter<Friend> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, friends);
+
         order_friends.setAdapter(adapter);
     }
 
@@ -111,7 +129,7 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     }
 
-    private void removeFromFriendSpinner(){
+    private void removeFriendFromSpinner(){
 
     }
 
