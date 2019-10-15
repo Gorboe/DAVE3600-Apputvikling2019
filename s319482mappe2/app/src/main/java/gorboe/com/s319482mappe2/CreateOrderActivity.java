@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -22,13 +26,15 @@ import gorboe.com.s319482mappe2.enteties.Restaurant;
 public class CreateOrderActivity extends AppCompatActivity {
 
     private ListView order_friendList;
-    private ArrayAdapter arrayAdapter;
     private Spinner order_friends;
     private Spinner order_restaurants;
     private EditText order_date;
     private EditText order_time;
     private DBHandler db;
     private Order existing_order;
+
+    private List<Friend> listFriends = new ArrayList<>();
+    private List<Friend> spinnerFriends = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         db = new DBHandler(this);
 
         tryGetOrder();
+
         initializeFriendList();
         initializeRestaurantDropDown();
         initializeFriendDropDown();
@@ -76,10 +83,8 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     public void initializeFriendDropDown(){
         List<Friend> allFriends = db.getAllFriends();
-        ArrayAdapter<Friend> adapter;
 
         if(existing_order != null){
-            List<Friend> notSelectedFriends = new ArrayList<>();
             boolean isSelected = false;
             for(int i = 0; i < allFriends.size(); i++){
                 for(int j = 0; j < existing_order.getFriends().size(); j++){
@@ -89,60 +94,58 @@ public class CreateOrderActivity extends AppCompatActivity {
                     }
                 }
                 if(!isSelected){
-                    notSelectedFriends.add(allFriends.get(i));
+                    spinnerFriends.add(allFriends.get(i));
                 }
                 isSelected = false;
             }
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, notSelectedFriends);
-        }else{
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, allFriends);
+        }else {
+            spinnerFriends = allFriends;
         }
+        populateFriendSpinner();
+    }
 
+    private void populateFriendSpinner(){
+        ArrayAdapter<Friend> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, spinnerFriends);
         order_friends.setAdapter(adapter);
     }
 
     public void initializeFriendList(){
-        List<Friend> friends;
         if(existing_order != null){
-            friends = existing_order.getFriends();
-        }else{
-            friends = new ArrayList<>();
+            listFriends = existing_order.getFriends();
         }
-
-        arrayAdapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, friends);
-
-        order_friendList.setAdapter(arrayAdapter);
+        populateFriendList();
 
         order_friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                System.out.println("pressed: " + position);
-                //TODO: add remove friends from list, but add them back to spinner..
+                Friend friend = listFriends.get(position);
+                listFriends.remove(friend);
+                spinnerFriends.add(friend);
+                populateFriendList();
+                populateFriendSpinner();
             }
         });
     }
-    public void addFriend(View view) {
-        arrayAdapter.add(order_friends.getSelectedItem());
-        //TODO: remove friend from spinner, so it cant be selected twice.
 
+    private void populateFriendList(){
+        ArrayAdapter<Friend> arrayAdapter = new ArrayAdapter<>
+                (this, R.layout.simple_list_with_delete, listFriends);
+
+        order_friendList.setAdapter(arrayAdapter);
     }
 
-    private void removeFriendFromSpinner(){
-
+    public void addFriend(View view) {
+        Friend friend = (Friend)order_friends.getSelectedItem();
+        listFriends.add(friend);
+        spinnerFriends.remove(friend);
+        populateFriendList();
+        populateFriendSpinner();
     }
 
     public void saveOrder(View view) {
-        List<Friend> friends = new ArrayList<>();
-
-        //add all selected friends
-        for(int i = 0; i < arrayAdapter.getCount(); i++){
-            friends.add((Friend)arrayAdapter.getItem(i));
-        }
-
         Order order = new Order((Restaurant)order_restaurants.getSelectedItem(), order_date.getText().toString(),
-                order_time.getText().toString(), friends);
+                order_time.getText().toString(), listFriends);
 
         if(existing_order != null){
             order.set_orderID(existing_order.get_orderID());
