@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateOrderActivity"></activity>
-        <activity android:name=".CreateFriendActivity" />
-        <activity android:name=".CreateRestaurantActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".FriendsActivity" />
-        <activity android:name=".RestaurantActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.create.CreateOrderActivity"></activity>
+        <activity android:name=".activities.create.CreateFriendActivity" />
+        <activity android:name=".activities.create.CreateRestaurantActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.FriendsActivity" />
+        <activity android:name=".activities.RestaurantActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

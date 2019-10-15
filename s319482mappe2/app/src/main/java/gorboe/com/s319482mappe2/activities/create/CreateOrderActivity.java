@@ -1,15 +1,10 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -19,6 +14,9 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.activities.MainActivity;
 import gorboe.com.s319482mappe2.enteties.Friend;
 import gorboe.com.s319482mappe2.enteties.Order;
 import gorboe.com.s319482mappe2.enteties.Restaurant;

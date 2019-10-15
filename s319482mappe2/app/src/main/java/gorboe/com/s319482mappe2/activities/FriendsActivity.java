@@ -1,4 +1,4 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,9 @@ import android.widget.Toolbar;
 
 import java.util.List;
 
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.activities.create.CreateFriendActivity;
 import gorboe.com.s319482mappe2.enteties.Friend;
 
 public class FriendsActivity extends AppCompatActivity {

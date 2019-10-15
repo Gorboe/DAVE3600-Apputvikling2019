@@ -1,71 +1,61 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.activities;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import gorboe.com.s319482mappe2.enteties.Friend;
-import gorboe.com.s319482mappe2.enteties.Order;
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.activities.create.CreateRestaurantActivity;
+import gorboe.com.s319482mappe2.enteties.Restaurant;
 
-public class MainActivity extends AppCompatActivity {
+public class RestaurantActivity extends AppCompatActivity {
 
-    //TODO: create icons vector in drawable...
-    private ListView orderList;
     private DBHandler db;
+    private ListView restaurantList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        orderList = findViewById(R.id.orderList);
-        db = new DBHandler(this);
+        setContentView(R.layout.activity_restaurant);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
-        initializeOrderList();
-
-        //TODO: TEMP!!
-        /*Order order = db.getOrder(1);
-        System.out.println("ID: " + order.get_orderID());
-        System.out.println("DATE: " + order.getDate());
-        System.out.println("TIME: " + order.getTime());
-        System.out.println("RESTAURANT: " + order.getRestaurant());
-        for(Friend friend: order.getFriends()){
-            System.out.println("FRIEND: " + friend);
-        }*/
+        db = new DBHandler(this);
+        restaurantList = findViewById(R.id.restaurantList);
+        initializeRestaurantList();
     }
 
-    public void initializeOrderList(){
-        final List<Order> orders = db.getAllOrders();
+    public void initializeRestaurantList(){
+        final List<Restaurant> restaurants = db.getAllRestaurants();
 
-        ArrayAdapter<Order> arrayAdapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, orders);
+        ArrayAdapter<Restaurant> arrayAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, restaurants);
+        restaurantList.setAdapter(arrayAdapter);
 
-        orderList.setAdapter(arrayAdapter);
-
-        orderList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        restaurantList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                Intent intent = new Intent(MainActivity.this, CreateOrderActivity.class);
-                intent.putExtra("selected_order_ID", orders.get(position).get_orderID());
+                Intent intent = new Intent(RestaurantActivity.this, CreateRestaurantActivity.class);
+                intent.putExtra("selected_restaurant_ID", restaurants.get(position).getRestaurantID());
                 startActivity(intent);
             }
         });
+    }
+
+    public void startCreateRestaurantActivity(View view) {
+        startActivity(new Intent(this, CreateRestaurantActivity.class));
     }
 
     @Override
@@ -92,9 +82,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void createOrder(View view) {
-        startActivity(new Intent(this, CreateOrderActivity.class));
     }
 }

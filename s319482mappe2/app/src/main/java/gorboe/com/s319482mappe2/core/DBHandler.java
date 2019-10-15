@@ -1,4 +1,4 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.core;
 
 import android.content.ContentValues;
 import android.content.Context;
