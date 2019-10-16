@@ -17,14 +17,16 @@ public class MainActivity extends AppCompatActivity {
     public static final Uri CONTENT_URI= Uri.parse("content://"+ PROVIDER + "/bok");
     public static final String TITTEL="Tittel";
     public static final String ID="_id";
-    EditText tittel;TextView visbok;
+    EditText tittel;
+    TextView visbok;
+    EditText edit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tittel=(EditText)findViewById(R.id.tittel);
         Button leggtil=(Button)findViewById(R.id.leggtil);
-
+        edit = findViewById(R.id.edit);
         visbok=(TextView)findViewById(R.id.vis);
     }
     public void leggtil(View v){
@@ -46,11 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
         if (cur.moveToFirst()) {
             do {
-                tekst = tekst + (cur.getString(1)) + "\r\n";
+                tekst = tekst + (cur.getString(0)) +(cur.getString(1)) + "\r\n";
             }
             while (cur.moveToNext());
             cur.close();
             visbok.setText(tekst);
         }
+    }
+
+    public void oppdater(View view) {
+        ContentValues values = new ContentValues();
+        values.put(TITTEL, tittel.getText().toString());
+
+        getContentResolver().update(Uri.parse(CONTENT_URI + "/" + edit.getText().toString()), values, null, null);
+        visalle(null);
+    }
+
+    public void slett(View view) {
+        getContentResolver().delete(Uri.parse(CONTENT_URI + "/" + edit.getText().toString()), null, null);
+        visalle(null);
     }
 }

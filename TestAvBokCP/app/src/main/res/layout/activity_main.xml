@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Tittel" />
+    <EditText android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="edit" />
     <Button
         android:id="@+id/leggtil"
         android:layout_width="match_parent"
@@ -22,6 +26,19 @@
         android:layout_height="wrap_content"
         android:text="Vis alle bøker"
         android:onClick="visalle" />
+    <Button
+        android:id="@+id/slett"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="slett"
+        android:onClick="slett" />
+    <Button
+        android:id="@+id/oppdater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="oppdater"
+        android:onClick="oppdater" />
+
     <TextView android:id="@+id/vis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
