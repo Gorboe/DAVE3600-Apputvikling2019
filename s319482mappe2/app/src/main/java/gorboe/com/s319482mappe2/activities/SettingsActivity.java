@@ -1,4 +1,4 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toolbar;
+
+import gorboe.com.s319482mappe2.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

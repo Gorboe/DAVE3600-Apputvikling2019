@@ -1,4 +1,4 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.activities.RestaurantActivity;
 import gorboe.com.s319482mappe2.enteties.Restaurant;
 
 public class CreateRestaurantActivity extends AppCompatActivity {

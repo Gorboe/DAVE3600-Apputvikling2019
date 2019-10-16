@@ -1,4 +1,4 @@
-package gorboe.com.s319482mappe2;
+package gorboe.com.s319482mappe2.core;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -83,7 +83,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 "(" + KEY_ORDER_PERSON_DETAILS + " INTEGER NOT NULL," +
                       KEY_ORDER_PERSON_DETAILS_FRIEND + " INTEGER NOT NULL," +
                 "CONSTRAINT  " + PRIMARY_KEY_ORDER_PERSON_DETAILS + " PRIMARY KEY " +
-                "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + ")" + ")"; //TODO: TRENGER BEGGE Å VÆRE KEY??
+                "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + ")" + ")";
         Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
         db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
@@ -131,9 +131,15 @@ public class DBHandler extends SQLiteOpenHelper {
         db.delete(TABLE_ORDERS, KEY_ORDER + " = ?",
                 new String[]{ String.valueOf(orderID) });
 
+        deleteOrderPersonDetails(orderID);
+
+        db.close();
+    }
+
+    private void deleteOrderPersonDetails(long orderID){
+        SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_ORDER_PERSON_DETAILS, KEY_ORDER_PERSON_DETAILS + " = ?",
                 new String[]{ String.valueOf(orderID) });
-
         db.close();
     }
 
@@ -146,6 +152,11 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
         int changed = db.update(TABLE_ORDERS, values, KEY_ORDER + " = ?",
                 new String[] { String.valueOf(order.get_orderID()) });
+
+        //order person details
+        deleteOrderPersonDetails(order.get_orderID());
+        addOrderPersonDetails(order, order.get_orderID());
+
         db.close();
         return changed;
     }
