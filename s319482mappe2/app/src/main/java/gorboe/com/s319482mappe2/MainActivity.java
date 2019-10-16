@@ -24,6 +24,8 @@ import gorboe.com.s319482mappe2.enteties.Order;
 public class MainActivity extends AppCompatActivity {
 
     //TODO: create icons vector in drawable...
+    //TODO: CONTENT PROVIDER
+    //TODO: content://authority/path/id  ex: content://gorobe.com.s319842mappe2/restaurant/2
     private ListView orderList;
     private DBHandler db;
 
