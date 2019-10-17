@@ -2,16 +2,23 @@ package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
@@ -26,11 +33,10 @@ public class CreateOrderActivity extends AppCompatActivity {
     private ListView order_friendList;
     private Spinner order_friends;
     private Spinner order_restaurants;
-    private EditText order_date;
-    private EditText order_time;
+    private TextView order_date;
+    private TextView order_time;
     private DBHandler db;
     private Order existing_order;
-
     private List<Friend> listFriends = new ArrayList<>();
     private List<Friend> spinnerFriends = new ArrayList<>();
 
@@ -60,6 +66,11 @@ public class CreateOrderActivity extends AppCompatActivity {
             existing_order = db.getOrder(order_id);
             order_date.setText(existing_order.getDate());
             order_time.setText(existing_order.getTime());
+        }else {
+            String defaultDate = "21/11/2019";
+            String defaultTime = "17:30";
+            order_date.setText(defaultDate);
+            order_time.setText(defaultTime);
         }
     }
 
@@ -134,6 +145,10 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void addFriend(View view) {
+        if(order_friends.getSelectedItem() == null){
+            //TODO: MSG TO USER? NO MORE FRIENDS, ADD MORE.
+            return;
+        }
         Friend friend = (Friend)order_friends.getSelectedItem();
         listFriends.add(friend);
         spinnerFriends.remove(friend);
@@ -142,6 +157,11 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void saveOrder(View view) {
+        if(order_restaurants.getSelectedItem() == null){
+            //TODO: MSG TO USER? YOU NEED TO CREATE A RESTAURANT!
+            return;
+        }
+
         Order order = new Order((Restaurant)order_restaurants.getSelectedItem(), order_date.getText().toString(),
                 order_time.getText().toString(), listFriends);
 
@@ -160,5 +180,30 @@ public class CreateOrderActivity extends AppCompatActivity {
             db.deleteOrder(existing_order.get_orderID());
         }
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void openDatePicker(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String date = day + "/" + month + "/" + year;
+                System.out.println(date);
+                order_date.setText(date);
+            }
+        }, 2019, 11, 21);
+        datePickerDialog.show();
+    }
+
+    public void openTimePicker(View view) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+                String time = hour + ":" + minutes;
+                System.out.println(time);
+                order_time.setText(time);
+            }
+
+        }, 17, 30, true);
+        timePickerDialog.show();
     }
 }
