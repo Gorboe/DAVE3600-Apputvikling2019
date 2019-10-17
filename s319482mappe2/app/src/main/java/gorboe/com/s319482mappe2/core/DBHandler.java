@@ -161,10 +161,6 @@ public class DBHandler extends SQLiteOpenHelper {
         return changed;
     }
 
-    /**
-     * This is just to get all orders to display in ListView. Therefor we do not need to extract
-     * friends list for the order, as we do not display that in the ListView.
-     * **/
     public List<Order> getAllOrders(){
         SQLiteDatabase db = this.getReadableDatabase();
         List<Order> orders = new ArrayList<>();
@@ -182,6 +178,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 order.setDate(c.getString(c.getColumnIndex(ORDER_DATE)));
                 order.setTime(c.getString(c.getColumnIndex(ORDER_TIME)));
                 order.setRestaurant(getRestaurant(c.getInt(c.getColumnIndex(ORDER_RESTAURANT_KEY))));
+                order.setFriends(getFriendsInOrder(order.get_orderID()));
                 orders.add(order);
             }while(c.moveToNext());
             c.close();
@@ -357,7 +354,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void deleteRestaurant(long restaurant_id){
-        //CHECK ORDERS FOR THAT RESTAURANT
+        //CHECK ORDERS FOR THAT RESTAURANT AND DELETE THEM
         List<Order> orders = getAllOrders();
         for(Order order: orders){
             if(order.getRestaurant().getRestaurantID() == restaurant_id){
@@ -387,7 +384,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**FRIENDS METHODS**/
     public void addFriend(Friend friend){
-        //TODO: CHECK IF IN ORDER, IF IT IS REMOVE FRIEND FROM ORDER (ORDERPERSONDETIALS)
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FRIEND_NAME, friend.getName());
@@ -443,6 +439,17 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void deleteFriend(long friend_id){
+        //CHECK ORDERS FOR THAT FRIEND AND REMOVE THEM FROM THE ORDER
+        List<Order> orders = getAllOrders();
+        for(Order order: orders){
+            for(Friend friend: order.getFriends()){
+                if(friend.getFriendID() == friend_id){
+                    order.getFriends().remove(friend);
+                    updateOrder(order);
+                }
+            }
+        }
+
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_FRIENDS, KEY_FRIEND + " = ?",
                 new String[]{ String.valueOf(friend_id) });
