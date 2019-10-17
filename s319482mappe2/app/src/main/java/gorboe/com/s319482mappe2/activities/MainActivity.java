@@ -23,8 +23,14 @@ import gorboe.com.s319482mappe2.enteties.Order;
 public class MainActivity extends AppCompatActivity {
 
     //TODO: create icons vector in drawable...
-    //TODO: CONTENT PROVIDER
     //TODO: content://authority/path/id  ex: content://gorobe.com.s319842mappe2/restaurant/2
+
+    //TODO: FRONT PAGE?
+    //TODO: CHECK ONCE PER DAY FOR ORDERS AND GIVE NOTIFICATION TO USER AND SEND SMS TO FRIENDS (SMS STORED IN SHARED PREF)
+    //TODO: SETTINGS. SET THE TIME FOR THE SMS SENDING. TURN ON AND OF SMS SERVICE.
+    //TODO: IF PHONE TURNS OF, RESTART THE SERVICE THINGY
+    //TODO: CONTENT PROVIDER TO SHARE RESTAURANT DATA
+    //TODO: DESIGN AND LAYOUT.
     private ListView orderList;
     private DBHandler db;
 
@@ -38,16 +44,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
         initializeOrderList();
-
-        //TODO: TEMP!!
-        /*Order order = db.getOrder(1);
-        System.out.println("ID: " + order.get_orderID());
-        System.out.println("DATE: " + order.getDate());
-        System.out.println("TIME: " + order.getTime());
-        System.out.println("RESTAURANT: " + order.getRestaurant());
-        for(Friend friend: order.getFriends()){
-            System.out.println("FRIEND: " + friend);
-        }*/
     }
 
     public void initializeOrderList(){

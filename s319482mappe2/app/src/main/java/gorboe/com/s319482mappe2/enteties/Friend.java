@@ -49,7 +49,7 @@ public class Friend {
     @NonNull
     @Override
     public String toString() {
-        return name + "     " + number;
+        return name;
     }
 
     public String toStringForSpinner(){
