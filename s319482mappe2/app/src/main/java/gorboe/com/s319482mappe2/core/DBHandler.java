@@ -357,6 +357,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void deleteRestaurant(long restaurant_id){
+        //CHECK ORDERS FOR THAT RESTAURANT
+        List<Order> orders = getAllOrders();
+        for(Order order: orders){
+            if(order.getRestaurant().getRestaurantID() == restaurant_id){
+                deleteOrder(order.get_orderID());
+            }
+        }
+
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_RESTAURANTS, KEY_RESTAURANT + " = ?",
                 new String[]{ String.valueOf(restaurant_id) });
@@ -379,6 +387,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     /**FRIENDS METHODS**/
     public void addFriend(Friend friend){
+        //TODO: CHECK IF IN ORDER, IF IT IS REMOVE FRIEND FROM ORDER (ORDERPERSONDETIALS)
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(FRIEND_NAME, friend.getName());
