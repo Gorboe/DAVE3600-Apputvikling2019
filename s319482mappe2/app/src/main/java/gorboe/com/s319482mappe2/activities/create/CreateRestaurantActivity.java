@@ -13,7 +13,7 @@ import gorboe.com.s319482mappe2.activities.RestaurantActivity;
 import gorboe.com.s319482mappe2.enteties.Restaurant;
 
 public class CreateRestaurantActivity extends AppCompatActivity {
-
+    //TODO: ADD PROPER DATE PICKER WITH TIME PICKER
     private EditText name_field;
     private EditText address_field;
     private EditText number_field;

@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO: IF PHONE TURNS OF, RESTART THE SERVICE THINGY
     //TODO: CONTENT PROVIDER TO SHARE RESTAURANT DATA
     //TODO: DESIGN AND LAYOUT.
+
+    //TODO: IF I DELETE A FRIEND OR RESTAURANT I NEED TO CHECK IF THEY ARE IN ORDERS.
     private ListView orderList;
     private DBHandler db;
 

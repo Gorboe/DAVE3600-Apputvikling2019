@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gorboe.com.s319482mappe2">
-
+    <uses-permission android:name="com.example.contentproviderbok.permission"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <permission android:name="gorboe.com.s319482mappe2.permission"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <provider
+            android:name="gorboe.com.s319482mappe2.core.Provider"
+            android:authorities="gorboe.com.s319482mappe2"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="gorboe.com.s319482mappe2.permission"
+            android:writePermission="gorboe.com.s319482mappe2.permission">
+        </provider>
         <activity android:name=".activities.create.CreateOrderActivity"></activity>
         <activity android:name=".activities.create.CreateFriendActivity" />
         <activity android:name=".activities.create.CreateRestaurantActivity" />

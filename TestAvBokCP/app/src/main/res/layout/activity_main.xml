@@ -6,26 +6,39 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="gorboe.com.testavbokcp.MainActivity">
-    <EditText android:id="@+id/tittel"
+    <EditText android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tittel" />
+        android:hint="Name" />
+    <EditText android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address" />
+    <EditText android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number" />
+    <EditText android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type" />
     <EditText android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="edit" />
+        android:hint="id" />
     <Button
         android:id="@+id/leggtil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Legg til bok"
-        android:onClick="leggtil" />
+        android:onClick="leggtil"
+        android:text="Legg til restaurant" />
+
     <Button
         android:id="@+id/visalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Vis alle bøker"
-        android:onClick="visalle" />
+        android:onClick="visalle"
+        android:text="Vis alle restauranter" />
     <Button
         android:id="@+id/slett"
         android:layout_width="match_parent"
