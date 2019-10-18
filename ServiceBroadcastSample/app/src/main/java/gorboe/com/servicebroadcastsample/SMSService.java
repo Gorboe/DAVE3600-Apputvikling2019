@@ -21,7 +21,7 @@ public class SMSService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(getApplicationContext(), "I SMS SERVICE", Toast.LENGTH_SHORT).show();
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage("+4790862870", null, "test msg", null, null);
+        smsManager.sendTextMessage("+15555215556", null, "test msg", null, null);
         return super.onStartCommand(intent, flags, startId);
     }
 }

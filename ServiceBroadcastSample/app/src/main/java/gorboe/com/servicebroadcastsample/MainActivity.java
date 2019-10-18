@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +29,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stoppPeriodisk(View v) {
-        Intent i = new Intent(this, MinService.class);
-        PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
-        AlarmManager alarm =
-                (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        if (alarm!= null) {
+        Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
+        stopService(new Intent(this, SMSService.class));
+        //Intent i = new Intent(this, SMSService.class);
+        //PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
+        //AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        /*if (alarm!= null) {
             alarm.cancel(pintent);
-        }
+        }*/
     }
 }
