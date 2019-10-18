@@ -38,11 +38,12 @@ public class ServiceManager extends Service {
         System.out.println("I ServiceManager");
 
         String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
-                            (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because february = 0.
+                             Calendar.getInstance().get(Calendar.MONTH) + "/" +
                              Calendar.getInstance().get(Calendar.YEAR);
 
         for(Order order: db.getAllOrders()){
             String orderDate = order.getDate();
+            System.out.println("Matchin: " + orderDate + " against " + currentDate);
             if(currentDate.equals(orderDate)){
                 //this order is today!!
                 Toast.makeText(getApplicationContext(), "THIS ORDER IS TODAY!", Toast.LENGTH_SHORT).show();
@@ -50,6 +51,8 @@ public class ServiceManager extends Service {
                 startService(new Intent(this, NotificationService.class));
 
                 //start sms service (mellomservice for å håndtere tid?)
+            }else{
+                Toast.makeText(getApplicationContext(), "ORDER NOT TODAY! " + order.get_orderID(), Toast.LENGTH_SHORT).show();
             }
         }
 

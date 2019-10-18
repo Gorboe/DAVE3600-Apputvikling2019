@@ -15,6 +15,7 @@ import gorboe.com.s319482mappe2.services.NotificationService;
 import gorboe.com.s319482mappe2.services.Receiver;
 import gorboe.com.s319482mappe2.services.PeriodicService;
 import gorboe.com.s319482mappe2.services.SMSService;
+import gorboe.com.s319482mappe2.services.ServiceManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -62,7 +63,8 @@ public class SettingsActivity extends AppCompatActivity {
     public void stopService(View view) {
         Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
         stopService(new Intent(this, PeriodicService.class));
-        //maybe stop service helper service
+        stopService(new Intent(this, ServiceManager.class));
+        //maybe stop SMS service helper service
         stopService(new Intent(this, NotificationService.class));
         stopService(new Intent(this, SMSService.class));
     }
