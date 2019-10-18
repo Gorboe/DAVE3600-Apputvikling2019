@@ -4,8 +4,13 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,10 +25,8 @@ public class NotificationService extends Service {
 
     private DBHandler db;
 
-    @Override
-    public void onCreate() {
+    public NotificationService(){
         db = new DBHandler(this);
-        super.onCreate();
     }
 
     @Nullable
@@ -37,7 +40,9 @@ public class NotificationService extends Service {
         Toast.makeText(getApplicationContext(), "I NotificationService", Toast.LENGTH_SHORT).show();
         System.out.println("I NotificationService");
 
-        long order_id = intent.getLongExtra("selected_order_ID", -1);
+        //get order_id from sharedpref
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        long order_id = preferences.getLong("current_order_ID", -1);
         Order order = db.getOrder(order_id);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

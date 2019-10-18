@@ -5,7 +5,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -48,16 +50,15 @@ public class ServiceManager extends Service {
                 //this order is today!!
                 Toast.makeText(getApplicationContext(), "THIS ORDER IS TODAY!", Toast.LENGTH_SHORT).show();
 
-                //start notification service
-                Intent notificationIntent = new Intent(this, NotificationService.class);
-                intent.putExtra("selected_order_ID", order.get_orderID());
-                startActivity(notificationIntent);
+                //add order_id to shared pref so we can access it in service
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                preferences.edit().putLong("current_order_ID", order.get_orderID()).apply();
 
+                //start notification service
+                startService(new Intent(this, NotificationService.class));
 
                 //start sms service (mellomservice for å håndtere tid?)
-                Intent SMSIntent = new Intent(this, SMSService.class);
-                intent.putExtra("selected_order_ID", order.get_orderID());
-                startActivity(SMSIntent);
+                startService(new Intent(this, SMSService.class));
             }else{
                 Toast.makeText(getApplicationContext(), "ORDER NOT TODAY! " + order.get_orderID(), Toast.LENGTH_SHORT).show();
             }

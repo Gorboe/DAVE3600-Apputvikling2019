@@ -2,7 +2,9 @@ package gorboe.com.s319482mappe2.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
@@ -33,13 +35,16 @@ public class SMSService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(getApplicationContext(), "I SMS SERVICE", Toast.LENGTH_SHORT).show();
 
-        long order_id = intent.getLongExtra("selected_order_ID", -1);
+        //get order_id from sharedpref
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        long order_id = preferences.getLong("current_order_ID", -1);
         Order order = db.getOrder(order_id);
+
         //TODO: get msg from shared pref
         for(Friend friend: order.getFriends()){
             try{
                 SmsManager smsManager = SmsManager.getDefault(); //TODO: try catch this
-                smsManager.sendTextMessage(friend.getNumber(), null, "test msg", null, null); //+15555215556 for emu
+                smsManager.sendTextMessage(friend.getNumber(), null, "test msg: " + order.getRestaurant(), null, null); //+15555215556 for emu
             }catch (Exception e){
                 Toast.makeText(getApplicationContext(), "SMS EXCEPTION!!", Toast.LENGTH_SHORT).show();
             }
