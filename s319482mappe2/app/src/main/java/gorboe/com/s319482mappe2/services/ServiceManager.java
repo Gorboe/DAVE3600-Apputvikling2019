@@ -12,7 +12,12 @@ import androidx.annotation.Nullable;
 
 import java.util.Calendar;
 
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.enteties.Order;
+
 public class ServiceManager extends Service {
+
+    private DBHandler db;
 
     @Nullable
     @Override
@@ -21,18 +26,39 @@ public class ServiceManager extends Service {
     }
 
     @Override
+    public void onCreate() {
+        db = new DBHandler(this);
+        super.onCreate();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(), "I ServiceManager", Toast.LENGTH_SHORT).show();
+        //TODO: temp
+        Toast.makeText(getApplicationContext(), "I ServiceManager checking orders", Toast.LENGTH_SHORT).show();
         System.out.println("I ServiceManager");
-        java.util.Calendar cal = Calendar.getInstance();
-        Intent i = new Intent(this, NotificationService.class);
-        PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
-        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 1000, pintent); //TODO: once per day
 
-        //TODO: check for sms
+        String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
+                            (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because february = 0.
+                             Calendar.getInstance().get(Calendar.YEAR);
 
+        for(Order order: db.getAllOrders()){
+            String orderDate = order.getDate();
+            if(currentDate.equals(orderDate)){
+                //this order is today!!
+                Toast.makeText(getApplicationContext(), "THIS ORDER IS TODAY!", Toast.LENGTH_SHORT).show();
+                //start notification service
+                startService(new Intent(this, NotificationService.class));
+
+                //start sms service (mellomservice for å håndtere tid?)
+            }
+        }
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        Toast.makeText(this, "ServiceManager onDestroy()", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
     }
 }

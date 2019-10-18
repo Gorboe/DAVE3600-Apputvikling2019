@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
+import java.util.Calendar;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
@@ -52,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
         initializeOrderList();
+
+        System.out.println("YEAR: " + Calendar.getInstance().get(Calendar.YEAR));
+        System.out.println("MONTH: " + (Calendar.getInstance().get(Calendar.MONTH) + 1)); //+1 fordi den starter på 0 altså february = 0
+        System.out.println("DAY IN MONTH: " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        System.out.println("HOUR: " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+        System.out.println("MINUTE: " + Calendar.getInstance().get(Calendar.MINUTE));
     }
 
     public void initializeOrderList(){

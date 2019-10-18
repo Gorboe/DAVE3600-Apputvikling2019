@@ -33,7 +33,7 @@ public class NotificationService extends Service {
         Notification notifikasjon = new NotificationCompat.Builder(this)
                 .setContentTitle("My Notification")
                 .setContentText("Blablalba this is text")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher) //TODO: add own icon
                 .setContentIntent(pIntent).build();
         notifikasjon.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0, notifikasjon);
