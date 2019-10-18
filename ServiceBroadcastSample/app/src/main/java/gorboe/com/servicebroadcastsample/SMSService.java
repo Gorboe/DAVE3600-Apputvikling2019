@@ -30,4 +30,10 @@ public class SMSService extends Service {
         smsManager.sendTextMessage("+15555215556", null, "test msg", null, null);
         return super.onStartCommand(intent, flags, startId);
     }
+
+    @Override
+    public void onDestroy() {
+        Toast.makeText(getApplicationContext(), "I SMS onDestroy()", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
 }

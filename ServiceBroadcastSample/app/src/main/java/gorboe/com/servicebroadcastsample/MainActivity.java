@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public void stoppPeriodisk(View v) {
         Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
         stopService(new Intent(this, SettPeriodiskService.class));
+        stopService(new Intent(this, SMSService.class));
         //Intent i = new Intent(this, SMSService.class);
         //PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
         //AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
