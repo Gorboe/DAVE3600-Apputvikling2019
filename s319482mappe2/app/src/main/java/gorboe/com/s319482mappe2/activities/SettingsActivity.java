@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.services.NotificationService;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -45,5 +48,16 @@ public class SettingsActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startService(View view) {
+        Intent intent = new Intent();
+        intent.setAction("gorboe.com.s319482mappe2.mybroadcast");
+        sendBroadcast(intent);
+    }
+
+    public void stopService(View view) {
+        Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
+        stopService(new Intent(this, NotificationService.class));
     }
 }

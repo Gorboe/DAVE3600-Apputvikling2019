@@ -12,6 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".services.SMSService"></service>
+        <service android:name=".services.NotificationService"></service>
+        <service android:name=".services.ServiceManager"></service>
+        <receiver android:name=".services.Receiver">
+            <intent-filter>
+                <action android:name="gorboe.com.s319482mappe2.mybroadcast" />
+            </intent-filter>
+        </receiver>
         <provider
             android:name="gorboe.com.s319482mappe2.core.Provider"
             android:authorities="gorboe.com.s319482mappe2"
