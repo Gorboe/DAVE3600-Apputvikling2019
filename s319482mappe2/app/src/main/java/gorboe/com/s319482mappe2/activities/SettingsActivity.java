@@ -60,6 +60,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void stopService(View view) {
         Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
+        stopService(new Intent(this, Receiver.class));
+        stopService(new Intent(this, NotificationService.class));
         stopService(new Intent(this, ServiceManager.class));
     }
 }

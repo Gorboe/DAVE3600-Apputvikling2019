@@ -18,6 +18,12 @@ public class SMSService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        Toast.makeText(getApplicationContext(), "I SMS ONCREATE", Toast.LENGTH_SHORT).show();
+        super.onCreate();
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(getApplicationContext(), "I SMS SERVICE", Toast.LENGTH_SHORT).show();
         SmsManager smsManager = SmsManager.getDefault();
