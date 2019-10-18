@@ -47,10 +47,17 @@ public class ServiceManager extends Service {
             if(currentDate.equals(orderDate)){
                 //this order is today!!
                 Toast.makeText(getApplicationContext(), "THIS ORDER IS TODAY!", Toast.LENGTH_SHORT).show();
+
                 //start notification service
-                startService(new Intent(this, NotificationService.class));
+                Intent notificationIntent = new Intent(this, NotificationService.class);
+                intent.putExtra("selected_order_ID", order.get_orderID());
+                startActivity(notificationIntent);
+
 
                 //start sms service (mellomservice for å håndtere tid?)
+                Intent SMSIntent = new Intent(this, SMSService.class);
+                intent.putExtra("selected_order_ID", order.get_orderID());
+                startActivity(SMSIntent);
             }else{
                 Toast.makeText(getApplicationContext(), "ORDER NOT TODAY! " + order.get_orderID(), Toast.LENGTH_SHORT).show();
             }

@@ -13,8 +13,18 @@ import androidx.core.app.NotificationCompat;
 
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.activities.SettingsActivity;
+import gorboe.com.s319482mappe2.core.DBHandler;
+import gorboe.com.s319482mappe2.enteties.Order;
 
 public class NotificationService extends Service {
+
+    private DBHandler db;
+
+    @Override
+    public void onCreate() {
+        db = new DBHandler(this);
+        super.onCreate();
+    }
 
     @Nullable
     @Override
@@ -27,12 +37,16 @@ public class NotificationService extends Service {
         Toast.makeText(getApplicationContext(), "I NotificationService", Toast.LENGTH_SHORT).show();
         System.out.println("I NotificationService");
 
+        long order_id = intent.getLongExtra("selected_order_ID", -1);
+        Order order = db.getOrder(order_id);
+
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Intent i = new Intent(this, SettingsActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, i, 0);
         Notification notifikasjon = new NotificationCompat.Builder(this)
                 .setContentTitle("My Notification")
-                .setContentText("Blablalba this is text")
+                .setContentText("Ikke glem restaurantbesøk idag ved " + order.getRestaurant()
+                        + " kl: " + order.getTime())
                 .setSmallIcon(R.mipmap.ic_launcher) //TODO: add own icon
                 .setContentIntent(pIntent).build();
         notifikasjon.flags |= Notification.FLAG_AUTO_CANCEL;
