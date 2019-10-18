@@ -23,13 +23,21 @@ import gorboe.com.s319482mappe2.enteties.Order;
 public class MainActivity extends AppCompatActivity {
 
     //TODO: create icons vector in drawable...
-    //TODO: content://authority/path/id  ex: content://gorobe.com.s319842mappe2/restaurant/2
+    //TODO: content://authority/path/id  ex: content://gorboe.com.s319842mappe2/restaurant/2
 
     //TODO: CHECK ONCE PER DAY FOR ORDERS AND GIVE NOTIFICATION TO USER AND SEND SMS TO FRIENDS (SMS STORED IN SHARED PREF)
     //TODO: SETTINGS. SET THE TIME FOR THE SMS SENDING. TURN ON AND OF SMS SERVICE.
     //TODO: IF PHONE TURNS OF, RESTART THE SERVICE THINGY
     //TODO: CONTENT PROVIDER TO SHARE RESTAURANT DATA
     //TODO: DESIGN AND LAYOUT.
+
+    //TODO: sms-service
+    //TODO: xml for settings, shared pref, fra timen
+    //TODO: order check, må ha lagt inn rest
+    //TODO: validation for phone number.
+    //TODO: test project for content provider.
+    //TODO: back-stack. (Navigation)
+    //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
 
     private ListView orderList;
     private DBHandler db;

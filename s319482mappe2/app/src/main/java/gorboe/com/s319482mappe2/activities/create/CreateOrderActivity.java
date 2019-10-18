@@ -67,6 +67,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             order_date.setText(existing_order.getDate());
             order_time.setText(existing_order.getTime());
         }else {
+            //TODO: GET CURRENT DATE AND TIME
             String defaultDate = "21/11/2019";
             String defaultTime = "17:30";
             order_date.setText(defaultDate);
@@ -183,6 +184,8 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void openDatePicker(View view) {
+        //TODO: CHECK DATE AGAINST TODAY DATE, OLD DATE SHOULD NOT BE ALLOWED
+        //TODO: GET CURRENT YEAR, MONTH, DAY
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -195,6 +198,8 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void openTimePicker(View view) {
+        //TODO: GET CURRENT TIME
+        //TODO: IF CURRENT DATE = SELECTED DATE, CHECK TIME IF IT IS ALLOWED
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
