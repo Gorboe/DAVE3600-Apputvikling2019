@@ -20,7 +20,8 @@ public class SettPeriodiskService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         java.util.Calendar cal = Calendar.getInstance();
-        Intent i = new Intent(this, MinService.class);
+        //Intent i = new Intent(this, MinService.class);
+        Intent i = new Intent(this, SMSService.class);
         PendingIntent pintent = PendingIntent.getService(this, 0, i, 0);
         AlarmManager alarm =
                 (AlarmManager) getSystemService(Context.ALARM_SERVICE);

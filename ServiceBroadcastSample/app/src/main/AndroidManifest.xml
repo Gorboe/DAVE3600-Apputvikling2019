@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <service android:name=".SettPeriodiskService"></service>
         <service android:name=".MinService"></service>
+        <service android:name=".SMSService"></service>
         <activity android:name=".Resultat"></activity>
         <receiver android:name=".MinBroadcastReceiver">
             <intent-filter>
