@@ -45,6 +45,7 @@ public class CreateFriendActivity extends AppCompatActivity {
     }
 
     public void saveFriend(View view) {
+        //TODO: validate name, same for restaurant and order.............
         //VALIDATE PHONE NR
         if(!PhoneNumberValidator.validatePhoneNumber(number_field.getText().toString(), this)){
             return;
