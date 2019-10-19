@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item android:id="@+id/nav_order"
-        android:title="eqw"
+        android:title=""
         android:icon="@drawable/order_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
@@ -13,7 +13,7 @@
         tools:ignore="AppCompatResource"/>
 
     <item android:id="@+id/nav_restaurant"
-        android:title="ewq"
+        android:title=""
         android:icon="@drawable/restaurant_icon"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
@@ -23,9 +23,9 @@
         tools:ignore="AppCompatResource"/>
 
     <item android:id="@+id/nav_friends"
-        android:title="rqrq"
+        android:title=""
         android:icon="@drawable/friends_icon"
-        android:showAsAction="always|withText"
+        android:showAsAction="always"
         tools:ignore="AppCompatResource" />
 
     <item
@@ -34,7 +34,7 @@
         tools:ignore="AppCompatResource" />
 
     <item android:id="@+id/nav_settings"
-        android:title="ewq"
+        android:title=""
         android:icon="@drawable/ic_settings_icon_black_40dp"
         android:showAsAction="always"
         tools:ignore="AppCompatResource" />
