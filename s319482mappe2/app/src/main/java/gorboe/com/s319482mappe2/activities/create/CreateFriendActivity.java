@@ -2,6 +2,7 @@ package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,31 @@ public class CreateFriendActivity extends AppCompatActivity {
     }
 
     public void saveFriend(View view) {
+        //VALIDATE PHONE NR
+        int phonenr;
+        try{
+            phonenr = Integer.parseInt(number_field.getText().toString());
+        }catch (Exception e){
+            //phonenr must be a number and cant contain letters or symbols
+            new AlertDialog.Builder(CreateFriendActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret kan ikke inneholde bokstaver eller symboler.")
+                    .show();
+            return;
+        }
+        int overLimit = 100000000;
+        int underLimit = 9999999;
+        if(!(phonenr < overLimit && phonenr > underLimit)){
+            //not a valid 8 digit number
+            new AlertDialog.Builder(CreateFriendActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret må ha 8 siffer.")
+                    .show();
+            return;
+        }
+
         Friend friend = new Friend(name_field.getText().toString(), number_field.getText().toString());
 
         if(existing_friend != null){

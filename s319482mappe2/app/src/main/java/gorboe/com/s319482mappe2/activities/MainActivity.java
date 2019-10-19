@@ -26,16 +26,15 @@ public class MainActivity extends AppCompatActivity {
     //TODO: create icons vector in drawable...
     //TODO: content://authority/path/id  ex: content://gorboe.com.s319842mappe2/restaurant/2
 
+    //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
+    //TODO: PLUS PROMPT TEXT FOR EVERYTHING
+
     //TODO: CHECK ONCE PER DAY FOR ORDERS AND GIVE NOTIFICATION TO USER AND SEND SMS TO FRIENDS (SMS STORED IN SHARED PREF)
     //TODO: SETTINGS. SET THE TIME FOR THE SMS SENDING. TURN ON AND OF SMS SERVICE.
-    //TODO: IF PHONE TURNS OF, RESTART THE SERVICE THINGY
     //TODO: CONTENT PROVIDER TO SHARE RESTAURANT DATA
     //TODO: DESIGN AND LAYOUT.
 
-    //TODO: sms-service
     //TODO: xml for settings, shared pref, fra timen
-    //TODO: order check, må ha lagt inn rest
-    //TODO: validation for phone number.
     //TODO: test project for content provider.
     //TODO: back-stack. (Navigation)
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
@@ -53,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
         initializeOrderList();
-
-        System.out.println("YEAR: " + Calendar.getInstance().get(Calendar.YEAR));
-        System.out.println("MONTH: " + (Calendar.getInstance().get(Calendar.MONTH) + 1)); //+1 fordi den starter på 0 altså february = 0
-        System.out.println("DAY IN MONTH: " + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        System.out.println("HOUR: " + Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
-        System.out.println("MINUTE: " + Calendar.getInstance().get(Calendar.MINUTE));
     }
 
     public void initializeOrderList(){
@@ -91,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.nav_order:
                 //startActivity(new Intent(this, MainActivity.class));
+                //TODO: FIX OR DELETE NAVIGATION
                 Navigation.getInstance().forward(this, new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
