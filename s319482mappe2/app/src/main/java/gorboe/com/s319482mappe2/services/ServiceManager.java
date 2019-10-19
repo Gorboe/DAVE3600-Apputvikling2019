@@ -40,7 +40,7 @@ public class ServiceManager extends Service {
         System.out.println("I ServiceManager");
 
         String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
-                             Calendar.getInstance().get(Calendar.MONTH) + "/" +
+                            (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //because calendar start at 0
                              Calendar.getInstance().get(Calendar.YEAR);
 
         for(Order order: db.getAllOrders()){

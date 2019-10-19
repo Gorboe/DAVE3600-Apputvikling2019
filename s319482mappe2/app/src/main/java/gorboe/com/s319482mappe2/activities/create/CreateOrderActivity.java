@@ -2,6 +2,7 @@ package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,11 +69,15 @@ public class CreateOrderActivity extends AppCompatActivity {
             order_date.setText(existing_order.getDate());
             order_time.setText(existing_order.getTime());
         }else {
-            //TODO: GET CURRENT DATE AND TIME
-            String defaultDate = "21/11/2019";
-            String defaultTime = "17:30";
-            order_date.setText(defaultDate);
-            order_time.setText(defaultTime);
+            String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
+                                (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
+                                 Calendar.getInstance().get(Calendar.YEAR);
+
+            String currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" +
+                                 Calendar.getInstance().get(Calendar.MINUTE);
+
+            order_date.setText(currentDate);
+            order_time.setText(currentTime);
         }
     }
 
@@ -147,7 +153,11 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     public void addFriend(View view) {
         if(order_friends.getSelectedItem() == null){
-            //TODO: MSG TO USER? NO MORE FRIENDS, ADD MORE.
+            new AlertDialog.Builder(CreateOrderActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Du har allerede valgt alle vennene dine")
+                    .show();
             return;
         }
         Friend friend = (Friend)order_friends.getSelectedItem();
@@ -159,7 +169,11 @@ public class CreateOrderActivity extends AppCompatActivity {
 
     public void saveOrder(View view) {
         if(order_restaurants.getSelectedItem() == null){
-            //TODO: MSG TO USER? YOU NEED TO CREATE A RESTAURANT!
+            new AlertDialog.Builder(CreateOrderActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Du må legge til en restaurant før du kan lage en ordre")
+                    .show();
             return;
         }
 
@@ -184,31 +198,62 @@ public class CreateOrderActivity extends AppCompatActivity {
     }
 
     public void openDatePicker(View view) {
-        //TODO: CHECK DATE AGAINST TODAY DATE, OLD DATE SHOULD NOT BE ALLOWED
-        //TODO: GET CURRENT YEAR, MONTH, DAY
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                String date = day + "/" + month + "/" + year;
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+                int currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+                //VALIDATION OF SELECTED DATE
+                if(year < currentYear){
+                    new AlertDialog.Builder(CreateOrderActivity.this)
+                                   .setTitle("Advarsel")
+                                   .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                   .setMessage("Året du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                                   .show();
+                    return;
+                }
+                if(year == currentYear){
+                    if(month < currentMonth){
+                        new AlertDialog.Builder(CreateOrderActivity.this)
+                                .setTitle("Advarsel")
+                                .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                .setMessage("Måneden du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                                .show();
+                        return;
+                    }
+                    if(month == currentMonth){
+                        if(day < currentDayOfMonth){
+                            new AlertDialog.Builder(CreateOrderActivity.this)
+                                    .setTitle("Advarsel")
+                                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                    .setMessage("Dagen du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                                    .show();
+                            return;
+                        }
+                    }
+                }
+
+                String date = day + "/" + (month + 1) + "/" + year; //month start at 0
                 System.out.println(date);
                 order_date.setText(date);
             }
-        }, 2019, 11, 21);
+        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
     }
 
     public void openTimePicker(View view) {
-        //TODO: GET CURRENT TIME
-        //TODO: IF CURRENT DATE = SELECTED DATE, CHECK TIME IF IT IS ALLOWED
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
-                String time = hour + ":" + minutes;
+                String time = String.format("%02d:%02d", hour, minutes); //secures format hh:mm
+
                 System.out.println(time);
                 order_time.setText(time);
             }
 
-        }, 17, 30, true);
+        }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
         timePickerDialog.show();
     }
 }
