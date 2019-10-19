@@ -46,7 +46,9 @@ public class CreateFriendActivity extends AppCompatActivity {
 
     public void saveFriend(View view) {
         //VALIDATE PHONE NR
-        PhoneNumberValidator.validatePhoneNumber(number_field.getText().toString(), this);
+        if(!PhoneNumberValidator.validatePhoneNumber(number_field.getText().toString(), this)){
+            return;
+        }
 
         Friend friend = new Friend(name_field.getText().toString(), number_field.getText().toString());
 
