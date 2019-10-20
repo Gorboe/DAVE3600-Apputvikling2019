@@ -49,8 +49,11 @@ public class CreateRestaurantActivity extends AppCompatActivity {
     }
 
     public void saveRestaurant(View view) {
-        //VALIDATE PHONE NR
-        if(!Validator.validatePhoneNumber(number_field.getText().toString(), this)){
+        //VALIDATE FIELDS
+        if(!Validator.validatePhoneNumber(number_field.getText().toString(), this) ||
+           !Validator.validateName(name_field.getText().toString(), this) ||
+           !Validator.validateAddress(address_field.getText().toString(), this) ||
+           !Validator.validateType(type_field.getText().toString(), this)){
             return;
         }
 

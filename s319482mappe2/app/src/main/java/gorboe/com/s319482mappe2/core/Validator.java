@@ -58,4 +58,30 @@ public class Validator {
 
         return true;
     }
+
+    public static boolean validateAddress(String name, Context context){
+        if(name.isEmpty()){
+            new AlertDialog.Builder(context)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Adresse kan ikke være et tomt felt.")
+                    .show();
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateType(String name, Context context){
+        if(name.isEmpty()){
+            new AlertDialog.Builder(context)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Type kan ikke være et tomt felt.")
+                    .show();
+            return false;
+        }
+
+        return true;
+    }
 }

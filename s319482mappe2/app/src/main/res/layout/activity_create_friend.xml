@@ -22,7 +22,7 @@
         android:id="@+id/friend_name"
         android:layout_width="138dp"
         android:layout_height="39dp"
-        android:hint="@string/prompt_navn"
+        android:hint="@string/prompt_name"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

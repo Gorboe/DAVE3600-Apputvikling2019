@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Restaurantapp</string>
     <string name="order_list_heading">Dine Bestillinger: </string>
-
-    <string name="prompt_restaurant_name">Restaurant Navn</string>
-    <string name="prompt_restaurant_address">Adresse</string>
+    <string name="prompt_address">Adresse</string>
     <string name="prompt_number">Nummer</string>
-    <string name="prompt_restaurant_type">Type</string>
-
-    <string name="prompt_navn">Navn</string>
+    <string name="prompt_type">Type</string>
+    <string name="prompt_name">Navn</string>
 </resources>
