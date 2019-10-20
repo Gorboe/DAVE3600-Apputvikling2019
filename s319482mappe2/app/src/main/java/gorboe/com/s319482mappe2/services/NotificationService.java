@@ -5,8 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
@@ -52,7 +50,7 @@ public class NotificationService extends Service {
                 .setContentTitle("My Notification")
                 .setContentText("Ikke glem restaurantbesøk idag ved " + order.getRestaurant()
                         + " kl: " + order.getTime())
-                .setSmallIcon(R.mipmap.ic_launcher) //TODO: add own icon
+                .setSmallIcon(R.drawable.ic_app_icon)
                 .setContentIntent(pIntent).build();
         notifikasjon.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0, notifikasjon);

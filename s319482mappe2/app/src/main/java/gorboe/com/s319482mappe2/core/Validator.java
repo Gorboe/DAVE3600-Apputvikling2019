@@ -2,8 +2,6 @@ package gorboe.com.s319482mappe2.core;
 
 import android.app.AlertDialog;
 import android.content.Context;
-
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import gorboe.com.s319482mappe2.R;
@@ -17,7 +15,7 @@ public class Validator {
         }catch (Exception e){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret kan ikke inneholde bokstaver eller symboler.")
                     .show();
             return false;
@@ -27,7 +25,7 @@ public class Validator {
         if(!(phonenr < overLimit && phonenr > underLimit)){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret må ha 8 siffer.")
                     .show();
             return false;
@@ -39,7 +37,7 @@ public class Validator {
         if(name.isEmpty()){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Navn kan ikke være et tomt felt.")
                     .show();
             return false;
@@ -50,7 +48,7 @@ public class Validator {
         if(!Pattern.matches("[A-ZÆØÅa-zæøå ]+", name)){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Navn kan bare inneholde store og små bokstaver. Tall og symboler er ikke lov!")
                     .show();
             return false;
@@ -63,7 +61,7 @@ public class Validator {
         if(name.isEmpty()){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Adresse kan ikke være et tomt felt.")
                     .show();
             return false;
@@ -76,7 +74,7 @@ public class Validator {
         if(name.isEmpty()){
             new AlertDialog.Builder(context)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Type kan ikke være et tomt felt.")
                     .show();
             return false;

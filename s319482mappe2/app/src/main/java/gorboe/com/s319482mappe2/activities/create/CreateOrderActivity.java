@@ -11,16 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
@@ -76,7 +73,7 @@ public class CreateOrderActivity extends AppCompatActivity {
             String currentTime = String.format("%02d:%02d",
                                         Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
                                         Calendar.getInstance().get(Calendar.MINUTE)); //secures format hh:mm
-            
+
             order_date.setText(currentDate);
             order_time.setText(currentTime);
         }
@@ -156,7 +153,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         if(order_friends.getSelectedItem() == null){
             new AlertDialog.Builder(CreateOrderActivity.this)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Du har allerede valgt alle vennene dine")
                     .show();
             return;
@@ -172,7 +169,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         if(order_restaurants.getSelectedItem() == null){
             new AlertDialog.Builder(CreateOrderActivity.this)
                     .setTitle("Advarsel")
-                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setIcon(R.drawable.ic_warning_yellow)
                     .setMessage("Du må legge til en restaurant før du kan lage en ordre")
                     .show();
             return;
@@ -210,7 +207,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                 if(year < currentYear){
                     new AlertDialog.Builder(CreateOrderActivity.this)
                                    .setTitle("Advarsel")
-                                   .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                   .setIcon(R.drawable.ic_warning_yellow)
                                    .setMessage("Året du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
                                    .show();
                     return;
@@ -219,7 +216,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                     if(month < currentMonth){
                         new AlertDialog.Builder(CreateOrderActivity.this)
                                 .setTitle("Advarsel")
-                                .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                .setIcon(R.drawable.ic_warning_yellow)
                                 .setMessage("Måneden du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
                                 .show();
                         return;
@@ -228,7 +225,7 @@ public class CreateOrderActivity extends AppCompatActivity {
                         if(day < currentDayOfMonth){
                             new AlertDialog.Builder(CreateOrderActivity.this)
                                     .setTitle("Advarsel")
-                                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                                    .setIcon(R.drawable.ic_warning_yellow)
                                     .setMessage("Dagen du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
                                     .show();
                             return;

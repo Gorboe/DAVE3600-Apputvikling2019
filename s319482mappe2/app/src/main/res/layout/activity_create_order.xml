@@ -24,7 +24,7 @@
         android:id="@+id/order_add_friend"
         android:layout_width="62dp"
         android:layout_height="57dp"
-        android:background="@drawable/add_icon"
+        android:background="@drawable/ic_add_icon"
         android:onClick="addFriend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.337"
@@ -106,7 +106,7 @@
         android:id="@+id/btn_date"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/ic_date_picker_black_24dp"
+        android:background="@drawable/ic_date_picker"
         android:onClick="openDatePicker"
         app:layout_constraintStart_toEndOf="@+id/order_date"
         app:layout_constraintTop_toTopOf="@+id/order_date" />
@@ -116,7 +116,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_time_picker_black_24dp"
+        android:background="@drawable/ic_time_picker"
         android:onClick="openTimePicker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/order_time" />
