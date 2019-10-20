@@ -24,7 +24,7 @@ import gorboe.com.s319482mappe2.enteties.Order;
 public class MainActivity extends AppCompatActivity {
 
     //TODO: content://authority/path/id  ex: content://gorboe.com.s319842mappe2/restaurant/2
-    
+
     //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
 
     //TODO: SETTINGS. SET THE TIME FOR THE SMS SENDING. TURN ON AND OF SMS SERVICE.(SMS STORED IN SHARED PREF)

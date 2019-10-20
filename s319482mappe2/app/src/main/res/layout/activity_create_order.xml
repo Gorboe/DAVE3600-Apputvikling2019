@@ -8,117 +8,123 @@
 
     <ListView
         android:id="@+id/order_friendList"
-        android:layout_width="260dp"
-        android:layout_height="169dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="330dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.37"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/order_friends"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintTop_toBottomOf="@+id/order_friends" />
 
     <Button
         android:id="@+id/order_add_friend"
-        android:layout_width="62dp"
-        android:layout_height="57dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/ic_add_icon"
         android:onClick="addFriend"
+        app:layout_constraintBottom_toBottomOf="@+id/order_friends"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.337"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/order_friends"
         app:layout_constraintTop_toTopOf="@+id/order_friends" />
 
     <TextView
         android:id="@+id/order_date"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:textAlignment="center"
-        android:textSize="18sp"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.046" />
 
     <TextView
         android:id="@+id/order_time"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginStart="72dp"
-        android:textAlignment="center"
-        android:textSize="18sp"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/btn_time"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btn_date"
         app:layout_constraintTop_toTopOf="@+id/order_date" />
 
     <Spinner
         android:id="@+id/order_restaurants"
-        android:layout_width="149dp"
-        android:layout_height="63dp"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dropdown"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_date" />
 
     <Spinner
         android:id="@+id/order_friends"
-        android:layout_width="149dp"
-        android:layout_height="63dp"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dropdown"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_restaurants" />
 
     <Button
         android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/ic_save"
         android:onClick="saveOrder"
-        android:text="SAVE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_friendList" />
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/exit_icon"
         android:onClick="deleteOrder"
-        android:text="DELETE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button6"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button6" />
 
     <Button
         android:id="@+id/btn_date"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/ic_date_picker"
         android:onClick="openDatePicker"
-        app:layout_constraintStart_toEndOf="@+id/order_date"
-        app:layout_constraintTop_toTopOf="@+id/order_date" />
+        app:layout_constraintBottom_toBottomOf="@+id/order_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_time"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/ic_time_picker"
         android:onClick="openTimePicker"
+        app:layout_constraintBottom_toBottomOf="@+id/order_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/order_time" />
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
