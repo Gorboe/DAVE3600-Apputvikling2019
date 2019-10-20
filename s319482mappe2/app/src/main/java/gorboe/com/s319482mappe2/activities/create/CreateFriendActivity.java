@@ -2,7 +2,6 @@ package gorboe.com.s319482mappe2.activities.create;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.activities.FriendsActivity;
-import gorboe.com.s319482mappe2.core.PhoneNumberValidator;
+import gorboe.com.s319482mappe2.core.Validator;
 import gorboe.com.s319482mappe2.enteties.Friend;
 
 public class CreateFriendActivity extends AppCompatActivity {
@@ -47,7 +46,8 @@ public class CreateFriendActivity extends AppCompatActivity {
     public void saveFriend(View view) {
         //TODO: validate name, same for restaurant and order.............
         //VALIDATE PHONE NR
-        if(!PhoneNumberValidator.validatePhoneNumber(number_field.getText().toString(), this)){
+        if(!Validator.validatePhoneNumber(number_field.getText().toString(), this) ||
+           !Validator.validateName(name_field.getText().toString(), this)){
             return;
         }
 

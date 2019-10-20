@@ -10,7 +10,7 @@ import android.widget.EditText;
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.activities.RestaurantActivity;
-import gorboe.com.s319482mappe2.core.PhoneNumberValidator;
+import gorboe.com.s319482mappe2.core.Validator;
 import gorboe.com.s319482mappe2.enteties.Restaurant;
 
 public class CreateRestaurantActivity extends AppCompatActivity {
@@ -50,7 +50,7 @@ public class CreateRestaurantActivity extends AppCompatActivity {
 
     public void saveRestaurant(View view) {
         //VALIDATE PHONE NR
-        if(!PhoneNumberValidator.validatePhoneNumber(number_field.getText().toString(), this)){
+        if(!Validator.validatePhoneNumber(number_field.getText().toString(), this)){
             return;
         }
 

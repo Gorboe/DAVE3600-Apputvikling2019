@@ -3,10 +3,13 @@ package gorboe.com.s319482mappe2.core;
 import android.app.AlertDialog;
 import android.content.Context;
 
-import gorboe.com.s319482mappe2.R;
-import gorboe.com.s319482mappe2.activities.create.CreateFriendActivity;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class PhoneNumberValidator {
+import gorboe.com.s319482mappe2.R;
+
+public class Validator {
+
     public static boolean validatePhoneNumber(String number, Context context){
         int phonenr;
         try{
@@ -29,6 +32,30 @@ public class PhoneNumberValidator {
                     .show();
             return false;
         }
+        return true;
+    }
+
+    public static boolean validateName(String name, Context context){
+        if(name.isEmpty()){
+            new AlertDialog.Builder(context)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Navn kan ikke være et tomt felt.")
+                    .show();
+            return false;
+        }
+
+        //First letter big rest small: ^[A-ZÆØÅ][a-zæøå]+$
+        //A-Å små og store med mellomrom: [A-ZÆØÅa-zæøå ]+
+        if(!Pattern.matches("[A-ZÆØÅa-zæøå ]+", name)){
+            new AlertDialog.Builder(context)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow_24dp)
+                    .setMessage("Navn kan bare inneholde store og små bokstaver. Tall og symboler er ikke lov!")
+                    .show();
+            return false;
+        }
+
         return true;
     }
 }
