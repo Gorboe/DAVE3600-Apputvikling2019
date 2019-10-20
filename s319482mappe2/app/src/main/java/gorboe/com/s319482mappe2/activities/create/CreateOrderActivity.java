@@ -73,9 +73,10 @@ public class CreateOrderActivity extends AppCompatActivity {
                                 (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
                                  Calendar.getInstance().get(Calendar.YEAR);
 
-            String currentTime = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" +
-                                 Calendar.getInstance().get(Calendar.MINUTE);
-
+            String currentTime = String.format("%02d:%02d",
+                                        Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                                        Calendar.getInstance().get(Calendar.MINUTE)); //secures format hh:mm
+            
             order_date.setText(currentDate);
             order_time.setText(currentTime);
         }
