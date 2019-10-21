@@ -41,10 +41,10 @@ public class SMSService extends Service {
         Order order = db.getOrder(order_id);
 
         //TODO: get msg from shared pref
-        //TODO: only allow +15 and +47 prefixes? validation for phone nr friends is then its must be 8 numbers. And i set prefix here?
         for(Friend friend: order.getFriends()){
             try{
-                SmsManager smsManager = SmsManager.getDefault(); //TODO: try catch this
+
+                SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(friend.getNumber(), null, "test msg: " + order.getRestaurant(), null, null); //+15 555 21 5556 for emu
             }catch (Exception e){
                 Toast.makeText(getApplicationContext(), "SMS EXCEPTION!!", Toast.LENGTH_SHORT).show();

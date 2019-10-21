@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //TODO: xml for settings, shared pref, fra timen
-    //TODO: test project for content provider.
+
     //TODO: back-stack. (Navigation)
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
 

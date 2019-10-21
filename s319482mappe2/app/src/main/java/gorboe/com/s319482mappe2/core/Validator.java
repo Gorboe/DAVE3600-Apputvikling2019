@@ -9,6 +9,12 @@ import gorboe.com.s319482mappe2.R;
 public class Validator {
 
     public static boolean validatePhoneNumber(String number, Context context){
+        //This allows user to enter any phone number with +xx prefix.
+        if(Pattern.matches("^[+][0-9]{10}$", number)){
+            return true;
+        }
+
+        //without +xx
         int phonenr;
         try{
             phonenr = Integer.parseInt(number);
@@ -19,7 +25,7 @@ public class Validator {
         int overLimit = 100000000;
         int underLimit = 9999999;
         if(!(phonenr < overLimit && phonenr > underLimit)){
-            displayWarningMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret må ha 8 siffer.", context);
+            displayWarningMessage("Telefon nummeret som ble oppgitt er ikke gyldig. Nummeret må ha 8 siffer, eller ha +xx etterfulgt av 8 siffer.", context);
             return false;
         }
         return true;
