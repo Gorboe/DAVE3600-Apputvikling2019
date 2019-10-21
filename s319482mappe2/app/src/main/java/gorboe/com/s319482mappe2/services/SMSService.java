@@ -43,7 +43,7 @@ public class SMSService extends Service {
         //get msg from sharedpref
         String defaultSMSMessage = "Hei, dette er en påminnelse på din restaurant avtale idag!";
         String message = preferences.getString("smsmessage", defaultSMSMessage);
-        
+
         for(Friend friend: order.getFriends()){
             try{
 

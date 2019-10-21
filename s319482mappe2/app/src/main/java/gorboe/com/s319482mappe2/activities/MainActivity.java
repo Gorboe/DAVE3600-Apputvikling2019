@@ -14,13 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
-import java.util.Calendar;
 import java.util.List;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.activities.create.CreateOrderActivity;
-import gorboe.com.s319482mappe2.core.Navigation;
 import gorboe.com.s319482mappe2.enteties.Order;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,14 +26,6 @@ public class MainActivity extends AppCompatActivity {
     //TODO: content://authority/path/id  ex: content://gorboe.com.s319842mappe2/restaurant/2
 
     //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
-
-    //TODO: SETTINGS. SET THE TIME FOR THE SMS SENDING. TURN ON AND OF SMS SERVICE.(SMS STORED IN SHARED PREF)
-    //TODO: DESIGN AND LAYOUT.
-
-
-    //TODO: xml for settings, shared pref, fra timen
-
-    //TODO: back-stack. (Navigation)
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
 
     private ListView orderList;
@@ -100,21 +90,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_order:
-                //startActivity(new Intent(this, MainActivity.class));
-                //TODO: FIX OR DELETE NAVIGATION
-                Navigation.getInstance().forward(this, new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
-                //startActivity(new Intent(this, RestaurantActivity.class));
-                Navigation.getInstance().forward(this, new Intent(this, RestaurantActivity.class));
+                startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
-                //startActivity(new Intent(this, FriendsActivity.class));
-                Navigation.getInstance().forward(this, new Intent(this, FriendsActivity.class));
+                startActivity(new Intent(this, FriendsActivity.class));
                 break;
             case R.id.nav_settings:
-                //startActivity(new Intent(this, SettingsActivity.class));
-                Navigation.getInstance().forward(this, new Intent(this, SettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
 
         }
