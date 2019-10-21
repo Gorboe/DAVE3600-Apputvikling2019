@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_hoved_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="gorboe.com.testavrestaurantcp.MainActivity">
+    <EditText android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Navn" />
+    <EditText android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Adresse" />
+    <EditText android:id="@+id/number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nummer" />
+    <EditText android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type" />
+
+    <Button
+        android:id="@+id/leggtil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="leggtil"
+        android:text="Legg til restaurant" />
+
+    <Button
+        android:id="@+id/visalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="visalle"
+        android:text="Vis alle restauranter" />
+
+    <TextView android:id="@+id/vis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
