@@ -3,7 +3,9 @@ package gorboe.com.s319482mappe2.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
         initializeOrderList();
+        checkServiceState();
+    }
+
+    /**
+     * This is needed for the very first launch of the app to make sure
+     * service is started as default.
+     * **/
+    public void checkServiceState(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isInitial = preferences.getBoolean("initial", true); //default = false
+
+        if(isInitial){
+            System.out.println("INITIAL?");
+            preferences.edit().putBoolean("initial", false).apply(); //set to false and will be false forever after initial launch.
+            Intent intent = new Intent();
+            intent.setAction("gorboe.com.s319482mappe2.mybroadcast");
+            sendBroadcast(intent);
+        }
     }
 
     public void initializeOrderList(){

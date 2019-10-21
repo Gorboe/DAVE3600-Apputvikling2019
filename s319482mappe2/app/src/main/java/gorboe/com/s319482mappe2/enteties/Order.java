@@ -74,6 +74,7 @@ public class Order {
     @NonNull
     @Override
     public String toString() {
-        return restaurant.getName() + "\t" + restaurant.getType() + "\nDate: " + date + "\nTime: " + time;
+        return "Restaurant: " + restaurant.getName() + "\n" + "Type: " + restaurant.getType() +
+                "\nDate: " + date + "\nTime: " + time;
     }
 }
