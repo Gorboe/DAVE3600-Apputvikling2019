@@ -47,6 +47,7 @@ public class SMSService extends Service {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(friend.getNumber(), null, "test msg: " + order.getRestaurant(), null, null); //+15 555 21 5556 for emu
             }catch (Exception e){
+                //should never throw exception here as i validate all phone numbers.
                 Toast.makeText(getApplicationContext(), "SMS EXCEPTION!!", Toast.LENGTH_SHORT).show();
             }
         }

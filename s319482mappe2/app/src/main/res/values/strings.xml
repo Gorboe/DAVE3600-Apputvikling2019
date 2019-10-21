@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Restoday</string>
-    <string name="order_list_heading">Dine Bestillinger: </string>
+    <string name="order_list_heading">Dine Bestillinger</string>
     <string name="prompt_address">Adresse</string>
     <string name="prompt_number">Nummer</string>
     <string name="prompt_type">Type</string>

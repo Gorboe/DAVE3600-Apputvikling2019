@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context=".activities.create.CreateOrderActivity">
 
     <ListView
         android:id="@+id/order_friendList"
-        android:layout_width="330dp"
+        android:layout_width="300dp"
         android:layout_height="250dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="20dp"
