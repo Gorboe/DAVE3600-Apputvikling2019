@@ -3,6 +3,7 @@
     <string name="order_list_heading">Dine Bestillinger</string>
     <string name="restaurant_list_heading">Dine Restauranter</string>
     <string name="friend_list_heading">Dine Venner</string>
+    <string name="settings_heading">Settings</string>
     <string name="prompt_smsmessage">Legg til din standar sms melding</string>
     <string name="prompt_address">Adresse</string>
     <string name="prompt_number">Nummer</string>
