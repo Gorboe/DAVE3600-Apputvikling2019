@@ -23,10 +23,11 @@
         android:id="@+id/settings_btn_time"
         android:layout_width="35dp"
         android:layout_height="35dp"
+        android:layout_marginTop="45dp"
         android:background="@drawable/ic_time_picker"
         android:onClick="openTimePicker"
-        app:layout_constraintBottom_toBottomOf="@+id/settings_time"
-        app:layout_constraintStart_toEndOf="@+id/settings_time" />
+        app:layout_constraintStart_toStartOf="@+id/toggleButton"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
     <include
         android:id="@+id/toolbar"
@@ -37,13 +38,14 @@
 
     <ToggleButton
         android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="35dp"
         android:layout_marginTop="32dp"
-        android:text="ToggleButton"
+        android:textOff=" "
+        android:textOn=" "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintVertical_bias="0.0" />
@@ -54,23 +56,48 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toggleButton"
-        app:layout_constraintVertical_bias="0.04000002" />
+        app:layout_constraintBottom_toBottomOf="@+id/settings_btn_time"
+        app:layout_constraintStart_toEndOf="@+id/settings_btn_time"
+        app:layout_constraintTop_toTopOf="@+id/settings_btn_time"
+        app:layout_constraintVertical_bias="0.041" />
 
     <EditText
         android:id="@+id/messageField"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="45dp"
         android:hint="@string/prompt_smsmessage"
         android:inputType="text|textMultiLine"
         android:maxLength="200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
+        app:layout_constraintTop_toBottomOf="@+id/settings_btn_time" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_info_time"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/settings_btn_time"
+        app:layout_constraintEnd_toStartOf="@+id/settings_btn_time"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/messageField"
+        app:layout_constraintTop_toTopOf="@+id/settings_btn_time" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/settings_info_sms"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toggleButton"
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/toggleButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

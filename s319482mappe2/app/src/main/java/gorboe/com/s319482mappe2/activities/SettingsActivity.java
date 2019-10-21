@@ -51,9 +51,11 @@ public class SettingsActivity extends AppCompatActivity {
                 saveSMSMessage();
                 if (isChecked) {
                     // The toggle is enabled
+                    toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
                     startService();
                 } else {
                     // The toggle is disabled
+                    toggleButton.setBackgroundResource(R.drawable.toggle_button_off);
                     stopService();
                 }
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
@@ -86,6 +88,12 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean toggleState = preferences.getBoolean("toggleState", true); //default = false
         toggleButton.setChecked(toggleState);
+
+        if(toggleState){
+            toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
+        }else {
+            toggleButton.setBackgroundResource(R.drawable.toggle_button_off);
+        }
     }
 
     @Override

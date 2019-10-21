@@ -4,6 +4,8 @@
     <string name="restaurant_list_heading">Dine Restauranter</string>
     <string name="friend_list_heading">Dine Venner</string>
     <string name="settings_heading">Settings</string>
+    <string name="settings_info_sms">SMS/Notifikasjoner</string>
+    <string name="settings_info_time">Når på dagen ønsker du å sende ut SMS</string>
     <string name="prompt_smsmessage">Legg til din standar sms melding</string>
     <string name="prompt_address">Adresse</string>
     <string name="prompt_number">Nummer</string>
