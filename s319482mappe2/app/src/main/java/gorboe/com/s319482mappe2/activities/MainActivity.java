@@ -23,8 +23,6 @@ import gorboe.com.s319482mappe2.enteties.Order;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: content://authority/path/id  ex: content://gorboe.com.s319842mappe2/restaurant/2
-
     //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
 

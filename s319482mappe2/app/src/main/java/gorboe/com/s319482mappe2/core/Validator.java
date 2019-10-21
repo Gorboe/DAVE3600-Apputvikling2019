@@ -44,8 +44,6 @@ public class Validator {
             return false;
         }
 
-        //TODO: check for length??
-
         return true;
     }
 
