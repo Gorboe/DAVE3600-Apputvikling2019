@@ -27,7 +27,6 @@ public class PeriodicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //TODO: temp
         Toast.makeText(getApplicationContext(), "I PeriodicService", Toast.LENGTH_SHORT).show();
         System.out.println("I PeriodicService");
 
@@ -43,7 +42,7 @@ public class PeriodicService extends Service {
         Intent i = new Intent(this, ServiceManager.class);
         pintent = PendingIntent.getService(this, 0, i, 0);
         alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 1000, pintent); //TODO: Check once per day, from user preference
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 86400000, pintent); //1day = 86 400 000ms
 
         return super.onStartCommand(intent, flags, startId);
     }
