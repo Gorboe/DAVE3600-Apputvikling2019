@@ -62,6 +62,9 @@ public class Validator {
     }
 
     private static void displayWarningMessage(String message, Context context){
+        if(context == null){
+            return; //this allows me to pass context = null when i need the values check, but not the display msg
+        }
         new AlertDialog.Builder(context)
                 .setTitle("Advarsel")
                 .setIcon(R.drawable.ic_warning_yellow)

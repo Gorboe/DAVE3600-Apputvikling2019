@@ -2,6 +2,7 @@ package gorboe.com.testavrestaurantcp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -46,6 +47,17 @@ public class MainActivity extends AppCompatActivity {
         values.put(RESTAURANT_NUMBER, number.getText().toString());
         values.put(RESTAURANT_TYPE, type.getText().toString());
         Uri uri = getContentResolver().insert( CONTENT_URI, values);
+        if(uri == null){
+            new AlertDialog.Builder(this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow)
+                    .setMessage("Noe gikk galt, restauranten ble ikke lagt til. Sørg for at navn " +
+                            "er fylt inn og består bare av store og små bokstaver. Sørg for at adresse " +
+                            "feltet er fylt inn. Sørg for at nummer feltet er fylt inn og bare består " +
+                            " 8 tall. Sørg for at type feltet er fylt inn.")
+                    .show();
+            return;
+        }
         name.setText("");
         address.setText("");
         number.setText("");

@@ -247,7 +247,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return friends;
     }
     /** TEST STUFF FOR CONTENT PROVIDER**/
-    public long testAddRest(ContentValues values){
+    public long addRestaurant(ContentValues values){
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.insert(TABLE_RESTAURANTS, null, values);
@@ -260,33 +260,10 @@ public class DBHandler extends SQLiteOpenHelper {
         return id;
     }
 
-    public Cursor restQuery(){
+    public Cursor getRestaurants(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_RESTAURANTS, null);
     }
-
-
-
-    public void testUpdateRest(ContentValues values, String uripathsegment){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(TABLE_RESTAURANTS, values, KEY_RESTAURANT + " = " + uripathsegment, null);
-    }
-
-    public void testUpdateRest(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.update(TABLE_RESTAURANTS, null, null, null);
-    }
-
-    public void testDeleteRest(String uripathsegment, String[] selectionArgs){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_RESTAURANTS, KEY_RESTAURANT + " = " + uripathsegment, selectionArgs);
-    }
-
-    public void testDeleteRest(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_RESTAURANTS, null, null);
-    }
-
 
     /**RESTAURANT METHODS**/
     public void addRestaurant(Restaurant restaurant){
