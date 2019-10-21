@@ -35,9 +35,7 @@ public class ServiceManager extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //TODO: temp
         Toast.makeText(getApplicationContext(), "I ServiceManager checking orders", Toast.LENGTH_SHORT).show();
-        System.out.println("I ServiceManager");
 
         String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
                             (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //because calendar start at 0
