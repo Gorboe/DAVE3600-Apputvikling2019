@@ -122,6 +122,10 @@ public class SettingsActivity extends AppCompatActivity {
                 preferences.edit().putInt("prefMinutes", minutes).apply(); //need to store permanently for service
                 String time = String.format("%02d:%02d", hour, minutes); //secures format hh:mm
                 settings_time.setText(time);
+
+                //restart service so it get new time preference
+                stopService();
+                startService();
             }
 
         }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
