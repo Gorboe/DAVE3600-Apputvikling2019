@@ -40,12 +40,15 @@ public class SMSService extends Service {
         long order_id = preferences.getLong("current_order_ID", -1);
         Order order = db.getOrder(order_id);
 
-        //TODO: get msg from shared pref
+        //get msg from sharedpref
+        String defaultSMSMessage = "Hei, dette er en påminnelse på din restaurant avtale idag!";
+        String message = preferences.getString("smsmessage", defaultSMSMessage);
+        
         for(Friend friend: order.getFriends()){
             try{
 
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(friend.getNumber(), null, "test msg: " + order.getRestaurant(), null, null); //+15 555 21 5556 for emu
+                smsManager.sendTextMessage(friend.getNumber(), null, message, null, null); //+15 555 21 5556 for emu
             }catch (Exception e){
                 //should never throw exception here as i validate all phone numbers.
                 Toast.makeText(getApplicationContext(), "SMS EXCEPTION!!", Toast.LENGTH_SHORT).show();

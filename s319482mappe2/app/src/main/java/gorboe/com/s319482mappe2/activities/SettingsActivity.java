@@ -22,7 +22,6 @@ import java.util.Calendar;
 
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.services.NotificationService;
-import gorboe.com.s319482mappe2.services.Receiver;
 import gorboe.com.s319482mappe2.services.PeriodicService;
 import gorboe.com.s319482mappe2.services.SMSService;
 import gorboe.com.s319482mappe2.services.ServiceManager;
@@ -31,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ToggleButton toggleButton;
     private TextView settings_time;
+    private EditText messageField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +39,16 @@ public class SettingsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toggleButton = findViewById(R.id.toggleButton);
         settings_time = findViewById(R.id.settings_time);
+        messageField = findViewById(R.id.messageField);
         toolbar.inflateMenu(R.menu.mymenu);
         setActionBar(toolbar);
 
         checkToggleState();
         checkPreferredTime();
+        checkSMSMessage();
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveSMSMessage();
                 if (isChecked) {
                     // The toggle is enabled
                     startService();
@@ -57,6 +60,18 @@ public class SettingsActivity extends AppCompatActivity {
                 preferences.edit().putBoolean("toggleState", isChecked).apply(); //always store state permanently
             }
         });
+    }
+
+    public void checkSMSMessage(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String defaultSMSMessage = "Hei, dette er en påminnelse på din restaurant avtale idag!";
+        String message = preferences.getString("smsmessage", defaultSMSMessage);
+        messageField.setText(message);
+    }
+
+    public void saveSMSMessage(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putString("smsmessage", messageField.getText().toString()).apply();
     }
 
     public void checkPreferredTime(){
@@ -81,6 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        saveSMSMessage(); //always saves
         switch(item.getItemId()){
             case R.id.nav_order:
                 startActivity(new Intent(this, MainActivity.class));
@@ -124,11 +140,18 @@ public class SettingsActivity extends AppCompatActivity {
                 settings_time.setText(time);
 
                 //restart service so it get new time preference
+                saveSMSMessage();
                 stopService();
                 startService();
             }
 
         }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
         timePickerDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        saveSMSMessage();
+        super.onBackPressed();
     }
 }
