@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
     //TODO: MAKE SURE ACTIVITIES END. call finish or something...
+    //TODO: SORT ORDER LIST BY DATE
+    //TODO: VALIDATE TIME AGAINST DATE?
+    //TODO: NOTIFICATION PRESSED GO TO MAINACTIVITY
 
     private ListView orderList;
     private DBHandler db;
