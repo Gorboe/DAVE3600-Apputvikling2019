@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -36,9 +35,6 @@ public class NotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(), "I NotificationService", Toast.LENGTH_SHORT).show();
-        System.out.println("I NotificationService");
-
         //get order_id from sharedpref
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         long order_id = preferences.getLong("current_order_ID", -1);
@@ -51,7 +47,7 @@ public class NotificationService extends Service {
                 .setContentTitle("My Notification")
                 .setContentText("Ikke glem restaurantbesøk idag ved " + order.getRestaurant()
                         + " kl: " + order.getTime())
-                .setSmallIcon(R.drawable.ic_app_icon)
+                .setSmallIcon(R.drawable.ic_notification_icon)
                 .setContentIntent(pIntent).build();
         notifikasjon.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(0, notifikasjon);

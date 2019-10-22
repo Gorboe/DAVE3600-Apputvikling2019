@@ -65,10 +65,8 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         if(existing_restaurant != null){
             restaurant.setRestaurantID(existing_restaurant.getRestaurantID());
             db.updateRestaurant(restaurant);
-            System.out.println("RESTAURANT WAS EDITED");
         }else{
             db.addRestaurant(restaurant);
-            System.out.println("RESTAURANT ADDED TO DB");
         }
 
         startActivity(new Intent(this, RestaurantActivity.class));

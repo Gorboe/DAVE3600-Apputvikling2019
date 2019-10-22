@@ -1,15 +1,16 @@
 package gorboe.com.s319482mappe2.services;
 
+import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.telephony.SmsManager;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.enteties.Friend;
 import gorboe.com.s319482mappe2.enteties.Order;
@@ -27,13 +28,11 @@ public class SMSService extends Service {
     @Override
     public void onCreate() {
         db = new DBHandler(this);
-        Toast.makeText(getApplicationContext(), "I SMS ONCREATE", Toast.LENGTH_SHORT).show();
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(), "I SMS SERVICE", Toast.LENGTH_SHORT).show();
 
         //get order_id from sharedpref
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -46,12 +45,15 @@ public class SMSService extends Service {
 
         for(Friend friend: order.getFriends()){
             try{
-
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(friend.getNumber(), null, message, null, null); //+15 555 21 5556 for emu
             }catch (Exception e){
-                //should never throw exception here as i validate all phone numbers.
-                Toast.makeText(getApplicationContext(), "SMS EXCEPTION!!", Toast.LENGTH_SHORT).show();
+                //should never throw exception here as i validate all phone numbers. But have the try catch just in case
+                new AlertDialog.Builder(this)
+                        .setTitle("Advarsel")
+                        .setIcon(R.drawable.ic_warning_yellow)
+                        .setMessage("Noe gikk galt når vi prøvde å sende ut SMS.")
+                        .show();
             }
         }
         //+15 555 21 5554

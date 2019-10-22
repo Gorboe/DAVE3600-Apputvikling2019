@@ -2,8 +2,11 @@ package gorboe.com.s319482mappe2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.SimpleDateFormat;
+import android.icu.text.StringSearch;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -14,7 +17,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.R;
@@ -25,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: CHECK ALL BUTTONS/TEXTFIELDS AND PUT STRINGS IN STRINGS FILE
     //TODO: REMOVE PRINT LINES, LOOK OVER DATABASE CODE
-    //TODO: MAKE SURE ACTIVITIES END. call finish or something...
-    //TODO: SORT ORDER LIST BY DATE
-    //TODO: VALIDATE TIME AGAINST DATE?
+    //TODO: MAKE SURE ACTIVITIES END. call finish or something
 
     private ListView orderList;
     private DBHandler db;
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         boolean isInitial = preferences.getBoolean("initial", true); //default = false
 
         if(isInitial){
-            System.out.println("INITIAL?");
             preferences.edit().putBoolean("initial", false).apply(); //set to false and will be false forever after initial launch.
             Intent intent = new Intent();
             intent.setAction("gorboe.com.s319482mappe2.mybroadcast");

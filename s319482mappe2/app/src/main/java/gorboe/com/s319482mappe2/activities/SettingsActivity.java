@@ -14,7 +14,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.Toolbar;
 
@@ -130,7 +129,6 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void stopService() {
-        Toast.makeText(getApplicationContext(), "I STOP SERVICE", Toast.LENGTH_SHORT).show();
         stopService(new Intent(this, PeriodicService.class));
         stopService(new Intent(this, ServiceManager.class));
         stopService(new Intent(this, NotificationService.class));

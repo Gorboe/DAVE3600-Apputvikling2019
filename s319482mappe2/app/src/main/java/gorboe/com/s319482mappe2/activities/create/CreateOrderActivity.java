@@ -234,7 +234,6 @@ public class CreateOrderActivity extends AppCompatActivity {
                 }
 
                 String date = day + "/" + (month + 1) + "/" + year; //month start at 0
-                System.out.println(date);
                 order_date.setText(date);
             }
         }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -255,7 +254,6 @@ public class CreateOrderActivity extends AppCompatActivity {
                 if(currentDate.equals(order_date.getText().toString())){
                     int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
                     int currentMinutes = Calendar.getInstance().get(Calendar.MINUTE);
-                    System.out.println("CURRENT: " + currentHour + "   HOUR: " + hour);
                     if(currentHour > hour){
                         //fail because of hour
                         new AlertDialog.Builder(CreateOrderActivity.this)
@@ -278,7 +276,6 @@ public class CreateOrderActivity extends AppCompatActivity {
                     }
                 }
 
-                System.out.println(time);
                 order_time.setText(time);
             }
 

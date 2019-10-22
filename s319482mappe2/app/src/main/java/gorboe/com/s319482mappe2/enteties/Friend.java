@@ -51,8 +51,4 @@ public class Friend {
     public String toString() {
         return name;
     }
-
-    public String toStringForSpinner(){
-        return name;
-    }
 }

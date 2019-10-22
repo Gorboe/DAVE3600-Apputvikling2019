@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -27,9 +26,6 @@ public class PeriodicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(), "I PeriodicService", Toast.LENGTH_SHORT).show();
-        System.out.println("I PeriodicService");
-
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         int hour = preferences.getInt("prefHour", 17); //17 base
         int minutes = preferences.getInt("prefMinutes", 0); //0
@@ -49,7 +45,6 @@ public class PeriodicService extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Periodisk onDestroy()", Toast.LENGTH_SHORT).show();
         alarm.cancel(pintent);
         super.onDestroy();
     }

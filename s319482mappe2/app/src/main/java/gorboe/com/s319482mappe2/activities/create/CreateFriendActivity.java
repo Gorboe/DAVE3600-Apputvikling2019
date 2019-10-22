@@ -54,10 +54,8 @@ public class CreateFriendActivity extends AppCompatActivity {
         if(existing_friend != null){
             friend.setFriendID(existing_friend.getFriendID());
             db.updateFriend(friend);
-            System.out.println("FRIEND EDITED");
         }else{
             db.addFriend(friend);
-            System.out.println("FRIEND ADDED TO DB");
         }
         startActivity(new Intent(this, FriendsActivity.class));
     }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,21 +60,18 @@ public class DBHandler extends SQLiteOpenHelper {
                 RESTAURANT_ADDRESS + " TEXT," +
                 RESTAURANT_NUMBER + " TEXT," +
                 RESTAURANT_TYPE + " TEXT" + ")";
-        Log.d("SQL", CREATE_RESTAURANT_TABLE);
         db.execSQL(CREATE_RESTAURANT_TABLE);
 
         //FRIENDS TABLE
         String CREATE_FRIENDS_TABLE = "CREATE TABLE " + TABLE_FRIENDS + "(" + KEY_FRIEND +
                 " INTEGER PRIMARY KEY," + FRIEND_NAME + " TEXT," +
                 FRIEND_NUMBER + " TEXT" + ")";
-        Log.d("SQL", CREATE_FRIENDS_TABLE);
         db.execSQL(CREATE_FRIENDS_TABLE);
 
         //ORDER TABLE
         String CREATE_ORDER_TABLE = "CREATE TABLE " + TABLE_ORDERS + "(" + KEY_ORDER +
                 " INTEGER PRIMARY KEY," + ORDER_RESTAURANT_KEY + " TEXT," + ORDER_DATE + " TEXT," +
                 ORDER_TIME + " TEXT" + ")";
-        Log.d("SQL", CREATE_ORDER_TABLE);
         db.execSQL(CREATE_ORDER_TABLE);
 
         //ORDER PERSON DETAILS TABLE
@@ -84,7 +80,6 @@ public class DBHandler extends SQLiteOpenHelper {
                       KEY_ORDER_PERSON_DETAILS_FRIEND + " INTEGER NOT NULL," +
                 "CONSTRAINT  " + PRIMARY_KEY_ORDER_PERSON_DETAILS + " PRIMARY KEY " +
                 "(" + KEY_ORDER_PERSON_DETAILS + "," + KEY_ORDER_PERSON_DETAILS_FRIEND + ")" + ")";
-        Log.d("SQL", CREATE_ORDER_PERSON_DETAILS_TABLE);
         db.execSQL(CREATE_ORDER_PERSON_DETAILS_TABLE);
     }
 
@@ -104,9 +99,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(ORDER_RESTAURANT_KEY, order.getRestaurant().getRestaurantID());
         values.put(ORDER_DATE, order.getDate());
         values.put(ORDER_TIME, order.getTime());
-
-        System.out.println("VALUES: " + values);
-        System.out.println("Friends: " + order.getFriends());
         long orderID = db.insert(TABLE_ORDERS, null, values);
         addOrderPersonDetails(order, orderID);
         db.close();
@@ -119,7 +111,6 @@ public class DBHandler extends SQLiteOpenHelper {
         for(Friend friend: order.getFriends()){
             values.put(KEY_ORDER_PERSON_DETAILS, orderID);
             values.put(KEY_ORDER_PERSON_DETAILS_FRIEND, friend.getFriendID());
-            System.out.println("IN FOR LOOP");
             //insert here
             db.insert(TABLE_ORDER_PERSON_DETAILS, null, values);
         }
@@ -127,12 +118,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteOrder(long orderID){
         SQLiteDatabase db = this.getReadableDatabase();
-
         db.delete(TABLE_ORDERS, KEY_ORDER + " = ?",
                 new String[]{ String.valueOf(orderID) });
-
         deleteOrderPersonDetails(orderID);
-
         db.close();
     }
 
@@ -167,8 +155,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_ORDERS;
 
-        Log.d("SQL", query);
-
         Cursor c = db.rawQuery(query, null);
 
         if(c.moveToFirst()){
@@ -194,8 +180,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_ORDERS + " WHERE " + KEY_ORDER
                 + " = " + orderID;
-
-        Log.d("SQL", query);
 
         Cursor c = db.rawQuery(query, null);
         if(c != null){
@@ -241,7 +225,6 @@ public class DBHandler extends SQLiteOpenHelper {
             } while(c.moveToNext());
         }
 
-
         c.close();
         db.close();
         return friends;
@@ -282,8 +265,6 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_RESTAURANTS + " WHERE " + KEY_RESTAURANT
                 + " = " + restaurant_id;
 
-        Log.d("SQL", query);
-
         Cursor c = db.rawQuery(query, null);
         if(c != null){
             c.moveToFirst();
@@ -307,8 +288,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Restaurant> restaurants = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_RESTAURANTS;
-
-        Log.d("SQL", query);
 
         Cursor c = db.rawQuery(query, null);
 
@@ -374,8 +353,6 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_FRIENDS + " WHERE " + KEY_FRIEND
                 + " = " + friend_id;
 
-        Log.d("SQL", query);
-
         Cursor c = db.rawQuery(query, null);
         if(c != null){
             c.moveToFirst();
@@ -394,8 +371,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Friend> friends = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_FRIENDS;
-
-        Log.d("SQL", query);
 
         Cursor c = db.rawQuery(query, null);
 
