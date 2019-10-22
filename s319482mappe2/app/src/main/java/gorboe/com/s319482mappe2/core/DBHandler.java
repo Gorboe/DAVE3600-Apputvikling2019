@@ -37,10 +37,9 @@ public class DBHandler extends SQLiteOpenHelper {
     //Order table
     private static String TABLE_ORDERS = "Orders";
     private static String KEY_ORDER = "_orderID";
-    private static String ORDER_RESTAURANT_KEY = "restaurantFK";//private static String ORDER_RESTAURANT = "restaurant"; //restaurants...
+    private static String ORDER_RESTAURANT_KEY = "restaurantFK";
     private static String ORDER_DATE = "date";
     private static String ORDER_TIME = "time";
-    //friends...
 
     //OrderPersonDetails
     private static String TABLE_ORDER_PERSON_DETAILS = "OrderPersonDetails";
