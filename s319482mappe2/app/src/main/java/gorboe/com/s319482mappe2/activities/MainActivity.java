@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     //TODO: MAKE SURE ACTIVITIES END. call finish or something...
     //TODO: SORT ORDER LIST BY DATE
     //TODO: VALIDATE TIME AGAINST DATE?
-    //TODO: NOTIFICATION PRESSED GO TO MAINACTIVITY
 
     private ListView orderList;
     private DBHandler db;

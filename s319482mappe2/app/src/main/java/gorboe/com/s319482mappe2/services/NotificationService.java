@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import gorboe.com.s319482mappe2.R;
+import gorboe.com.s319482mappe2.activities.MainActivity;
 import gorboe.com.s319482mappe2.activities.SettingsActivity;
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.enteties.Order;
@@ -44,7 +45,7 @@ public class NotificationService extends Service {
         Order order = db.getOrder(order_id);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent i = new Intent(this, SettingsActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, i, 0);
         Notification notifikasjon = new NotificationCompat.Builder(this)
                 .setContentTitle("My Notification")

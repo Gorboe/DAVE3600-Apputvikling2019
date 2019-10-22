@@ -247,6 +247,37 @@ public class CreateOrderActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
                 String time = String.format("%02d:%02d", hour, minutes); //secures format hh:mm
 
+                String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
+                                    (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
+                                     Calendar.getInstance().get(Calendar.YEAR);
+
+                //if order is today
+                if(currentDate.equals(order_date.getText().toString())){
+                    int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                    int currentMinutes = Calendar.getInstance().get(Calendar.MINUTE);
+                    System.out.println("CURRENT: " + currentHour + "   HOUR: " + hour);
+                    if(currentHour > hour){
+                        //fail because of hour
+                        new AlertDialog.Builder(CreateOrderActivity.this)
+                                .setTitle("Advarsel")
+                                .setIcon(R.drawable.ic_warning_yellow)
+                                .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
+                                .show();
+                        return;
+                    }
+                    if(currentHour == hour){
+                        if(currentMinutes > minutes){
+                            //fail because of min
+                            new AlertDialog.Builder(CreateOrderActivity.this)
+                                    .setTitle("Advarsel")
+                                    .setIcon(R.drawable.ic_warning_yellow)
+                                    .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
+                                    .show();
+                            return;
+                        }
+                    }
+                }
+
                 System.out.println(time);
                 order_time.setText(time);
             }
