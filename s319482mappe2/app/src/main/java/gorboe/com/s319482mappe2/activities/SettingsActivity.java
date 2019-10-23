@@ -85,7 +85,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void checkToggleState(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean toggleState = preferences.getBoolean("toggleState", true); //default = false
+        boolean toggleState = preferences.getBoolean("toggleState", false); //default = false
         toggleButton.setChecked(toggleState);
 
         if(toggleState){
