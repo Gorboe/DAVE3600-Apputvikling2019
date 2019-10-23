@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView orderList;
     private DBHandler db;
 
+    //TODO: NAVIGATION
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
