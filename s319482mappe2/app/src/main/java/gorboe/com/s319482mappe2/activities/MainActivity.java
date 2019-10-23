@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Check permissions for sms thingy (int)
     //TODO: Sort orders by date
     //TODO: Delete orders that have been
-    //TODO: SMS/Notification service av som default
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

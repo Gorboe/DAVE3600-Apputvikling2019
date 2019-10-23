@@ -1,10 +1,13 @@
 package gorboe.com.s319482mappe2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -50,8 +53,20 @@ public class SettingsActivity extends AppCompatActivity {
                 saveSMSMessage();
                 if (isChecked) {
                     // The toggle is enabled
-                    toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
-                    startService();
+                    //check permissions
+                    int SMS_PERMISSION = ActivityCompat
+                                    .checkSelfPermission
+                                    (SettingsActivity.this, Manifest.permission.SEND_SMS);
+
+                    int PHONE_STATE_PERMISSION = ActivityCompat
+                                    .checkSelfPermission
+                                    (SettingsActivity.this, Manifest.permission.READ_PHONE_STATE);
+
+                    if(SMS_PERMISSION == PackageManager.PERMISSION_GRANTED &&
+                            PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
+                        toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
+                        startService();
+                    }
                 } else {
                     // The toggle is disabled
                     toggleButton.setBackgroundResource(R.drawable.toggle_button_off);
