@@ -55,16 +55,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if (isChecked) {
                     // The toggle is enabled
                     //check permissions
-                    int SMS_PERMISSION = ActivityCompat
-                                    .checkSelfPermission
-                                    (SettingsActivity.this, Manifest.permission.SEND_SMS);
-
-                    int PHONE_STATE_PERMISSION = ActivityCompat
-                                    .checkSelfPermission
-                                    (SettingsActivity.this, Manifest.permission.READ_PHONE_STATE);
-
-                    if(SMS_PERMISSION == PackageManager.PERMISSION_GRANTED &&
-                            PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
+                    if(checkSMSPermissions()){
                         toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
                         startService();
                     }
@@ -77,6 +68,22 @@ public class SettingsActivity extends AppCompatActivity {
                 preferences.edit().putBoolean("toggleState", isChecked).apply(); //always store state permanently
             }
         });
+    }
+
+    private boolean checkSMSPermissions(){
+        int SMS_PERMISSION = ActivityCompat
+                .checkSelfPermission
+                        (SettingsActivity.this, Manifest.permission.SEND_SMS);
+
+        int PHONE_STATE_PERMISSION = ActivityCompat
+                .checkSelfPermission
+                        (SettingsActivity.this, Manifest.permission.READ_PHONE_STATE);
+
+        if(SMS_PERMISSION == PackageManager.PERMISSION_GRANTED &&
+           PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        return false;
     }
 
     public void checkSMSMessage(){
@@ -122,16 +129,18 @@ public class SettingsActivity extends AppCompatActivity {
         saveSMSMessage(); //always saves
         switch(item.getItemId()){
             case R.id.nav_order:
+                finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
+                finish();
                 startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
+                finish();
                 startActivity(new Intent(this, FriendsActivity.class));
                 break;
             case R.id.nav_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
                 break;
 
         }
@@ -163,8 +172,11 @@ public class SettingsActivity extends AppCompatActivity {
 
                 //restart service so it get new time preference
                 saveSMSMessage();
-                stopService();
-                startService();
+                boolean isToggled = preferences.getBoolean("toggleState", false);
+                if(checkSMSPermissions() && isToggled){
+                    stopService();
+                    startService();
+                }
             }
 
         }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);

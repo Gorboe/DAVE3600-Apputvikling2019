@@ -70,15 +70,17 @@ public class FriendsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_order:
+                finish();
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
+                finish();
                 startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
-                startActivity(new Intent(this, FriendsActivity.class));
                 break;
             case R.id.nav_settings:
+                finish();
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
 
