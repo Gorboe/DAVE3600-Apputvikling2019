@@ -52,15 +52,14 @@ public class SettingsActivity extends AppCompatActivity {
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSMSMessage();
-                if (isChecked) {
+                if (isChecked && checkSMSPermissions()) {
                     // The toggle is enabled
                     //check permissions
-                    if(checkSMSPermissions()){
-                        toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
-                        startService();
-                    }
+                    toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
+                    startService();
                 } else {
                     // The toggle is disabled
+                    isChecked = false; //incase it fails on SMSPermission, we dont want to save button on in sp
                     toggleButton.setBackgroundResource(R.drawable.toggle_button_off);
                     stopService();
                 }
@@ -73,15 +72,19 @@ public class SettingsActivity extends AppCompatActivity {
     private boolean checkSMSPermissions(){
         int SMS_PERMISSION = ActivityCompat
                 .checkSelfPermission
-                        (SettingsActivity.this, Manifest.permission.SEND_SMS);
+                        (this, Manifest.permission.SEND_SMS);
 
         int PHONE_STATE_PERMISSION = ActivityCompat
                 .checkSelfPermission
-                        (SettingsActivity.this, Manifest.permission.READ_PHONE_STATE);
+                        (this, Manifest.permission.READ_PHONE_STATE);
 
         if(SMS_PERMISSION == PackageManager.PERMISSION_GRANTED &&
            PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
             return true;
+        }else {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.SEND_SMS,
+                    Manifest.permission.READ_PHONE_STATE}, 0);
         }
         return false;
     }
@@ -110,7 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean toggleState = preferences.getBoolean("toggleState", false); //default = false
         toggleButton.setChecked(toggleState);
-
         if(toggleState){
             toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
         }else {
@@ -173,7 +175,7 @@ public class SettingsActivity extends AppCompatActivity {
                 //restart service so it get new time preference
                 saveSMSMessage();
                 boolean isToggled = preferences.getBoolean("toggleState", false);
-                if(checkSMSPermissions() && isToggled){
+                if(isToggled){
                     stopService();
                     startService();
                 }
