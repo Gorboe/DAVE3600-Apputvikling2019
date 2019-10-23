@@ -32,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView orderList;
     private DBHandler db;
 
+    //TODO: Check permissions for sms thingy (int) 
+    //TODO: Sort orders by date
+    //TODO: Delete orders that have been
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

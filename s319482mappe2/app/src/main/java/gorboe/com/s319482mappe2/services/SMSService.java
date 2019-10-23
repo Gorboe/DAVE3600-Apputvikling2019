@@ -49,11 +49,7 @@ public class SMSService extends Service {
                 smsManager.sendTextMessage(friend.getNumber(), null, message, null, null);
             }catch (Exception e){
                 //should never throw exception here as i validate all phone numbers. But have the try catch just in case
-                new AlertDialog.Builder(this)
-                        .setTitle("Advarsel")
-                        .setIcon(R.drawable.ic_warning_yellow)
-                        .setMessage("Noe gikk galt når vi prøvde å sende ut SMS.")
-                        .show();
+                //might run if permissions not set.
             }
         }
         //+15 555 21 5554
