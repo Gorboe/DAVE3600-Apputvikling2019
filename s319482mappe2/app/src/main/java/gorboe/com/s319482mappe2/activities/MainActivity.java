@@ -2,13 +2,9 @@ package gorboe.com.s319482mappe2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
-import android.icu.text.StringSearch;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,22 +14,20 @@ import android.widget.ListView;
 import android.widget.Toolbar;
 
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import gorboe.com.s319482mappe2.core.DBHandler;
 import gorboe.com.s319482mappe2.R;
 import gorboe.com.s319482mappe2.activities.create.CreateOrderActivity;
+import gorboe.com.s319482mappe2.core.DateComparator;
 import gorboe.com.s319482mappe2.enteties.Order;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView orderList;
     private DBHandler db;
-
-    //TODO: Sort orders by date
-    //TODO: Delete orders that have been
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +42,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initializeOrderList(){
+        List<Order> ordersList = db.getAllOrders();
+
+        //REMOVE OLD ORDERS
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Date todayDate = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            for(Order order: ordersList){
+                Date orderDate;
+                try {
+                    orderDate = sdf.parse(order.getDate() + " " + order.getTime());
+                } catch (ParseException e) {
+                    continue;
+                }
+                if(orderDate.before(todayDate)){
+                    db.deleteOrder(order.get_orderID()); //delete order from database and not list
+                }
+            }
+        }
         final List<Order> orders = db.getAllOrders();
 
         //SORT ORDERS
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-
-            for(Order order: orders){
-                SimpleDateFormat sdf = new SimpleDateFormat();
-                sdf.format(order.getDate());
-                sdf.format(order.getTime());
-                System.out.println(sdf);
-            }
-        }
-
-        
+        Collections.sort(orders, new DateComparator());
 
         ArrayAdapter<Order> arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, orders);
