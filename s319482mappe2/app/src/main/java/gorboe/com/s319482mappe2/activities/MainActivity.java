@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView orderList;
     private DBHandler db;
 
-    //TODO: Check permissions for sms thingy (int)
     //TODO: Sort orders by date
     //TODO: Delete orders that have been
 
@@ -50,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void initializeOrderList(){
         final List<Order> orders = db.getAllOrders();
+
+        //SORT ORDERS
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+
+            for(Order order: orders){
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.format(order.getDate());
+                sdf.format(order.getTime());
+                System.out.println(sdf);
+            }
+        }
+
+        
 
         ArrayAdapter<Order> arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, orders);
