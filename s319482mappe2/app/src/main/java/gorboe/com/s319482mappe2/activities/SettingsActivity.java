@@ -52,14 +52,19 @@ public class SettingsActivity extends AppCompatActivity {
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveSMSMessage();
-                if (isChecked && checkSMSPermissions()) {
+                if(!checkSMSPermissions()){
+                    requestSMSPermissions();
+                    toggleButton.setChecked(false);
+                    return;
+                }
+
+                if (isChecked) {
                     // The toggle is enabled
                     //check permissions
                     toggleButton.setBackgroundResource(R.drawable.toggle_button_on);
                     startService();
                 } else {
                     // The toggle is disabled
-                    isChecked = false; //incase it fails on SMSPermission, we dont want to save button on in sp
                     toggleButton.setBackgroundResource(R.drawable.toggle_button_off);
                     stopService();
                 }
@@ -82,11 +87,15 @@ public class SettingsActivity extends AppCompatActivity {
            PHONE_STATE_PERMISSION == PackageManager.PERMISSION_GRANTED){
             return true;
         }else {
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.SEND_SMS,
-                    Manifest.permission.READ_PHONE_STATE}, 0);
+            requestSMSPermissions();
         }
         return false;
+    }
+
+    private void requestSMSPermissions(){
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.SEND_SMS,
+                Manifest.permission.READ_PHONE_STATE}, 0);
     }
 
     public void checkSMSMessage(){
