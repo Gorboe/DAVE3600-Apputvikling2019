@@ -11,6 +11,8 @@ public class Validator {
     public static boolean validatePhoneNumber(String number, Context context){
         //This allows user to enter any phone number with +xx prefix.
         // and allows to use emulator numbers, requires +15 555 21 xxxx total of 11 digits and a + sign
+        number = number.replaceAll("\\s+", "");
+        System.out.println(number);
         if(Pattern.matches("^[+][0-9]{10}$", number) ||
            Pattern.matches("^([+]1555521)[0-9]{4}", number)){
             return true;

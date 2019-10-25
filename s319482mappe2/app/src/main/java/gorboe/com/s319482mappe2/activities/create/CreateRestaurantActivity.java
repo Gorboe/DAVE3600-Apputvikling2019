@@ -56,10 +56,10 @@ public class CreateRestaurantActivity extends AppCompatActivity {
            !Validator.validateType(type_field.getText().toString(), this)){
             return;
         }
-
+        String number = number_field.getText().toString().replaceAll("\\s+", ""); //removes whitespace
         Restaurant restaurant = new Restaurant(name_field.getText().toString(),
                 address_field.getText().toString(),
-                number_field.getText().toString(),
+                number,
                 type_field.getText().toString());
 
         if(existing_restaurant != null){

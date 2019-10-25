@@ -48,8 +48,8 @@ public class CreateFriendActivity extends AppCompatActivity {
            !Validator.validateName(name_field.getText().toString(), this)){
             return;
         }
-
-        Friend friend = new Friend(name_field.getText().toString(), number_field.getText().toString());
+        String number = number_field.getText().toString().replaceAll("\\s+", ""); //removes whitespace
+        Friend friend = new Friend(name_field.getText().toString(), number);
 
         if(existing_friend != null){
             friend.setFriendID(existing_friend.getFriendID());
