@@ -107,7 +107,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void saveSMSMessage(){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putString("smsmessage", messageField.getText().toString()).apply();
+        if(messageField.getText().toString().trim().isEmpty()){
+            String defaultSMSMessage = "Hei, dette er en påminnelse på din restaurant avtale idag!";
+            preferences.edit().putString("smsmessage", defaultSMSMessage).apply();
+        }else{
+            preferences.edit().putString("smsmessage", messageField.getText().toString()).apply();
+        }
     }
 
     public void checkPreferredTime(){
