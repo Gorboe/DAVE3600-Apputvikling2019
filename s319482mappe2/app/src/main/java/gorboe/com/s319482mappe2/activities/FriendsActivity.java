@@ -78,6 +78,8 @@ public class FriendsActivity extends AppCompatActivity {
                 startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
+                finish();
+                startActivity(new Intent(this, FriendsActivity.class));
                 break;
             case R.id.nav_settings:
                 finish();

@@ -184,7 +184,7 @@ public class CreateOrderActivity extends AppCompatActivity {
         }else {
             db.addOrder(order);
         }
-
+        finish();
         startActivity(new Intent(this, MainActivity.class));
     }
 
@@ -192,7 +192,14 @@ public class CreateOrderActivity extends AppCompatActivity {
         if(existing_order != null){
             db.deleteOrder(existing_order.get_orderID());
         }
+        finish();
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 
     public void openDatePicker(View view) {

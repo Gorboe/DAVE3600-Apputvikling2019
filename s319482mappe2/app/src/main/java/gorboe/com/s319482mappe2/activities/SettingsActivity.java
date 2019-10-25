@@ -143,6 +143,8 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(new Intent(this, FriendsActivity.class));
                 break;
             case R.id.nav_settings:
+                finish();
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
 
         }

@@ -72,6 +72,8 @@ public class RestaurantActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
+                finish();
+                startActivity(new Intent(this, RestaurantActivity.class));
                 break;
             case R.id.nav_friends:
                 finish();

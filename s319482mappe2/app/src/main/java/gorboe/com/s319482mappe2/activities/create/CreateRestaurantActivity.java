@@ -68,7 +68,7 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         }else{
             db.addRestaurant(restaurant);
         }
-
+        finish();
         startActivity(new Intent(this, RestaurantActivity.class));
     }
 
@@ -76,6 +76,13 @@ public class CreateRestaurantActivity extends AppCompatActivity {
         if(existing_restaurant != null){
             db.deleteRestaurant(existing_restaurant.getRestaurantID());
         }
+        finish();
         startActivity(new Intent(this, RestaurantActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }

@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.nav_order:
+                finish();
+                startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.nav_restaurant:
                 startActivity(new Intent(this, RestaurantActivity.class));

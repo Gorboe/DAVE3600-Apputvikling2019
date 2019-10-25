@@ -57,6 +57,7 @@ public class CreateFriendActivity extends AppCompatActivity {
         }else{
             db.addFriend(friend);
         }
+        finish();
         startActivity(new Intent(this, FriendsActivity.class));
     }
 
@@ -64,6 +65,13 @@ public class CreateFriendActivity extends AppCompatActivity {
         if(existing_friend != null){
             db.deleteFriend(existing_friend.getFriendID());
         }
+        finish();
         startActivity(new Intent(this, FriendsActivity.class));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }
