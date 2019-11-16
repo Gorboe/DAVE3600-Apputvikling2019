@@ -26,7 +26,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private EditText input;
     private TextView output;
-    public boolean isTaskRunning;
+    private getJSON task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +38,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         output = findViewById(R.id.output);
         input = findViewById(R.id.input);
 
-        getJSON task = new getJSON();
-        task.execute(
-                "http://student.cs.hioa.no/~s319482/jsonin.php/?Name=coolstuff",
-                "http://student.cs.hioa.no/~s319482/jsonout.php");
+        task = new getJSON();
+        task.execute("http://student.cs.hioa.no/~s319482/jsonout.php");
 
-        //task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Name=detduleggerinn");
 
-        //task.execute("http://student.cs.hioa.no/~s319482/jsonout.php");
         //Add data: http://student.cs.hioa.no/~s319482/jsonin.php/?Name=detduleggerinn
         //Get data: http://student.cs.hioa.no/~s319482/jsonout.php
     }
@@ -94,6 +90,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void sendData(View view) {
         String text = input.getText().toString();
+        task = new getJSON();
+        task.execute(
+                "http://student.cs.hioa.no/~s319482/jsonin.php/?Name=" + text,
+                "http://student.cs.hioa.no/~s319482/jsonout.php");
     }
 
     private void getData(){
