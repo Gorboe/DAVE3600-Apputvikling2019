@@ -19,25 +19,26 @@ if($table=='Room')
   $sql=mysqli_query($con,"insert into $table (Description, CoordinateX, CoordinateY) values ('$beskrivelse','$coordinatex','$coordinatey');");
 }
 
-/////////////////////////////////////////////////////////////////
+if($table=='Reservation')
+{
+   $innromid=$_REQUEST['Romid'];
+   $inndate=$_REQUEST['Date'];
+   $inntime=$_REQUEST['Time'];
+
+   $romid=(String)$innromid;
+   $date=(String)$inndate;
+   $time=(String)$inntime;
+
+  $sql=mysqli_query($con,"insert into $table (RoomID, Date, Time) values ('$romid','$inndate','$inntime');");
+}
 
 
-//second get table from link variable
-<?php
-$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
-
-$inntable=$_REQUEST['Table'];
-$table=(String)$inntable;
-
-$inncolumn=$_REQUEST['Column'];
-$column=(String)$inncolumn;
-
-$innvalue=$_REQUEST['Value'];
-$value=(String)$innvalue;
-
-$sql=mysqli_query($con,"insert into $table ($column) values ('$value');");
 mysqli_close($con);
 ?>
+
+
+/////////////////////////////////////////////////////////////////
+
 
 
 
@@ -53,5 +54,6 @@ mysqli_close($con);
 ?>
 
 
-//YMSE
+//links for putting in data
 http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse=dette%20er%20en%20beskrivelse2&Cordx=50&Cordy=60
+http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Reservation&Romid=2&Date=adate&Time=atime
