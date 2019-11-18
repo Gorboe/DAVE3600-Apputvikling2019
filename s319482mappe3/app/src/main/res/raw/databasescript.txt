@@ -1,0 +1,16 @@
+CREATE TABLE Room (
+    RoomID int NOT NULL AUTO_INCREMENT,
+    Description VARCHAR(500) NOT NULL,
+    CoordinateX DECIMAL(65, 30) NOT NULL,
+    CoordinateY DECIMAL(65, 30) NOT NULL,
+    PRIMARY KEY(RoomID)
+);
+
+CREATE TABLE Reservation (
+    ReservationID int NOT NULL AUTO_INCREMENT,
+    RoomID int NOT NULL,
+    Date VARCHAR(30),
+    Time VARCHAR(30),
+    PRIMARY KEY(ReservationID),
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+);

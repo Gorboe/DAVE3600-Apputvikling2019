@@ -1,0 +1,57 @@
+
+//FINAL/////////////////////////////////////////////////////////////////////
+<?php
+$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
+
+$inntable=$_REQUEST['Table'];
+$table=(String)$inntable;
+
+if($table=='Room')
+{
+   $innbeskrivelse=$_REQUEST['Beskrivelse'];
+   $inncoordinatex=$_REQUEST['Cordx'];
+   $inncoordinatey=$_REQUEST['Cordy'];
+
+   $beskrivelse=(String)$innbeskrivelse;
+   $coordinatex=(String)$inncoordinatex;
+   $coordinatey=(String)$inncoordinatey;
+
+  $sql=mysqli_query($con,"insert into $table (Description, CoordinateX, CoordinateY) values ('$beskrivelse','$coordinatex','$coordinatey');");
+}
+
+/////////////////////////////////////////////////////////////////
+
+
+//second get table from link variable
+<?php
+$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
+
+$inntable=$_REQUEST['Table'];
+$table=(String)$inntable;
+
+$inncolumn=$_REQUEST['Column'];
+$column=(String)$inncolumn;
+
+$innvalue=$_REQUEST['Value'];
+$value=(String)$innvalue;
+
+$sql=mysqli_query($con,"insert into $table ($column) values ('$value');");
+mysqli_close($con);
+?>
+
+
+
+//first
+<?php
+$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
+
+$inn=$_REQUEST['Name'];
+$name=(String)$inn;
+
+$sql=mysqli_query($con,"insert into Food (Name) values ('$name');");
+mysqli_close($con);
+?>
+
+
+//YMSE
+http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse=dette%20er%20en%20beskrivelse2&Cordx=50&Cordy=60
