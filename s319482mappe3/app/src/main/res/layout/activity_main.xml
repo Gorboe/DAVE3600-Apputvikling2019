@@ -14,8 +14,8 @@
         app:layout_constraintHorizontal_bias="0.387"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/map"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintTop_toBottomOf="@+id/xcord"
+        app:layout_constraintVertical_bias="0.07999998" />
 
     <fragment
         android:id="@+id/map"
@@ -50,4 +50,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/input"
         app:layout_constraintTop_toTopOf="@+id/input" />
+
+    <TextView
+        android:id="@+id/xcord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map" />
+
+    <TextView
+        android:id="@+id/ycord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/xcord"
+        app:layout_constraintTop_toTopOf="@+id/xcord" />
 </androidx.constraintlayout.widget.ConstraintLayout>

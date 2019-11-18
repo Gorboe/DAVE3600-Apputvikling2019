@@ -21,11 +21,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
     private EditText input;
     private TextView output;
+    private TextView xcord;
+    private TextView ycord;
     private getJSON task;
 
     @Override
@@ -37,13 +39,23 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         output = findViewById(R.id.output);
         input = findViewById(R.id.input);
+        xcord = findViewById(R.id.xcord);
+        ycord = findViewById(R.id.ycord);
 
         task = new getJSON();
         task.execute("http://student.cs.hioa.no/~s319482/jsonout.php");
 
-
+        //mMap.setOnMarkerClickListener();
         //Add data: http://student.cs.hioa.no/~s319482/jsonin.php/?Name=detduleggerinn
         //Get data: http://student.cs.hioa.no/~s319482/jsonout.php
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        String xcoordinates = latLng.longitude + "";
+        String ycoordinates = latLng.latitude + "";
+        xcord.setText(xcoordinates);
+        ycord.setText(ycoordinates);
     }
 
     private class getJSON extends AsyncTask<String, Void,String> {
@@ -83,6 +95,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapClickListener(this);
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
