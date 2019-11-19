@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe3.enteties;
 
+import androidx.annotation.NonNull;
+
 public class Reservation {
     private int reservationID;
     private int roomID;
@@ -27,5 +29,11 @@ public class Reservation {
 
     public String getTime() {
         return time;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return date + "\n" + time;
     }
 }

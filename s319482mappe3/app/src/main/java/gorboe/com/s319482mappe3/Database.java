@@ -61,7 +61,17 @@ public class Database {
                     String description = jsonObject.getString("Description");
                     double coordinateX = jsonObject.getDouble("CoordinateX");
                     double coordinateY = jsonObject.getDouble("CoordinateY");
-                    Room room = new Room(roomID, description, coordinateX, coordinateY);
+
+                    //get reservations for this room
+                    List<Reservation> currentRoomReservations = new ArrayList<>();
+                    System.out.println("RES: " + reservations.size());
+                    for(Reservation candidate: reservations){
+                        if(candidate.getRoomID() == roomID){
+                            currentRoomReservations.add(candidate);
+                            System.out.println(roomID + " got a new candidate " + candidate.getReservationID());
+                        }
+                    }
+                    Room room = new Room(roomID, description, coordinateX, coordinateY, currentRoomReservations);
                     System.out.println("ID: " + roomID);
                     rooms.add(roomID, room);
                 }

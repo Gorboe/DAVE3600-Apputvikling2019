@@ -18,7 +18,7 @@ public class CreateRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
 
-        ETx = findViewById(R.id.xfield);
+        ETx = findViewById(R.id.time);
         ETy = findViewById(R.id.yfield);
         ETdescription = findViewById(R.id.description);
 

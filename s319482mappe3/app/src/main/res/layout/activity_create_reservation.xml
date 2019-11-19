@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".CreateReservationActivity">
 
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:hint="time"
+        android:inputType="text"
+        android:maxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="150dp"
+        android:hint="date"
+        android:inputType="text"
+        android:maxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="addReservation"
+        android:text="add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="delete"
+        android:text="DelExit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

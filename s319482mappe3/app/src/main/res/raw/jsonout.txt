@@ -7,14 +7,14 @@ $con=mysqli_connect("student.cs.hioa.no","s319482","","s319482");
 $sqlroom=("select * from Room");
 $sqlreservation=("select * from Reservation");
 
-$tabellroom=mysqli_query($con,$sqlroom);
-while ($row=mysqli_fetch_assoc($tabellroom))
+$tabellreservation=mysqli_query($con,$sqlreservation);
+while ($row=mysqli_fetch_assoc($tabellreservation))
 {
 $output[]=$row;
 }
 
-$tabellreservation=mysqli_query($con,$sqlreservation);
-while ($row=mysqli_fetch_assoc($tabellreservation))
+$tabellroom=mysqli_query($con,$sqlroom);
+while ($row=mysqli_fetch_assoc($tabellroom))
 {
 $output[]=$row;
 }
@@ -22,6 +22,7 @@ $output[]=$row;
 print(json_encode($output));
 mysqli_close($con);
 ?>
+
 
 
 ////////////////////////////////
