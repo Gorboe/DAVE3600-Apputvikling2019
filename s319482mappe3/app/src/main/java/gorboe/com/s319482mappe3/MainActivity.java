@@ -45,14 +45,15 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         xcord = findViewById(R.id.xcord);
         ycord = findViewById(R.id.ycord);
 
-        task = new Server();
-        try{
+        Database.getInstance().GetAllItems();
+        //task = new Server();
+        /*try{
             String result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();
             output.setText(result);
         }catch (Exception e){
             //catch
             System.out.println("noe gikk veldig galt");
-        }
+        }*/
 
 
         //mMap.setOnMarkerClickListener();
