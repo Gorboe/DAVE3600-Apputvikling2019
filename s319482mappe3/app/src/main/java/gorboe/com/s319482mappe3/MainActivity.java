@@ -11,9 +11,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private TextView TVx;
@@ -33,6 +34,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
+
+        //todo: get all rooms and add them to map
+        //todo: zoom in on oslo
+        LatLng sydney = new LatLng(-45, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
     public void onMapClick(LatLng latLng) {
         x = latLng.longitude;
         y = latLng.latitude;
@@ -43,12 +57,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setOnMapClickListener(this);
-        LatLng sydney = new LatLng(-45, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    public boolean onMarkerClick(Marker marker) {
+        System.out.println("works");
+        return false;
     }
 
     public void addRoom(View view) {
