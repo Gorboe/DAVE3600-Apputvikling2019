@@ -47,13 +47,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         for(Room room: Database.getInstance().getRooms()){
             LatLng pos = new LatLng(room.getCoordinateY(), room.getCoordinateX());
-            Marker marker = mMap.addMarker(new MarkerOptions().position(pos).title(room.getDescription()));
+            Marker marker = mMap.addMarker(new MarkerOptions().position(pos));
             markerHashMap.put(marker, room.getRoomID());
         }
-
-        LatLng sydney = new LatLng(-45, 151); //temp
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)); //todo: zoom in on oslo
+        
+        mMap.setMinZoomPreference(15);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(59.91943817362552, 10.7355922879354954), 17));
     }
 
     @Override
