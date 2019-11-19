@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe3;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -46,11 +48,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(this);
 
         for(Room room: Database.getInstance().getRooms()){
+            if(room == null) continue;
             LatLng pos = new LatLng(room.getCoordinateY(), room.getCoordinateX());
             Marker marker = mMap.addMarker(new MarkerOptions().position(pos));
+            System.out.println("ID: " + room.getRoomID());
             markerHashMap.put(marker, room.getRoomID());
         }
-        
+
         mMap.setMinZoomPreference(15);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(59.91943817362552, 10.7355922879354954), 17));
@@ -68,8 +72,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        int id = markerHashMap.get(marker);
-        System.out.println("ID: " + id);
+        Integer id = markerHashMap.get(marker);
+        System.out.println(id);
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        intent.putExtra("roomID", id);
+        startActivity(intent);
+        finish();
         return false;
     }
 

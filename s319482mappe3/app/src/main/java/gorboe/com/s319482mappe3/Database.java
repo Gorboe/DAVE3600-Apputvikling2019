@@ -31,7 +31,7 @@ public class Database {
     //GetAllItems
     private void GetAllItems(){
         task = new Server();
-        rooms = new ArrayList<>();
+        rooms = new FlexList<>();
         reservations = new ArrayList<>();
         String result;
         try{
@@ -62,7 +62,8 @@ public class Database {
                     double coordinateX = jsonObject.getDouble("CoordinateX");
                     double coordinateY = jsonObject.getDouble("CoordinateY");
                     Room room = new Room(roomID, description, coordinateX, coordinateY);
-                    rooms.add(room);
+                    System.out.println("ID: " + roomID);
+                    rooms.add(roomID, room);
                 }
             }
         }catch (Exception e){
@@ -96,6 +97,10 @@ public class Database {
     //GETTERS
     public List<Room> getRooms() {
         return rooms;
+    }
+
+    public Room getRoom(int id){
+        return rooms.get(id);
     }
 
     public List<Reservation> getReservations() {
