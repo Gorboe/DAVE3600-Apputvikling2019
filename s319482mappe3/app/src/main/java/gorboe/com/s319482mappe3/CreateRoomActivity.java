@@ -4,20 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 public class CreateRoomActivity extends AppCompatActivity {
 
-    private EditText xfield;
-    private EditText yfield;
+    private EditText ETx;
+    private EditText ETy;
+    private EditText ETdescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
 
-        xfield = findViewById(R.id.xfield);
-        yfield = findViewById(R.id.yfield);
+        ETx = findViewById(R.id.xfield);
+        ETy = findViewById(R.id.yfield);
+        ETdescription = findViewById(R.id.description);
 
         tryGetCoordinates();
     }
@@ -30,8 +33,17 @@ public class CreateRoomActivity extends AppCompatActivity {
         if(coordinateX != -1 && coordinateY != -1){
             String x = coordinateX + "";
             String y = coordinateY + "";
-            xfield.setText(x);
-            yfield.setText(y);
+            ETx.setText(x);
+            ETy.setText(y);
         }
+    }
+
+    public void addRoom(View view) {
+        //todo: validate here?? also check x and y if exist marker at that loc?
+        String description = ETdescription.getText().toString();
+        double x = Double.parseDouble(ETx.getText().toString());
+        double y = Double.parseDouble(ETy.getText().toString());
+        Database.getInstance().AddRoom(description, x, y);
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
