@@ -26,17 +26,23 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     private void tryGetID(){
         Intent intent = getIntent();
-        int roomID = intent.getIntExtra("roomID", -1);
+        roomID = intent.getIntExtra("roomID", -1);
     }
 
     public void addReservation(View view) {
         //todo: if reservationID not existing!!! then only update values
+        System.out.println("BIGS" + roomID + " " + ETDate.getText().toString() + " " + ETTime.getText().toString());
         Database.getInstance().AddReservation(roomID, ETDate.getText().toString(), ETTime.getText().toString());
+
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        intent.putExtra("roomID", roomID);
+        startActivity(intent);
         finish();
     }
 
     public void delete(View view) {
         //delete/exit; delete hvis den har reservationID
+        finish();
     }
 
     @Override
