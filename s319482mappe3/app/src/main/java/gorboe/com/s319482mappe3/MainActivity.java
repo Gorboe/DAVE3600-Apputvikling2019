@@ -45,7 +45,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         xcord = findViewById(R.id.xcord);
         ycord = findViewById(R.id.ycord);
 
-        Database.getInstance().GetAllItems();
+        
         //task = new Server();
         /*try{
             String result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();

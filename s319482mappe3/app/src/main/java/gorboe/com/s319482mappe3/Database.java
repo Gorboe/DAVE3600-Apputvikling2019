@@ -18,6 +18,7 @@ public class Database {
     private Database(){
         rooms = new ArrayList<>();
         reservations = new ArrayList<>();
+        GetAllItems();
     }
 
     public static Database getInstance(){
@@ -27,24 +28,24 @@ public class Database {
         return INSTANCE;
     }
 
-    //GetAllItems //TODO: make this private and call it before getters to make sure data updated
-    public void GetAllItems(){
+    //GetAllItems
+    private void GetAllItems(){
         task = new Server();
+        rooms = new ArrayList<>();
+        reservations = new ArrayList<>();
         String result;
         try{
             result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();
         }catch (Exception e){
-            //catch
+            //todo: catch
             System.out.println("unable to get items async");
             return;
         }
-        System.out.println(result);
-        //to json objects todo: following 5lines should maybe be elsewhere?
+
         try{
             JSONArray jsonObjects = new JSONArray(result);
             for(int j = 0; j < jsonObjects.length(); j++){
                 JSONObject jsonObject = jsonObjects.getJSONObject(j);
-                System.out.println(jsonObject); //todo:to convert to object Gson gson = new Gson();Object object = gson.fromJson(jsonObject, object.class);
 
                 if(!jsonObject.isNull("ReservationID")){
                     //Is a reservation
@@ -63,11 +64,9 @@ public class Database {
                     Room room = new Room(roomID, description, coordinateX, coordinateY);
                     rooms.add(room);
                 }
-                //String name = jsonObject.getString("name");
-                //result.append(name).append(" ");
             }
         }catch (Exception e){
-            //catch
+            //todo: catch
             System.out.println("unable to create jasonobjects");
             return;
         }
@@ -75,8 +74,24 @@ public class Database {
     }
 
     //AddRoom always call GetAllItems after to update list items
+    public void AddRoom(String description, double coordinateX, double coordinateY){
+        //todo: validation
+
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse="
+                + description + "&Cordx=" + coordinateX + "&Cordy=" + coordinateY);
+        GetAllItems();
+    }
 
     //AddReservation always call GetAllItems after to update list items
+    public void AddReservation(int roomID, String date, String time){
+        //todo: validation
+
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Reservation&Romid="
+                + roomID + "&Date=" + date + "&Time=" + time);
+        GetAllItems();
+    }
 
     //GETTERS
     public List<Room> getRooms() {
