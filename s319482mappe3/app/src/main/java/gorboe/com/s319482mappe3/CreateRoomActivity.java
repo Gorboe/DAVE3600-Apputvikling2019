@@ -46,4 +46,10 @@ public class CreateRoomActivity extends AppCompatActivity {
         Database.getInstance().AddRoom(description, x, y);
         startActivity(new Intent(this, MainActivity.class));
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }

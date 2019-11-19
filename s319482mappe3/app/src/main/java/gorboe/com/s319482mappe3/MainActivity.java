@@ -41,17 +41,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
-        //todo: get all rooms and add them to map
-        //todo: zoom in on oslo
         for(Room room: Database.getInstance().getRooms()){
-            System.out.println("Adding marker: " + room.getCoordinateX() + " " + room.getCoordinateY());
             LatLng marker = new LatLng(room.getCoordinateY(), room.getCoordinateX());
             mMap.addMarker(new MarkerOptions().position(marker).title(room.getDescription()));
         }
 
-        LatLng sydney = new LatLng(-45, 151);
+        LatLng sydney = new LatLng(-45, 151); //temp
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)); //todo: zoom in on oslo
     }
 
     @Override
@@ -75,5 +72,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         intent.putExtra("keyX", x);
         intent.putExtra("keyY", y);
         startActivity(intent);
+        finish();
     }
 }
