@@ -1,7 +1,10 @@
 package gorboe.com.s319482mappe3;
 
 import androidx.fragment.app.FragmentActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,8 +16,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
-    private TextView xcord;
-    private TextView ycord;
+    private TextView TVx;
+    private TextView TVy;
+    private double x;
+    private double y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,31 +28,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         MapFragment mapFragment = (MapFragment) getFragmentManager() .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        xcord = findViewById(R.id.xcord);
-        ycord = findViewById(R.id.ycord);
-
-
-        //task = new Server();
-        /*try{
-            String result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();
-            output.setText(result);
-        }catch (Exception e){
-            //catch
-            System.out.println("noe gikk veldig galt");
-        }*/
-
-
-        //mMap.setOnMarkerClickListener();
-        //Add data: http://student.cs.hioa.no/~s319482/jsonin.php/?Name=detduleggerinn
-        //Get data: http://student.cs.hioa.no/~s319482/jsonout.php
+        TVx = findViewById(R.id.xcord);
+        TVy = findViewById(R.id.ycord);
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
-        String xcoordinates = "x: " + latLng.longitude + "";
-        String ycoordinates = "y: " + latLng.latitude + "";
-        xcord.setText(xcoordinates);
-        ycord.setText(ycoordinates);
+        x = latLng.longitude;
+        y = latLng.latitude;
+        String sx = "x: " + x;
+        String sy = "y: " + y;
+        TVx.setText(sx);
+        TVy.setText(sy);
     }
 
     @Override
@@ -57,5 +49,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng sydney = new LatLng(-45, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void addRoom(View view) {
+        Intent intent = new Intent(this, CreateRoomActivity.class);
+        intent.putExtra("keyX", x);
+        intent.putExtra("keyY", y);
+        startActivity(intent);
     }
 }
