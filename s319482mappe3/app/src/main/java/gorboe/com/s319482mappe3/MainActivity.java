@@ -14,6 +14,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import gorboe.com.s319482mappe3.enteties.Room;
+
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
@@ -41,6 +43,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         //todo: get all rooms and add them to map
         //todo: zoom in on oslo
+        for(Room room: Database.getInstance().getRooms()){
+            System.out.println("Adding marker: " + room.getCoordinateX() + " " + room.getCoordinateY());
+            LatLng marker = new LatLng(room.getCoordinateY(), room.getCoordinateX());
+            mMap.addMarker(new MarkerOptions().position(marker).title(room.getDescription()));
+        }
+
         LatLng sydney = new LatLng(-45, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));

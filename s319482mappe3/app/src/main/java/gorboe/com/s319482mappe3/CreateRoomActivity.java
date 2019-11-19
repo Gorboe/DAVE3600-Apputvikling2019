@@ -27,10 +27,10 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     private void tryGetCoordinates(){
         Intent intent = getIntent();
-        double coordinateX = intent.getDoubleExtra("keyX", -1);
-        double coordinateY = intent.getDoubleExtra("keyY", -1);
+        double coordinateX = intent.getDoubleExtra("keyX", -9999);
+        double coordinateY = intent.getDoubleExtra("keyY", -9999);
 
-        if(coordinateX != -1 && coordinateY != -1){
+        if(coordinateX != -9999 && coordinateY != -9999){
             String x = coordinateX + "";
             String y = coordinateY + "";
             ETx.setText(x);

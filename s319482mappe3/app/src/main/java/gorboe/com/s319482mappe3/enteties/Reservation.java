@@ -12,4 +12,20 @@ public class Reservation {
         this.date = Date;
         this.time = Time;
     }
+
+    public int getReservationID() {
+        return reservationID;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
 }

@@ -12,4 +12,20 @@ public class Room {
         this.coordinateX = CoordinateX;
         this.coordinateY = CoordinateY;
     }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getCoordinateX() {
+        return coordinateX;
+    }
+
+    public double getCoordinateY() {
+        return coordinateY;
+    }
 }
