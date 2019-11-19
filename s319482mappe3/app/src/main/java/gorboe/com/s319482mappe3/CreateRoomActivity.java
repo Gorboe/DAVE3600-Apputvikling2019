@@ -47,6 +47,8 @@ public class CreateRoomActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
+    //TODO: DELETE ROOM REMEMBER TO ALSO DELETE ALL RESERVATIONS UNDER THAT ROOM.
+
     @Override
     public void onBackPressed() {
         finish();

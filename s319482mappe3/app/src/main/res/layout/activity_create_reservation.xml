@@ -6,30 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".CreateReservationActivity">
 
-    <EditText
-        android:id="@+id/time"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
-        android:hint="time"
-        android:inputType="text"
-        android:maxLength="20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date" />
+        android:layout_marginTop="8dp"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_date"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050000012" />
 
-    <EditText
-        android:id="@+id/date"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="150dp"
-        android:hint="date"
-        android:inputType="text"
-        android:maxLength="20"
+        android:textAlignment="textEnd"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_time"
+        app:layout_constraintTop_toTopOf="@+id/txt_date" />
+
+    <Button
+        android:id="@+id/btn_date"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_date_picker"
+        android:onClick="openDatePicker"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_time"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/ic_time_picker"
+        android:onClick="openTimePicker"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button4"
@@ -38,6 +60,7 @@
         android:layout_marginTop="16dp"
         android:onClick="addReservation"
         android:text="add"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +73,7 @@
         android:layout_marginTop="16dp"
         android:onClick="delete"
         android:text="DelExit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button4"
         app:layout_constraintTop_toBottomOf="@+id/time" />

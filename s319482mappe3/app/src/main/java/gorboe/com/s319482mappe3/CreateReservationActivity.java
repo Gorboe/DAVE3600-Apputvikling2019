@@ -2,26 +2,35 @@ package gorboe.com.s319482mappe3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 public class CreateReservationActivity extends AppCompatActivity {
 
     private int roomID;
-    private EditText ETDate;
-    private EditText ETTime;
+    private TextView TVDate;
+    private TextView TVTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reservation);
 
-        ETDate = findViewById(R.id.date);
-        ETTime = findViewById(R.id.time);
+        TVDate = findViewById(R.id.txt_date);
+        TVTime = findViewById(R.id.txt_time);
 
         tryGetID();
+        //TODO: TRYGETRESERVATION PUT DEFAULT TIME IN HERE!!
     }
 
     private void tryGetID(){
@@ -31,8 +40,8 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     public void addReservation(View view) {
         //todo: if reservationID not existing!!! then only update values
-        System.out.println("BIGS" + roomID + " " + ETDate.getText().toString() + " " + ETTime.getText().toString());
-        Database.getInstance().AddReservation(roomID, ETDate.getText().toString(), ETTime.getText().toString());
+        System.out.println("BIGS" + roomID + " " + TVDate.getText().toString() + " " + TVTime.getText().toString());
+        Database.getInstance().AddReservation(roomID, TVDate.getText().toString(), TVTime.getText().toString());
 
         Intent intent = new Intent(this, RoomDetailsActivity.class);
         intent.putExtra("roomID", roomID);
@@ -43,6 +52,94 @@ public class CreateReservationActivity extends AppCompatActivity {
     public void delete(View view) {
         //delete/exit; delete hvis den har reservationID
         finish();
+    }
+
+    public void openDatePicker(View view) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+                int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+                int currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+                //VALIDATION OF SELECTED DATE
+                if(year < currentYear){
+                    new AlertDialog.Builder(CreateReservationActivity.this)
+                            .setTitle("Advarsel")
+                            .setIcon(R.drawable.ic_warning_yellow)
+                            .setMessage("Året du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                            .show();
+                    return;
+                }
+                if(year == currentYear){
+                    if(month < currentMonth){
+                        new AlertDialog.Builder(CreateReservationActivity.this)
+                                .setTitle("Advarsel")
+                                .setIcon(R.drawable.ic_warning_yellow)
+                                .setMessage("Måneden du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                                .show();
+                        return;
+                    }
+                    if(month == currentMonth){
+                        if(day < currentDayOfMonth){
+                            new AlertDialog.Builder(CreateReservationActivity.this)
+                                    .setTitle("Advarsel")
+                                    .setIcon(R.drawable.ic_warning_yellow)
+                                    .setMessage("Dagen du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
+                                    .show();
+                            return;
+                        }
+                    }
+                }
+
+                String date = day + "/" + (month + 1) + "/" + year; //month start at 0
+                TVDate.setText(date);
+            }
+        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    public void openTimePicker(View view) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
+                String time = String.format("%02d:%02d", hour, minutes); //secures format hh:mm
+
+                String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
+                        (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
+                        Calendar.getInstance().get(Calendar.YEAR);
+
+                //if order is today
+                if(currentDate.equals(TVDate.getText().toString())){
+                    int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                    int currentMinutes = Calendar.getInstance().get(Calendar.MINUTE);
+                    if(currentHour > hour){
+                        //fail because of hour
+                        new AlertDialog.Builder(CreateReservationActivity.this)
+                                .setTitle("Advarsel")
+                                .setIcon(R.drawable.ic_warning_yellow)
+                                .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
+                                .show();
+                        return;
+                    }
+                    if(currentHour == hour){
+                        if(currentMinutes > minutes){
+                            //fail because of min
+                            new AlertDialog.Builder(CreateReservationActivity.this)
+                                    .setTitle("Advarsel")
+                                    .setIcon(R.drawable.ic_warning_yellow)
+                                    .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
+                                    .show();
+                            return;
+                        }
+                    }
+                }
+
+                TVTime.setText(time);
+            }
+
+        }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
+        timePickerDialog.show();
     }
 
     @Override
