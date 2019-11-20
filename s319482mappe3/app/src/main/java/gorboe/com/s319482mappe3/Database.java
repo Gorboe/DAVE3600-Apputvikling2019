@@ -18,7 +18,7 @@ public class Database {
     private Database(){
         rooms = new ArrayList<>();
         reservations = new ArrayList<>();
-        GetAllItems();
+        getAllItems();
     }
 
     public static Database getInstance(){
@@ -28,11 +28,11 @@ public class Database {
         return INSTANCE;
     }
 
-    //GetAllItems
-    private void GetAllItems(){
+    //getAllItems
+    private void getAllItems(){
         task = new Server();
         rooms = new FlexList<>();
-        reservations = new ArrayList<>();
+        reservations = new FlexList<>();
         String result;
         try{
             result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();
@@ -54,7 +54,7 @@ public class Database {
                     String date = jsonObject.getString("Date");
                     String time = jsonObject.getString("Time");
                     Reservation reservation = new Reservation(reservationID, roomID, date, time);
-                    reservations.add(reservation);
+                    reservations.add(reservationID, reservation);
                 }else{
                     //Is a room
                     int roomID = jsonObject.getInt("RoomID");
@@ -66,13 +66,12 @@ public class Database {
                     List<Reservation> currentRoomReservations = new ArrayList<>();
                     System.out.println("RES: " + reservations.size());
                     for(Reservation candidate: reservations){
+                        if(candidate == null) continue;
                         if(candidate.getRoomID() == roomID){
                             currentRoomReservations.add(candidate);
-                            System.out.println(roomID + " got a new candidate " + candidate.getReservationID());
                         }
                     }
                     Room room = new Room(roomID, description, coordinateX, coordinateY, currentRoomReservations);
-                    System.out.println("ID: " + roomID);
                     rooms.add(roomID, room);
                 }
             }
@@ -84,24 +83,48 @@ public class Database {
 
     }
 
-    //AddRoom always call GetAllItems after to update list items
-    public void AddRoom(String description, double coordinateX, double coordinateY){
+    //addRoom always call getAllItems after to update list items
+    public void addRoom(String description, double coordinateX, double coordinateY){
         //todo: validation
 
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse="
                 + description + "&Cordx=" + coordinateX + "&Cordy=" + coordinateY);
-        GetAllItems();
+        getAllItems();
     }
 
-    //AddReservation always call GetAllItems after to update list items
-    public void AddReservation(int roomID, String date, String time){
-        //todo: validation
+    public void updateRoom(Room room){
+
+    }
+
+    public void deleteRoom(int id){
+        //"http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Room&Roomid=" + id
+
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Room&Roomid=" + id);
+        getAllItems();
+    }
+
+    //addReservation always call getAllItems after to update list items
+    public void addReservation(Reservation reservation){
+        //todo: validation (maybe to here? but in creates)
 
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Reservation&Romid="
-                + roomID + "&Date=" + date + "&Time=" + time);
-        GetAllItems();
+                + reservation.getRoomID() + "&Date=" + reservation.getDate() + "&Time=" + reservation.getTime());
+        getAllItems();
+    }
+
+    public void updateReservation(Reservation reservation){
+
+    }
+
+    public void deleteReservation(int id){
+        //"http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Reservation&Resid=" + id
+
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Reservation&Resid=" + id);
+        getAllItems();
     }
 
     //GETTERS
@@ -113,7 +136,7 @@ public class Database {
         return rooms.get(id);
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public Reservation getReservation(int id){
+        return reservations.get(id);
     }
 }

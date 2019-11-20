@@ -9,17 +9,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+
+import gorboe.com.s319482mappe3.enteties.Reservation;
 
 public class CreateReservationActivity extends AppCompatActivity {
 
     private int roomID;
     private TextView TVDate;
     private TextView TVTime;
+    private Reservation existing_reservation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,30 @@ public class CreateReservationActivity extends AppCompatActivity {
         TVTime = findViewById(R.id.txt_time);
 
         tryGetID();
+        tryGetReservation();
         //TODO: TRYGETRESERVATION PUT DEFAULT TIME IN HERE!!
+    }
+
+    private void tryGetReservation(){
+        Intent intent = getIntent();
+        int reservationID = intent.getIntExtra("reservationID", -1);
+
+        if(reservationID != -1){
+            existing_reservation = Database.getInstance().getReservation(reservationID);
+            TVDate.setText(existing_reservation.getDate());
+            TVTime.setText(existing_reservation.getTime());
+        }else{
+            String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
+                    (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
+                    Calendar.getInstance().get(Calendar.YEAR);
+
+            String currentTime = String.format("%02d:%02d",
+                    Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                    Calendar.getInstance().get(Calendar.MINUTE)); //secures format hh:mm
+
+            TVDate.setText(currentDate);
+            TVTime.setText(currentTime);
+        }
     }
 
     private void tryGetID(){
@@ -39,9 +64,16 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     public void addReservation(View view) {
-        //todo: if reservationID not existing!!! then only update values
-        System.out.println("BIGS" + roomID + " " + TVDate.getText().toString() + " " + TVTime.getText().toString());
-        Database.getInstance().AddReservation(roomID, TVDate.getText().toString(), TVTime.getText().toString());
+        //todo: validation?
+
+        Reservation reservation = new Reservation(roomID, TVDate.getText().toString(), TVTime.getText().toString());
+
+        if(existing_reservation != null){
+            reservation.setReservationID(existing_reservation.getReservationID());
+            //Database.getInstance().updateReservation(reservation);
+        }else{
+            Database.getInstance().addReservation(reservation);
+        }
 
         Intent intent = new Intent(this, RoomDetailsActivity.class);
         intent.putExtra("roomID", roomID);
@@ -51,6 +83,13 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     public void delete(View view) {
         //delete/exit; delete hvis den har reservationID
+        if(existing_reservation != null){
+            Database.getInstance().deleteReservation(existing_reservation.getReservationID());
+        }
+
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        intent.putExtra("roomID", roomID);
+        startActivity(intent);
         finish();
     }
 

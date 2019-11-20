@@ -43,7 +43,7 @@ public class CreateRoomActivity extends AppCompatActivity {
         String description = ETdescription.getText().toString();
         double x = Double.parseDouble(ETx.getText().toString());
         double y = Double.parseDouble(ETy.getText().toString());
-        Database.getInstance().AddRoom(description, x, y);
+        Database.getInstance().addRoom(description, x, y);
         startActivity(new Intent(this, MainActivity.class));
     }
 

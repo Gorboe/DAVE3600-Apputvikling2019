@@ -1,0 +1,27 @@
+<?php
+$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
+
+$inntable=$_REQUEST['Table'];
+$table=(String)$inntable;
+
+if($table=='Room')
+{
+   $innroomid=$_REQUEST['Roomid'];
+
+   $roomid=(String)$innroomid;
+
+  $sql=mysqli_query($con,"delete from Reservation where RoomID='$roomid';");
+  $sql=mysqli_query($con,"delete from Room where RoomID='$roomid';");
+}
+
+if($table=='Reservation')
+{
+    $innresid=$_REQUEST['Resid'];
+    $resid=(String)$innresid;
+
+    $sql=mysqli_query($con,"delete from $table where ReservationID='$resid';");
+}
+
+
+mysqli_close($con);
+?>

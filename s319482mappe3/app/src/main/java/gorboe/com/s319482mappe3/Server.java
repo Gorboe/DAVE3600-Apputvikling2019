@@ -10,12 +10,12 @@ public class Server extends AsyncTask<String, Void,String> {
     @Override
     protected String doInBackground(String... urls){
         StringBuilder output = new StringBuilder();
-        for(int i = 0; i < urls.length; i++){
-            try{
-                URL url = new URL(urls[i]); //get the url your working with
-                HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        for (String s : urls) {
+            try {
+                URL url = new URL(s); //get the url your working with
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-                if(connection.getResponseCode() != 200){
+                if (connection.getResponseCode() != 200) {
                     throw new RuntimeException("Failed : HTTP error code : "
                             + connection.getResponseCode());
                 }
@@ -23,11 +23,11 @@ public class Server extends AsyncTask<String, Void,String> {
                 BufferedReader reader = new BufferedReader(isr);
 
                 String temp;
-                while((temp = reader.readLine()) != null){
+                while ((temp = reader.readLine()) != null) {
                     output.append(temp);
                 }
                 connection.disconnect();
-            }catch (Exception e){
+            } catch (Exception e) {
                 return "noe gikk feil";
             }
         }

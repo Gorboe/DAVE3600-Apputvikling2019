@@ -48,7 +48,6 @@ public class RoomDetailsActivity extends AppCompatActivity {
 
     public void initializeReservationList(){
         final List<Reservation> reservations = selected.getReservations();
-        System.out.println("SETTING LIST: " + selected.getReservations().size());
         ArrayAdapter<Reservation> arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, reservations);
 
@@ -58,8 +57,11 @@ public class RoomDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 //position = the item pressed. first list item starts at 0
-                System.out.println("pressed");
-                //finish
+                Intent intent = new Intent(RoomDetailsActivity.this, CreateReservationActivity.class);
+                intent.putExtra("roomID", reservations.get(position).getRoomID());
+                intent.putExtra("reservationID", reservations.get(position).getReservationID());
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -74,6 +76,12 @@ public class RoomDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateReservationActivity.class);
         intent.putExtra("roomID", selected.getRoomID());
         startActivity(intent);
+        finish();
+    }
+
+    public void deleteRoom(View view) {
+        Database.getInstance().deleteRoom(selected.getRoomID());
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 }
