@@ -64,7 +64,6 @@ public class Database {
 
                     //get reservations for this room
                     List<Reservation> currentRoomReservations = new ArrayList<>();
-                    System.out.println("RES: " + reservations.size());
                     for(Reservation candidate: reservations){
                         if(candidate == null) continue;
                         if(candidate.getRoomID() == roomID){
@@ -95,11 +94,16 @@ public class Database {
 
     public void updateRoom(Room room){
         //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=noenytt&Cordx=53.1&Cordy=32.5&Roomid=3
+
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=" +
+                room.getDescription() +
+                "&Cordx=" + room.getCoordinateX() +
+                "&Cordy=" + room.getCoordinateY() +
+                "&Roomid=" + room.getRoomID());
     }
 
     public void deleteRoom(int id){
-        //"http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Room&Roomid=" + id
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Room&Roomid=" + id);
         getAllItems();
@@ -116,8 +120,6 @@ public class Database {
     }
 
     public void updateReservation(Reservation reservation){
-        //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Reservation&Date=nytt&Time=nytt&Reservationid=3
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Reservation&Date="
                 + reservation.getDate() +
@@ -127,8 +129,6 @@ public class Database {
     }
 
     public void deleteReservation(int id){
-        //"http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Reservation&Resid=" + id
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Reservation&Resid=" + id);
         getAllItems();
