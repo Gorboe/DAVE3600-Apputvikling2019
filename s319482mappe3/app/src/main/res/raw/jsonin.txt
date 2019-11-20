@@ -1,5 +1,3 @@
-
-//FINAL/////////////////////////////////////////////////////////////////////
 <?php
 $con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
 
@@ -35,25 +33,3 @@ if($table=='Reservation')
 
 mysqli_close($con);
 ?>
-
-
-/////////////////////////////////////////////////////////////////
-
-
-
-
-//first
-<?php
-$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
-
-$inn=$_REQUEST['Name'];
-$name=(String)$inn;
-
-$sql=mysqli_query($con,"insert into Food (Name) values ('$name');");
-mysqli_close($con);
-?>
-
-
-//links for putting in data
-http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse=dette%20er%20en%20beskrivelse2&Cordx=50&Cordy=60
-http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Reservation&Romid=2&Date=adate&Time=atime

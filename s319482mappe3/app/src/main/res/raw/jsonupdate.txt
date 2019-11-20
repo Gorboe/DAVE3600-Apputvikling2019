@@ -32,6 +32,5 @@ if($table=='Reservation')
   $sql=mysqli_query($con,"update Reservation set Date='$date', Time='$time' where ReservationID='$reservationid';");
 }
 
-
 mysqli_close($con);
 ?>

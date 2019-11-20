@@ -101,6 +101,7 @@ public class Database {
                 "&Cordx=" + room.getCoordinateX() +
                 "&Cordy=" + room.getCoordinateY() +
                 "&Roomid=" + room.getRoomID());
+        getAllItems();
     }
 
     public void deleteRoom(int id){

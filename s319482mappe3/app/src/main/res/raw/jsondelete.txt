@@ -22,6 +22,5 @@ if($table=='Reservation')
     $sql=mysqli_query($con,"delete from $table where ReservationID='$resid';");
 }
 
-
 mysqli_close($con);
 ?>
