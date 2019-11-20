@@ -70,7 +70,7 @@ public class CreateReservationActivity extends AppCompatActivity {
 
         if(existing_reservation != null){
             reservation.setReservationID(existing_reservation.getReservationID());
-            //Database.getInstance().updateReservation(reservation);
+            Database.getInstance().updateReservation(reservation);
         }else{
             Database.getInstance().addReservation(reservation);
         }

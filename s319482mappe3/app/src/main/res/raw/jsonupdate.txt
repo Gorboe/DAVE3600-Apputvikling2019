@@ -1,0 +1,37 @@
+<?php
+$con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
+
+$inntable=$_REQUEST['Table'];
+$table=(String)$inntable;
+
+if($table=='Room')
+{
+   $innbeskrivelse=$_REQUEST['Beskrivelse'];
+   $inncoordinatex=$_REQUEST['Cordx'];
+   $inncoordinatey=$_REQUEST['Cordy'];
+   $innroomid=$_REQUEST['Roomid'];
+
+   $beskrivelse=(String)$innbeskrivelse;
+   $coordinatex=(double)$inncoordinatex;
+   $coordinatey=(double)$inncoordinatey;
+   $roomid=(String)$innroomid;
+
+  $sql=mysqli_query($con,"update Room set Description='$beskrivelse', CoordinateX='$coordinatex', CoordinateY='$coordinatey' where RoomID='$roomid';");
+}
+
+if($table=='Reservation')
+{
+   $inndate=$_REQUEST['Date'];
+   $inntime=$_REQUEST['Time'];
+   $innreservationid=$_REQUEST['Reservationid'];
+
+   $date=(String)$inndate;
+   $time=(String)$inntime;
+   $reservationid=(String)$innreservationid;
+
+  $sql=mysqli_query($con,"update Reservation set Date='$date', Time='$time' where ReservationID='$reservationid';");
+}
+
+
+mysqli_close($con);
+?>

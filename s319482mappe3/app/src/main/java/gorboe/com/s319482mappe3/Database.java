@@ -94,7 +94,7 @@ public class Database {
     }
 
     public void updateRoom(Room room){
-
+        //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=noenytt&Cordx=53.1&Cordy=32.5&Roomid=3
     }
 
     public void deleteRoom(int id){
@@ -116,7 +116,14 @@ public class Database {
     }
 
     public void updateReservation(Reservation reservation){
+        //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Reservation&Date=nytt&Time=nytt&Reservationid=3
 
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Reservation&Date="
+                + reservation.getDate() +
+                "&Time=" + reservation.getTime() +
+                "&Reservationid=" + reservation.getReservationID());
+        getAllItems();
     }
 
     public void deleteReservation(int id){
