@@ -33,6 +33,7 @@ public class CreateReservationActivity extends AppCompatActivity {
     private List<String> times_in_existing_reservation;
     private String fromTime;
     private boolean isInitialTimeFrom = true;
+    private boolean isInitialTimeTo = true;
     private Integer position;
 
     @Override
@@ -58,7 +59,8 @@ public class CreateReservationActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println("PRESSED");
                 if(position != null && position != i) {
-                    populateTimeFromDropdown();
+                    System.out.println("TEST:::" + adapterView.getItemAtPosition(i).toString());
+                    populateTimeToDropdown(adapterView.getItemAtPosition(i).toString());
                 }
                 position = i;
             }
@@ -71,7 +73,6 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     private void populateTimeFromDropdown(){
-        System.out.println("RERENDERS!");
         List<String> availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
         STimeFrom.setAdapter(adapter);
@@ -98,18 +99,18 @@ public class CreateReservationActivity extends AppCompatActivity {
             //TODO: new dialog!
         }
 
-        populateTimeToDropdown();
+        populateTimeToDropdown(fromTime);
     }
 
-    private void populateTimeToDropdown(){
+    private void populateTimeToDropdown(String fromTime){
         List<String> availableToTimes = new ArrayList<>();
+        int id = -1;
         if(existing_reservation != null){
-            for(int i = 1; i < times_in_existing_reservation.size(); i++){
-                availableToTimes.add(times_in_existing_reservation.get(i));
-            }
+            id = existing_reservation.getReservationID();
         }
-        availableToTimes.addAll(Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID));
+        availableToTimes.addAll(Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID, id));
         Collections.sort(availableToTimes, new TimeComparator());
+        System.out.println("TEEEEST: " + availableToTimes);
 
         if(availableToTimes.isEmpty()){
             //TODO: new dialog!

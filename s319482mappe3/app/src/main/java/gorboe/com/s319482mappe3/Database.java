@@ -206,7 +206,7 @@ public class Database {
         return times;
     }
 
-    public List<String> getAvailableToTimes(String date, String fromTime, int roomID){
+    public List<String> getAvailableToTimes(String date, String fromTime, int roomID, int resID){
         List<String> times = new ArrayList<>();
 
         List<Reservation> reservationsToday = new ArrayList<>();
@@ -223,6 +223,7 @@ public class Database {
         List<String> selectedTimes = new ArrayList<>();
         for(Reservation reservation: reservationsToday){
             //pull out xx and match from and to and add the inbetweens
+            if(reservation.getReservationID() == resID) continue;
             int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
             int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
             //case from can be 8 and to can be 12.
@@ -251,7 +252,7 @@ public class Database {
             }
         }
 
-        //5. Remove times before our fromTime todo:fix
+        //5. Remove times before our fromTime
         List<String> possibleTimes = new ArrayList<>();
         for(String time: AllpossibleTimes){
             int from = Integer.parseInt(fromTime.substring(0, 2));
@@ -260,6 +261,7 @@ public class Database {
                 possibleTimes.add(time);
             }
         }
+        System.out.println("STEP 5: " + possibleTimes);
 
         //6. Get the next times max 4hours
         int counter = 0;
@@ -272,7 +274,7 @@ public class Database {
                 times.add(time);
             }
         }
-
+        System.out.println("STEP 6: " + times);
         return times;
     }
 
