@@ -33,6 +33,7 @@ public class CreateReservationActivity extends AppCompatActivity {
     private List<String> times_in_existing_reservation;
     private String fromTime;
     private boolean isInitialTimeFrom = true;
+    private Integer position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,30 @@ public class CreateReservationActivity extends AppCompatActivity {
 
         tryGetID();
         tryGetReservation();
+        initializeTimeFromDropdown();
         populateTimeFromDropdown();
     }
 
+    private void initializeTimeFromDropdown(){
+        STimeFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("PRESSED");
+                if(position != null && position != i) {
+                    populateTimeFromDropdown();
+                }
+                position = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
 
     private void populateTimeFromDropdown(){
+        System.out.println("RERENDERS!");
         List<String> availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
         STimeFrom.setAdapter(adapter);
@@ -65,12 +85,12 @@ public class CreateReservationActivity extends AppCompatActivity {
                 //go thru available and find tier.get(0)
                 for(int i = 0; i < availableFromTimes.size(); i++){
                     if(availableFromTimes.get(i).equals(times_in_existing_reservation.get(0))){
-                        System.out.println("SELECTED!");
                         STimeFrom.setSelection(i);
                     }
                 }
             }
             fromTime = (String)STimeFrom.getSelectedItem();
+            System.out.println(fromTime);
         }else {
             fromTime = (String)STimeFrom.getSelectedItem();
         }

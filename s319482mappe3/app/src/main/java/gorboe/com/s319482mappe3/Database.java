@@ -226,19 +226,15 @@ public class Database {
             int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
             int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
             //case from can be 8 and to can be 12.
-            System.out.println(from + " " + to);
             from++;
             for(;from <= to; from++){
                 String time = String.format("%02d", from) + ":00";
-                System.out.println(time);
                 selectedTimes.add(time);
             }
         }
 
         //3. Sort selected times list
-        System.out.println("Selected: " + selectedTimes);
         Collections.sort(selectedTimes, new TimeComparator());
-        System.out.println("Selected: " + selectedTimes);
 
         //4. Get all times but the selected ones
         List<String> AllpossibleTimes = new ArrayList<>();
@@ -254,7 +250,6 @@ public class Database {
                 AllpossibleTimes.add(String.format("%02d", i) + ":00");
             }
         }
-        System.out.println("Possible: " + AllpossibleTimes);
 
         //5. Remove times before our fromTime todo:fix
         List<String> possibleTimes = new ArrayList<>();
@@ -266,8 +261,6 @@ public class Database {
             }
         }
 
-        System.out.println("PossibleAfter: " + possibleTimes);
-        System.out.println("F: " + fromTime);
         //6. Get the next times max 4hours
         int counter = 0;
         int from = Integer.parseInt(fromTime.substring(0, 2));
@@ -280,7 +273,6 @@ public class Database {
             }
         }
 
-        System.out.println(times);
         return times;
     }
 
