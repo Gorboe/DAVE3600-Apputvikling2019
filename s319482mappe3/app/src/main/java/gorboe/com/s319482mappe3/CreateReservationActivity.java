@@ -14,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import gorboe.com.s319482mappe3.enteties.Reservation;
@@ -28,10 +30,9 @@ public class CreateReservationActivity extends AppCompatActivity {
     private EditText ETDescription;
     private EditText ETName;
     private Reservation existing_reservation;
-    private List<String> availableFromTimes;
-    private List<String> availableToTimes;
+    private List<String> times_in_existing_reservation;
     private String fromTime;
-    private Integer current;
+    private boolean isInitialTimeFrom = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,60 +48,54 @@ public class CreateReservationActivity extends AppCompatActivity {
         tryGetID();
         tryGetReservation();
         populateTimeFromDropdown();
-        initializeDropdown();
     }
 
-    private void initializeDropdown(){
-        STimeFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if(current != null && current != position){
-                    current = position;
-                    populateTimeFromDropdown();
-                }
-
-                current = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
 
     private void populateTimeFromDropdown(){
+        List<String> availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
+        STimeFrom.setAdapter(adapter);
         if(existing_reservation != null){
-            //todo: get correct time, nødløsning: remove existing from db temporary to open times
-        }
-        availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
-
-        if(availableFromTimes.isEmpty()){
-            //TODO: dialog box error msg take back to room
-        }else{
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
-            STimeFrom.setAdapter(adapter);
-            if(current != null){
-                STimeFrom.setSelection(current);
+            for(int i = 0; i < times_in_existing_reservation.size()-1; i++){
+                availableFromTimes.add(times_in_existing_reservation.get(i));
+            }
+            Collections.sort(availableFromTimes, new TimeComparator());
+            if(isInitialTimeFrom){
+                isInitialTimeFrom = false;
+                //go thru available and find tier.get(0)
+                for(int i = 0; i < availableFromTimes.size(); i++){
+                    if(availableFromTimes.get(i).equals(times_in_existing_reservation.get(0))){
+                        System.out.println("SELECTED!");
+                        STimeFrom.setSelection(i);
+                    }
+                }
             }
             fromTime = (String)STimeFrom.getSelectedItem();
-            populateTimeToDropdown();
+        }else {
+            fromTime = (String)STimeFrom.getSelectedItem();
         }
+        if(availableFromTimes.isEmpty()){
+            //TODO: new dialog!
+        }
+
+        populateTimeToDropdown();
     }
 
     private void populateTimeToDropdown(){
+        List<String> availableToTimes = new ArrayList<>();
         if(existing_reservation != null){
-            //todo: get correct time
+            for(int i = 1; i < times_in_existing_reservation.size(); i++){
+                availableToTimes.add(times_in_existing_reservation.get(i));
+            }
         }
-
-        availableToTimes = Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID);
+        availableToTimes.addAll(Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID));
+        Collections.sort(availableToTimes, new TimeComparator());
 
         if(availableToTimes.isEmpty()){
-            //TODO: DIALOG BOX
-        }else {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
-            STimeTo.setAdapter(adapter);
+            //TODO: new dialog!
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
+        STimeTo.setAdapter(adapter);
     }
 
     private void tryGetReservation(){
@@ -112,6 +107,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             TVDate.setText(existing_reservation.getDate());
             ETDescription.setText(existing_reservation.getDescription());
             ETName.setText(existing_reservation.getName());
+            times_in_existing_reservation = Database.getInstance().getTimesInReservation(existing_reservation.getReservationID());
         }else{
             String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
                     (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
@@ -209,6 +205,9 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        intent.putExtra("roomID", roomID);
+        startActivity(intent);
         finish();
     }
 }

@@ -65,6 +65,6 @@ public class Reservation {
     @NonNull
     @Override
     public String toString() {
-        return date + "\n" + timeFrom;
+        return "Dato: " + date + "\nPeriode: " + timeFrom + " - " + timeTo + "\nReservert Til: " + name;
     }
 }

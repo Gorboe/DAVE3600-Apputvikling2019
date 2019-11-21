@@ -283,4 +283,18 @@ public class Database {
         System.out.println(times);
         return times;
     }
+
+    public List<String> getTimesInReservation(int resID){
+        List<String> times = new ArrayList<>();
+        Reservation reservation = getReservation(resID);
+        int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
+        int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
+
+        for(;from <= to; from++){
+            String time = String.format("%02d", from) + ":00";
+            times.add(time);
+        }
+
+        return times;
+    }
 }
