@@ -267,6 +267,7 @@ public class Database {
         }
 
         System.out.println("PossibleAfter: " + possibleTimes);
+        System.out.println("F: " + fromTime);
         //6. Get the next times max 4hours
         int counter = 0;
         int from = Integer.parseInt(fromTime.substring(0, 2));

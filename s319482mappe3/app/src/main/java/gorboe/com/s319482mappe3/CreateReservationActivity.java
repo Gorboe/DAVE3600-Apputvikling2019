@@ -4,18 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,7 +31,7 @@ public class CreateReservationActivity extends AppCompatActivity {
     private List<String> availableFromTimes;
     private List<String> availableToTimes;
     private String fromTime;
-    private String toTime;
+    private Integer current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,30 +46,49 @@ public class CreateReservationActivity extends AppCompatActivity {
 
         tryGetID();
         tryGetReservation();
-        initializeTimeFromDropdown();
-        initializeTimeToDropdown();
+        populateTimeFromDropdown();
+        initializeDropdown();
     }
 
-    private void initializeTimeFromDropdown(){
+    private void initializeDropdown(){
+        STimeFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if(current != null && current != position){
+                    current = position;
+                    populateTimeFromDropdown();
+                }
+
+                current = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private void populateTimeFromDropdown(){
         if(existing_reservation != null){
-            //todo: get correct time
+            //todo: get correct time, nødløsning: remove existing from db temporary to open times
         }
         availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString());
 
         if(availableFromTimes.isEmpty()){
             //TODO: dialog box error msg take back to room
         }else{
-            populateTimeFromDropdown();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
+            STimeFrom.setAdapter(adapter);
+            if(current != null){
+                STimeFrom.setSelection(current);
+            }
+            fromTime = (String)STimeFrom.getSelectedItem();
+            populateTimeToDropdown();
         }
     }
 
-    private void populateTimeFromDropdown(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
-        STimeFrom.setAdapter(adapter);
-        fromTime = (String)STimeFrom.getSelectedItem();
-    }
-
-    private void initializeTimeToDropdown(){
+    private void populateTimeToDropdown(){
         if(existing_reservation != null){
             //todo: get correct time
         }
@@ -81,13 +98,9 @@ public class CreateReservationActivity extends AppCompatActivity {
         if(availableToTimes.isEmpty()){
             //TODO: DIALOG BOX
         }else {
-            populateTimeToDropdown();
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
+            STimeTo.setAdapter(adapter);
         }
-    }
-
-    private void populateTimeToDropdown(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
-        STimeTo.setAdapter(adapter);
     }
 
     private void tryGetReservation(){
