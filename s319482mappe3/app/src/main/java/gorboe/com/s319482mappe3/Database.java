@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import gorboe.com.s319482mappe3.enteties.Reservation;
@@ -182,10 +184,8 @@ public class Database {
             int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
             int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
             //case from can be 8 and to can be 12.
-            System.out.println(from + " " + to);
-            for(;from <= to; from++){
+            for(;from < to; from++){
                 String time = String.format("%02d", from) + ":00";
-                System.out.println(time);
                 selectedTimes.add(time);
             }
         }
@@ -203,6 +203,83 @@ public class Database {
                 times.add(String.format("%02d", i) + ":00");
             }
         }
+        return times;
+    }
+
+    public List<String> getAvailableToTimes(String date, String fromTime){
+        List<String> times = new ArrayList<>();
+
+        List<Reservation> reservationsToday = new ArrayList<>();
+        //1. get all reservations for the selected date
+        for(Reservation reservation: reservations){
+            if(reservation == null) continue;
+
+            if(reservation.getDate().equals(date)){
+                reservationsToday.add(reservation);
+            }
+        }
+
+        //2. get all times selected
+        List<String> selectedTimes = new ArrayList<>();
+        for(Reservation reservation: reservationsToday){
+            //pull out xx and match from and to and add the inbetweens
+            int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
+            int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
+            //case from can be 8 and to can be 12.
+            System.out.println(from + " " + to);
+            from++;
+            for(;from <= to; from++){
+                String time = String.format("%02d", from) + ":00";
+                System.out.println(time);
+                selectedTimes.add(time);
+            }
+        }
+
+        //3. Sort selected times list
+        System.out.println("Selected: " + selectedTimes);
+        Collections.sort(selectedTimes, new TimeComparator());
+        System.out.println("Selected: " + selectedTimes);
+
+        //4. Get all times but the selected ones
+        List<String> AllpossibleTimes = new ArrayList<>();
+        for(int i = 7; i <= 23; i++){
+            boolean isSelected = false;
+            for(String time: selectedTimes){
+                int t = Integer.parseInt(time.substring(0, 2));
+                if(t == i){
+                    isSelected = true;
+                }
+            }
+            if(!isSelected) {
+                AllpossibleTimes.add(String.format("%02d", i) + ":00");
+            }
+        }
+        System.out.println("Possible: " + AllpossibleTimes);
+
+        //5. Remove times before our fromTime todo:fix
+        List<String> possibleTimes = new ArrayList<>();
+        for(String time: AllpossibleTimes){
+            int from = Integer.parseInt(fromTime.substring(0, 2));
+            int t = Integer.parseInt(time.substring(0, 2));
+            if(from < t){
+                possibleTimes.add(time);
+            }
+        }
+
+        System.out.println("PossibleAfter: " + possibleTimes);
+        //6. Get the next times max 4hours
+        int counter = 0;
+        int from = Integer.parseInt(fromTime.substring(0, 2));
+        for(String time: possibleTimes){
+            from++;
+            int t = Integer.parseInt(time.substring(0, 2));
+            if(from == t && counter < 4){
+                counter++;
+                times.add(time);
+            }
+        }
+
+        System.out.println(times);
         return times;
     }
 }

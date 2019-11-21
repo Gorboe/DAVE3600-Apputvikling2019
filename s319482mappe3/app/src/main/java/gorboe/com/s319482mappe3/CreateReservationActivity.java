@@ -30,6 +30,10 @@ public class CreateReservationActivity extends AppCompatActivity {
     private EditText ETDescription;
     private EditText ETName;
     private Reservation existing_reservation;
+    private List<String> availableFromTimes;
+    private List<String> availableToTimes;
+    private String fromTime;
+    private String toTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,28 +53,41 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     private void initializeTimeFromDropdown(){
-        System.out.println("DATE: " + TVDate.getText().toString());
-        List<String> times = Database.getInstance().getAvailableTimes(TVDate.getText().toString());
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
-        STimeFrom.setAdapter(adapter);
         if(existing_reservation != null){
             //todo: get correct time
+        }
+        availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString());
+
+        if(availableFromTimes.isEmpty()){
+            //TODO: dialog box error msg take back to room
+        }else{
+            populateTimeFromDropdown();
         }
     }
 
-    private void initializeTimeToDropdown(){
-        List<String> times = new ArrayList<>();//todo: get possible times?Database.getInstance().getAvailableTimes();
-        times.add("10:00");
-        times.add("11:00");
-        times.add("12:00");
-        times.add("13:00");
+    private void populateTimeFromDropdown(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
+        STimeFrom.setAdapter(adapter);
+        fromTime = (String)STimeFrom.getSelectedItem();
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
-        STimeTo.setAdapter(adapter);
+    private void initializeTimeToDropdown(){
         if(existing_reservation != null){
             //todo: get correct time
         }
+
+        availableToTimes = Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime);
+
+        if(availableToTimes.isEmpty()){
+            //TODO: DIALOG BOX
+        }else {
+            populateTimeToDropdown();
+        }
+    }
+
+    private void populateTimeToDropdown(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
+        STimeTo.setAdapter(adapter);
     }
 
     private void tryGetReservation(){
