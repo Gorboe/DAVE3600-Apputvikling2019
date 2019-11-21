@@ -12,8 +12,8 @@ if($table=='Room')
    $innroomid=$_REQUEST['Roomid'];
 
    $beskrivelse=(String)$innbeskrivelse;
-   $coordinatex=(double)$inncoordinatex;
-   $coordinatey=(double)$inncoordinatey;
+   $coordinatex=(String)$inncoordinatex;
+   $coordinatey=(String)$inncoordinatey;
    $roomid=(String)$innroomid;
 
   $sql=mysqli_query($con,"update Room set Description='$beskrivelse', CoordinateX='$coordinatex', CoordinateY='$coordinatey' where RoomID='$roomid';");
@@ -22,14 +22,20 @@ if($table=='Room')
 if($table=='Reservation')
 {
    $inndate=$_REQUEST['Date'];
-   $inntime=$_REQUEST['Time'];
+   $inntimefrom=$_REQUEST['Timefrom'];
+   $inntimeto=$_REQUEST['Timeto'];
+   $innname=$_REQUEST['Name'];
+   $inndescription=$_REQUEST['Description'];
    $innreservationid=$_REQUEST['Reservationid'];
 
    $date=(String)$inndate;
-   $time=(String)$inntime;
+   $timefrom=(String)$inntimefrom;
+   $timeto=(String)$inntimeto;
+   $name=(String)$innname;
+   $description=(String)$inndescription;
    $reservationid=(String)$innreservationid;
 
-  $sql=mysqli_query($con,"update Reservation set Date='$date', Time='$time' where ReservationID='$reservationid';");
+  $sql=mysqli_query($con,"update Reservation set Date='$date', TimeFrom='$timefrom', TimeTo='$timeto', Name='$name', Description='$description' where ReservationID='$reservationid';");
 }
 
 mysqli_close($con);

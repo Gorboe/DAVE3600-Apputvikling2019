@@ -43,7 +43,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         if(reservationID != -1){
             existing_reservation = Database.getInstance().getReservation(reservationID);
             TVDate.setText(existing_reservation.getDate());
-            TVTime.setText(existing_reservation.getTime());
+            TVTime.setText(existing_reservation.getTimeFrom());
         }else{
             String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
                     (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0

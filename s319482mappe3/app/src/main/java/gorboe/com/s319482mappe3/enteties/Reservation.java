@@ -6,19 +6,28 @@ public class Reservation {
     private int reservationID;
     private int roomID;
     private String date;
-    private String time;
+    private String timeFrom;
+    private String timeTo;
+    private String name;
+    private String description;
 
-    public Reservation(int ReservationID, int RoomID, String Date, String Time){
+    public Reservation(int ReservationID, int RoomID, String Date, String timeFrom, String timeTo, String name, String description){
         this.reservationID = ReservationID;
         this.roomID = RoomID;
         this.date = Date;
-        this.time = Time;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.name = name;
+        this.description = description;
     }
 
-    public Reservation(int RoomID, String Date, String Time){
-        this.roomID = RoomID;
-        this.date = Date;
-        this.time = Time;
+    public Reservation(int roomID, String date, String timeFrom, String timeTo, String name, String description){
+        this.roomID = roomID;
+        this.date = date;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.name = name;
+        this.description = description;
     }
 
     public int getReservationID() {
@@ -37,13 +46,25 @@ public class Reservation {
         return date;
     }
 
-    public String getTime() {
-        return time;
+    public String getTimeFrom() {
+        return timeFrom;
+    }
+
+    public String getTimeTo() {
+        return timeTo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return date + "\n" + time;
+        return date + "\n" + timeFrom;
     }
 }

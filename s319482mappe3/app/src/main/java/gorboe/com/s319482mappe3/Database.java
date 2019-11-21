@@ -9,6 +9,8 @@ import java.util.List;
 import gorboe.com.s319482mappe3.enteties.Reservation;
 import gorboe.com.s319482mappe3.enteties.Room;
 
+//TODO: VALIDATION NOT ALLOW & SIGN IN ANY FIELDS WILL FUCK UP PHP.
+
 public class Database {
     private static Database INSTANCE = null;
     private Server task;
@@ -35,7 +37,7 @@ public class Database {
         reservations = new FlexList<>();
         String result;
         try{
-            result = task.execute("http://student.cs.hioa.no/~s319482/jsonout.php").get();
+            result = task.execute("http://student.cs.hioa.no/~s319482/out.php").get();
         }catch (Exception e){
             //todo: catch
             System.out.println("unable to get items async");
@@ -52,8 +54,11 @@ public class Database {
                     int reservationID = jsonObject.getInt("ReservationID");
                     int roomID = jsonObject.getInt("RoomID");
                     String date = jsonObject.getString("Date");
-                    String time = jsonObject.getString("Time");
-                    Reservation reservation = new Reservation(reservationID, roomID, date, time);
+                    String timeFrom = jsonObject.getString("TimeFrom");
+                    String timeTo = jsonObject.getString("TimeTo");
+                    String name = jsonObject.getString("Name");
+                    String description = jsonObject.getString("Description");
+                    Reservation reservation = new Reservation(reservationID, roomID, date, timeFrom, timeTo, name, description);
                     reservations.add(reservationID, reservation);
                 }else{
                     //Is a room
@@ -87,7 +92,7 @@ public class Database {
         //todo: validation
 
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Room&Beskrivelse="
+        task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Room&Beskrivelse="
                 + description + "&Cordx=" + coordinateX + "&Cordy=" + coordinateY);
         getAllItems();
     }
@@ -96,7 +101,7 @@ public class Database {
         //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=noenytt&Cordx=53.1&Cordy=32.5&Roomid=3
 
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=" +
+        task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Room&Beskrivelse=" +
                 room.getDescription() +
                 "&Cordx=" + room.getCoordinateX() +
                 "&Cordy=" + room.getCoordinateY() +
@@ -106,7 +111,7 @@ public class Database {
 
     public void deleteRoom(int id){
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Room&Roomid=" + id);
+        task.execute("http://student.cs.hioa.no/~s319482/delete.php/?Table=Room&Roomid=" + id);
         getAllItems();
     }
 
@@ -115,23 +120,31 @@ public class Database {
         //todo: validation (maybe to here? but in creates)
 
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsonin.php/?Table=Reservation&Romid="
-                + reservation.getRoomID() + "&Date=" + reservation.getDate() + "&Time=" + reservation.getTime());
+        task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Reservation&Romid="
+                + reservation.getRoomID() +
+                "&Date=" + reservation.getDate() +
+                "&Timefrom=" + reservation.getTimeFrom() +
+                "&Timeto=" + reservation.getTimeTo() +
+                "&Name=" + reservation.getName() +
+                "&Description=" + reservation.getDescription());
         getAllItems();
     }
 
     public void updateReservation(Reservation reservation){
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Reservation&Date="
+        task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Reservation&Date="
                 + reservation.getDate() +
-                "&Time=" + reservation.getTime() +
+                "&Timefrom=" + reservation.getTimeFrom() +
+                "&Timeto=" + reservation.getTimeTo() +
+                "&Name=" + reservation.getName() +
+                "&Description=" + reservation.getDescription() +
                 "&Reservationid=" + reservation.getReservationID());
         getAllItems();
     }
 
     public void deleteReservation(int id){
         task = new Server();
-        task.execute("http://student.cs.hioa.no/~s319482/jsondelete.php/?Table=Reservation&Resid=" + id);
+        task.execute("http://student.cs.hioa.no/~s319482/delete.php/?Table=Reservation&Resid=" + id);
         getAllItems();
     }
 
