@@ -29,6 +29,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private double x;
     private double y;
 
+    //TODO: DESIGN STUFF
+    //TODO: FIX TIME AND DATE ROOM RESERVATIONS
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

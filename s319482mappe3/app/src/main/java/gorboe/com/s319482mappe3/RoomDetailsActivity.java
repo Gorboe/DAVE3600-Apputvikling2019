@@ -79,9 +79,10 @@ public class RoomDetailsActivity extends AppCompatActivity {
         finish();
     }
 
-    public void deleteRoom(View view) {
-        Database.getInstance().deleteRoom(selected.getRoomID());
-        startActivity(new Intent(this, MainActivity.class));
+    public void edit(View view) {
+        Intent intent = new Intent(this, CreateRoomActivity.class);
+        intent.putExtra("roomID", selected.getRoomID());
+        startActivity(intent);
         finish();
     }
 }

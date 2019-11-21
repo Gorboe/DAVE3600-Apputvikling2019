@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import gorboe.com.s319482mappe3.enteties.Room;
+
 public class CreateRoomActivity extends AppCompatActivity {
 
     private EditText ETx;
     private EditText ETy;
     private EditText ETdescription;
+    private Room selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,21 @@ public class CreateRoomActivity extends AppCompatActivity {
         ETdescription = findViewById(R.id.description);
 
         tryGetCoordinates();
+        tryGetRoom();
+    }
+
+    private void tryGetRoom(){
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("roomID", -1);
+
+        if(id != -1){
+            selected = Database.getInstance().getRoom(id);
+            String x = selected.getCoordinateX() + "";
+            String y = selected.getCoordinateY() + "";
+            ETx.setText(x);
+            ETy.setText(y);
+            ETdescription.setText(selected.getDescription());
+        }
     }
 
     private void tryGetCoordinates(){
@@ -53,5 +71,13 @@ public class CreateRoomActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void delete(View view) {
+        if(selected != null){
+            Database.getInstance().deleteRoom(selected.getRoomID());
+        }
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

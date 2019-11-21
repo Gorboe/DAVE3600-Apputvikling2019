@@ -160,4 +160,49 @@ public class Database {
     public Reservation getReservation(int id){
         return reservations.get(id);
     }
+
+    public List<String> getAvailableTimes(String date){
+        //ROMTIDER 06:00-23:00 max 4timer om gangen
+        List<String> times = new ArrayList<>();
+
+        List<Reservation> reservationsToday = new ArrayList<>();
+        //1. get all reservations for the selected date
+        for(Reservation reservation: reservations){
+            if(reservation == null) continue;
+
+            if(reservation.getDate().equals(date)){
+                reservationsToday.add(reservation);
+            }
+        }
+
+        //2. get all times selected fe. 10:00-12:00, 16:00-17:00 are selected already
+        List<String> selectedTimes = new ArrayList<>();
+        for(Reservation reservation: reservationsToday){
+            //pull out xx and match from and to and add the inbetweens
+            int from = Integer.parseInt(reservation.getTimeFrom().substring(0, 2));
+            int to = Integer.parseInt(reservation.getTimeTo().substring(0, 2));
+            //case from can be 8 and to can be 12.
+            System.out.println(from + " " + to);
+            for(;from <= to; from++){
+                String time = String.format("%02d", from) + ":00";
+                System.out.println(time);
+                selectedTimes.add(time);
+            }
+        }
+
+        //3. give back 06:00-09:00, 13:00, 14:00, 15:00, 18:00-22:00 //til kan ha 23:00
+        for(int i = 6; i <= 22; i++){
+            boolean isSelected = false;
+            for(String time: selectedTimes){
+                int t = Integer.parseInt(time.substring(0, 2));
+                if(t == i){
+                    isSelected = true;
+                }
+            }
+            if(!isSelected) {
+                times.add(String.format("%02d", i) + ":00");
+            }
+        }
+        return times;
+    }
 }

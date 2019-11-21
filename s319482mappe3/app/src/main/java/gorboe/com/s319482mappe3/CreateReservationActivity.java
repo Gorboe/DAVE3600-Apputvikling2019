@@ -49,11 +49,8 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     private void initializeTimeFromDropdown(){
-        List<String> times = new ArrayList<>();//todo: get possible times?Database.getInstance().getAvailableTimes();
-        times.add("10:00");
-        times.add("11:00");
-        times.add("12:00");
-        times.add("13:00");
+        System.out.println("DATE: " + TVDate.getText().toString());
+        List<String> times = Database.getInstance().getAvailableTimes(TVDate.getText().toString());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
         STimeFrom.setAdapter(adapter);
@@ -135,6 +132,7 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     public void openDatePicker(View view) {
+        //TODO: when selected new date reinitialize dropdowns..
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
