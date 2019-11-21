@@ -117,7 +117,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
         STimeTo.setAdapter(adapter);
-        if(isInitialTimeTo){
+        if(isInitialTimeTo && existing_reservation != null){
             isInitialTimeTo = false;
             int counter = 0;
             for(String time: availableToTimes){
