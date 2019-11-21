@@ -163,7 +163,7 @@ public class Database {
         return reservations.get(id);
     }
 
-    public List<String> getAvailableTimes(String date){
+    public List<String> getAvailableTimes(String date, int roomID){
         //ROMTIDER 06:00-23:00 max 4timer om gangen
         List<String> times = new ArrayList<>();
 
@@ -172,7 +172,7 @@ public class Database {
         for(Reservation reservation: reservations){
             if(reservation == null) continue;
 
-            if(reservation.getDate().equals(date)){
+            if(reservation.getDate().equals(date) && reservation.getRoomID() == roomID){
                 reservationsToday.add(reservation);
             }
         }
@@ -206,7 +206,7 @@ public class Database {
         return times;
     }
 
-    public List<String> getAvailableToTimes(String date, String fromTime){
+    public List<String> getAvailableToTimes(String date, String fromTime, int roomID){
         List<String> times = new ArrayList<>();
 
         List<Reservation> reservationsToday = new ArrayList<>();
@@ -214,7 +214,7 @@ public class Database {
         for(Reservation reservation: reservations){
             if(reservation == null) continue;
 
-            if(reservation.getDate().equals(date)){
+            if(reservation.getDate().equals(date) && reservation.getRoomID() == roomID){
                 reservationsToday.add(reservation);
             }
         }

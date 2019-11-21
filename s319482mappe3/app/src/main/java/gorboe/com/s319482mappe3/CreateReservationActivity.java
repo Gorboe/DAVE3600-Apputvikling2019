@@ -73,7 +73,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         if(existing_reservation != null){
             //todo: get correct time, nødløsning: remove existing from db temporary to open times
         }
-        availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString());
+        availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
 
         if(availableFromTimes.isEmpty()){
             //TODO: dialog box error msg take back to room
@@ -93,7 +93,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             //todo: get correct time
         }
 
-        availableToTimes = Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime);
+        availableToTimes = Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID);
 
         if(availableToTimes.isEmpty()){
             //TODO: DIALOG BOX
