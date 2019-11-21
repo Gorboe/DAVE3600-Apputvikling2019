@@ -8,11 +8,16 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import gorboe.com.s319482mappe3.enteties.Reservation;
 
@@ -20,7 +25,10 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     private int roomID;
     private TextView TVDate;
-    private TextView TVTime;
+    private Spinner STimeTo;
+    private Spinner STimeFrom;
+    private EditText ETDescription;
+    private EditText ETName;
     private Reservation existing_reservation;
 
     @Override
@@ -29,11 +37,43 @@ public class CreateReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_reservation);
 
         TVDate = findViewById(R.id.txt_date);
-        TVTime = findViewById(R.id.txt_time);
+        STimeFrom = findViewById(R.id.timefrom);
+        STimeTo = findViewById(R.id.timeto);
+        ETDescription = findViewById(R.id.reservationdescription);
+        ETName = findViewById(R.id.name);
 
         tryGetID();
         tryGetReservation();
-        //TODO: TRYGETRESERVATION PUT DEFAULT TIME IN HERE!!
+        initializeTimeFromDropdown();
+        initializeTimeToDropdown();
+    }
+
+    private void initializeTimeFromDropdown(){
+        List<String> times = new ArrayList<>();//todo: get possible times?Database.getInstance().getAvailableTimes();
+        times.add("10:00");
+        times.add("11:00");
+        times.add("12:00");
+        times.add("13:00");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
+        STimeFrom.setAdapter(adapter);
+        if(existing_reservation != null){
+            //todo: get correct time
+        }
+    }
+
+    private void initializeTimeToDropdown(){
+        List<String> times = new ArrayList<>();//todo: get possible times?Database.getInstance().getAvailableTimes();
+        times.add("10:00");
+        times.add("11:00");
+        times.add("12:00");
+        times.add("13:00");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, times);
+        STimeTo.setAdapter(adapter);
+        if(existing_reservation != null){
+            //todo: get correct time
+        }
     }
 
     private void tryGetReservation(){
@@ -43,18 +83,14 @@ public class CreateReservationActivity extends AppCompatActivity {
         if(reservationID != -1){
             existing_reservation = Database.getInstance().getReservation(reservationID);
             TVDate.setText(existing_reservation.getDate());
-            TVTime.setText(existing_reservation.getTimeFrom());
+            ETDescription.setText(existing_reservation.getDescription());
+            ETName.setText(existing_reservation.getName());
         }else{
             String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
                     (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
                     Calendar.getInstance().get(Calendar.YEAR);
 
-            String currentTime = String.format("%02d:%02d",
-                    Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-                    Calendar.getInstance().get(Calendar.MINUTE)); //secures format hh:mm
-
             TVDate.setText(currentDate);
-            TVTime.setText(currentTime);
         }
     }
 
@@ -66,7 +102,12 @@ public class CreateReservationActivity extends AppCompatActivity {
     public void addReservation(View view) {
         //todo: validation?
 
-        Reservation reservation = new Reservation(roomID, TVDate.getText().toString(), TVTime.getText().toString());
+        Reservation reservation = new Reservation(roomID,
+                TVDate.getText().toString(),
+                (String)STimeFrom.getSelectedItem(),
+                (String)STimeTo.getSelectedItem(),
+                ETName.getText().toString(),
+                ETDescription.getText().toString());
 
         if(existing_reservation != null){
             reservation.setReservationID(existing_reservation.getReservationID());
@@ -136,49 +177,6 @@ public class CreateReservationActivity extends AppCompatActivity {
             }
         }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
-    }
-
-    public void openTimePicker(View view) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hour, int minutes) {
-                String time = String.format("%02d:%02d", hour, minutes); //secures format hh:mm
-
-                String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
-                        (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
-                        Calendar.getInstance().get(Calendar.YEAR);
-
-                //if order is today
-                if(currentDate.equals(TVDate.getText().toString())){
-                    int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-                    int currentMinutes = Calendar.getInstance().get(Calendar.MINUTE);
-                    if(currentHour > hour){
-                        //fail because of hour
-                        new AlertDialog.Builder(CreateReservationActivity.this)
-                                .setTitle("Advarsel")
-                                .setIcon(R.drawable.ic_warning_yellow)
-                                .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
-                                .show();
-                        return;
-                    }
-                    if(currentHour == hour){
-                        if(currentMinutes > minutes){
-                            //fail because of min
-                            new AlertDialog.Builder(CreateReservationActivity.this)
-                                    .setTitle("Advarsel")
-                                    .setIcon(R.drawable.ic_warning_yellow)
-                                    .setMessage("Du må velge en tid som ikke har vært enda, eller endre datoen før du endrer tiden.")
-                                    .show();
-                            return;
-                        }
-                    }
-                }
-
-                TVTime.setText(time);
-            }
-
-        }, Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), true);
-        timePickerDialog.show();
     }
 
     @Override

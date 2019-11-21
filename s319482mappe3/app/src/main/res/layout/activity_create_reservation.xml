@@ -19,15 +19,61 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.050000012" />
 
-    <TextView
-        android:id="@+id/txt_time"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/reservationdescription"
+        android:layout_width="304dp"
+        android:layout_height="50dp"
+        android:hint="kort; Hva skal du bruke rommet til?"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.352" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="304dp"
+        android:layout_height="50dp"
+        android:hint="Navn"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
+
+    <Spinner
+        android:id="@+id/timefrom"
+        android:layout_width="240dp"
         android:layout_height="40dp"
-        android:textAlignment="textEnd"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_time"
-        app:layout_constraintTop_toTopOf="@+id/txt_date" />
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.147" />
+
+    <Spinner
+        android:id="@+id/timeto"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/dropdown"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228" />
 
     <Button
         android:id="@+id/btn_date"
@@ -39,18 +85,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/txt_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_time"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_time_picker"
-        android:onClick="openTimePicker"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

@@ -18,8 +18,8 @@ public class CreateRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_room);
 
-        ETx = findViewById(R.id.time);
-        ETy = findViewById(R.id.yfield);
+        ETx = findViewById(R.id.cordx);
+        ETy = findViewById(R.id.cordy);
         ETdescription = findViewById(R.id.description);
 
         tryGetCoordinates();
