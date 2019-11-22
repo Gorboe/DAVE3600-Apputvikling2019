@@ -1,9 +1,16 @@
+CREATE TABLE Marker (
+    MarkerID int NOT NULL AUTO_INCREMENT,
+    CoordinateX DECIMAL(65, 30) NOT NULL,
+    CoordinateY DECIMAL(65, 30) NOT NULL,
+    PRIMARY KEY(MarkerID)
+);
+
 CREATE TABLE Room (
     RoomID int NOT NULL AUTO_INCREMENT,
     Description VARCHAR(100) NOT NULL,
-    CoordinateX DECIMAL(65, 30) NOT NULL,
-    CoordinateY DECIMAL(65, 30) NOT NULL,
-    PRIMARY KEY(RoomID)
+    FKMarkerID int NOT NULL,
+    PRIMARY KEY(RoomID),
+    FOREIGN KEY (FKMarkerID) REFERENCES Marker(MarkerID)
 );
 
 CREATE TABLE Reservation (

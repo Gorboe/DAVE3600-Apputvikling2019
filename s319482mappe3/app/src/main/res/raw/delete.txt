@@ -4,6 +4,16 @@ $con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
 $inntable=$_REQUEST['Table'];
 $table=(String)$inntable;
 
+if($table=='Marker')
+{
+    $innmarkerid=$_REQUEST['Markerid'];
+
+    $markerid=(String)$innmarkerid;
+
+    $sql=mysqli_query($con,"delete from Room where FKMarkerID='$markerid';");
+    $sql=mysqli_query($con,"delete from Marker where MarkerID='$markerid';");
+}
+
 if($table=='Room')
 {
    $innroomid=$_REQUEST['Roomid'];

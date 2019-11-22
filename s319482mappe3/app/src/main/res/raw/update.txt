@@ -4,16 +4,25 @@ $con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
 $inntable=$_REQUEST['Table'];
 $table=(String)$inntable;
 
+if($table=='Marker')
+{
+       $inncoordinatex=$_REQUEST['Cordx'];
+       $inncoordinatey=$_REQUEST['Cordy'];
+       $innmarkerid=$_REQUEST['Markerid'];
+
+       $coordinatex=(String)$inncoordinatex;
+       $coordinatey=(String)$inncoordinatey;
+       $markerid=(String)$innmarkerid;
+
+       $sql=mysqli_query($con,"update Marker set CoordinateX='$coordinatex', CoordinateY='$coordinatey' where MarkerID='$markerid';");
+}
+
 if($table=='Room')
 {
    $innbeskrivelse=$_REQUEST['Beskrivelse'];
-   $inncoordinatex=$_REQUEST['Cordx'];
-   $inncoordinatey=$_REQUEST['Cordy'];
    $innroomid=$_REQUEST['Roomid'];
 
    $beskrivelse=(String)$innbeskrivelse;
-   $coordinatex=(String)$inncoordinatex;
-   $coordinatey=(String)$inncoordinatey;
    $roomid=(String)$innroomid;
 
   $sql=mysqli_query($con,"update Room set Description='$beskrivelse', CoordinateX='$coordinatex', CoordinateY='$coordinatey' where RoomID='$roomid';");

@@ -50,12 +50,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
 
-        for(Room room: Database.getInstance().getRooms()){
-            if(room == null) continue;
-            LatLng pos = new LatLng(room.getCoordinateY(), room.getCoordinateX());
-            Marker marker = mMap.addMarker(new MarkerOptions().position(pos));
-            System.out.println("ID: " + room.getRoomID());
-            markerHashMap.put(marker, room.getRoomID());
+        for(gorboe.com.s319482mappe3.enteties.Marker marker: Database.getInstance().getMarkers()){
+            if(marker == null) continue;
+            LatLng pos = new LatLng(marker.getCoordinateY(), marker.getCoordinateX());
+            Marker m = mMap.addMarker(new MarkerOptions().position(pos));
+            System.out.println("ID: " + marker.getMarkerID());
+            markerHashMap.put(m, marker.getMarkerID());
         }
 
         mMap.setMinZoomPreference(15);

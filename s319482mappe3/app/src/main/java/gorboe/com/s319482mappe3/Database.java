@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import gorboe.com.s319482mappe3.enteties.Marker;
 import gorboe.com.s319482mappe3.enteties.Reservation;
 import gorboe.com.s319482mappe3.enteties.Room;
 
@@ -17,11 +18,13 @@ public class Database {
     private static Database INSTANCE = null;
     private Server task;
     private List<Room> rooms;
+    private List<Marker> markers;
     private List<Reservation> reservations;
 
     private Database(){
         rooms = new ArrayList<>();
         reservations = new ArrayList<>();
+        markers = new ArrayList<>();
         getAllItems();
     }
 
@@ -36,6 +39,7 @@ public class Database {
     private void getAllItems(){
         task = new Server();
         rooms = new FlexList<>();
+        markers = new FlexList<>();
         reservations = new FlexList<>();
         String result;
         try{
@@ -62,12 +66,11 @@ public class Database {
                     String description = jsonObject.getString("Description");
                     Reservation reservation = new Reservation(reservationID, roomID, date, timeFrom, timeTo, name, description);
                     reservations.add(reservationID, reservation);
-                }else{
+                }else if(!jsonObject.isNull("FKMarkerID")){
                     //Is a room
                     int roomID = jsonObject.getInt("RoomID");
                     String description = jsonObject.getString("Description");
-                    double coordinateX = jsonObject.getDouble("CoordinateX");
-                    double coordinateY = jsonObject.getDouble("CoordinateY");
+                    int markerID = jsonObject.getInt("FKMarkerID");
 
                     //get reservations for this room
                     List<Reservation> currentRoomReservations = new ArrayList<>();
@@ -77,8 +80,26 @@ public class Database {
                             currentRoomReservations.add(candidate);
                         }
                     }
-                    Room room = new Room(roomID, description, coordinateX, coordinateY, currentRoomReservations);
+                    Room room = new Room(roomID, description, currentRoomReservations, markerID);
                     rooms.add(roomID, room);
+                }
+                else{
+                    //Is a marker
+                    int markerID = jsonObject.getInt("MarkerID");
+                    double coordinateX = jsonObject.getDouble("CoordinateX");
+                    double coordinateY = jsonObject.getDouble("CoordinateY");
+
+                    //get rooms for this marker
+                    List<Room> currentRooms = new ArrayList<>();
+                    for(Room candidate: rooms){
+                        if(candidate == null) continue;
+                        if(candidate.getMarkerID() == markerID){
+                            currentRooms.add(candidate);
+                        }
+                    }
+
+                    Marker marker = new Marker(markerID, coordinateX, coordinateY, currentRooms);
+                    markers.add(markerID, marker);
                 }
             }
         }catch (Exception e){
@@ -89,13 +110,35 @@ public class Database {
 
     }
 
+    public void addMarker(double coordinateX, double coordinateY){
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Marker&Cordx="
+                + coordinateX + "&Cordy=" + coordinateY);
+        getAllItems();
+    }
+
+    public void updateMarker(Marker marker){
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Marker" +
+                "&Cordx=" + marker.getCoordinateX() +
+                "&Cordy=" + marker.getCoordinateY() +
+                "&Markerid=" + marker.getMarkerID());
+        getAllItems();
+    }
+
+    public void deleteMarker(int id){
+        task = new Server();
+        task.execute("http://student.cs.hioa.no/~s319482/delete.php/?Table=Marker&Markerid=" + id);
+        getAllItems();
+    }
+
     //addRoom always call getAllItems after to update list items
-    public void addRoom(String description, double coordinateX, double coordinateY){
+    public void addRoom(String description, int markerID){
         //todo: validation
 
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Room&Beskrivelse="
-                + description + "&Cordx=" + coordinateX + "&Cordy=" + coordinateY);
+                + description + "&Markerid=" + markerID);
         getAllItems();
     }
 
@@ -105,8 +148,6 @@ public class Database {
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Room&Beskrivelse=" +
                 room.getDescription() +
-                "&Cordx=" + room.getCoordinateX() +
-                "&Cordy=" + room.getCoordinateY() +
                 "&Roomid=" + room.getRoomID());
         getAllItems();
     }
@@ -159,8 +200,16 @@ public class Database {
         return rooms.get(id);
     }
 
+    public Marker getMarker(int id){
+        return markers.get(id);
+    }
+
     public Reservation getReservation(int id){
         return reservations.get(id);
+    }
+
+    public List<Marker> getMarkers() {
+        return markers;
     }
 
     public List<String> getAvailableTimes(String date, int roomID){

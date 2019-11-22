@@ -4,17 +4,15 @@ import java.util.List;
 
 public class Room {
     private int roomID;
+    private int markerID;
     private String description;
-    private double coordinateX;
-    private double coordinateY;
     private List<Reservation> reservations;
 
-    public Room(int RoomID, String Description, double CoordinateX, double CoordinateY, List<Reservation> reservations){
+    public Room(int RoomID, String Description, List<Reservation> reservations, int markerID){
         this.roomID = RoomID;
         this.description = Description;
-        this.coordinateX = CoordinateX;
-        this.coordinateY = CoordinateY;
         this.reservations = reservations;
+        this.markerID = markerID;
     }
 
     public int getRoomID() {
@@ -25,12 +23,8 @@ public class Room {
         return description;
     }
 
-    public double getCoordinateX() {
-        return coordinateX;
-    }
-
-    public double getCoordinateY() {
-        return coordinateY;
+    public int getMarkerID() {
+        return markerID;
     }
 
     public List<Reservation> getReservations() {

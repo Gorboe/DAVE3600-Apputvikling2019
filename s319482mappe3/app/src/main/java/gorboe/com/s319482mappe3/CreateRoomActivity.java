@@ -7,14 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import gorboe.com.s319482mappe3.enteties.Marker;
 import gorboe.com.s319482mappe3.enteties.Room;
 
 public class CreateRoomActivity extends AppCompatActivity {
 
     private EditText ETx;
     private EditText ETy;
-    private EditText ETdescription;
-    private Room selected;
+    private Marker selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class CreateRoomActivity extends AppCompatActivity {
 
         ETx = findViewById(R.id.cordx);
         ETy = findViewById(R.id.cordy);
-        ETdescription = findViewById(R.id.description);
 
         tryGetCoordinates();
         tryGetRoom();
@@ -34,12 +33,11 @@ public class CreateRoomActivity extends AppCompatActivity {
         int id = intent.getIntExtra("roomID", -1);
 
         if(id != -1){
-            selected = Database.getInstance().getRoom(id);
+            selected = Database.getInstance().getMarker(id);
             String x = selected.getCoordinateX() + "";
             String y = selected.getCoordinateY() + "";
             ETx.setText(x);
             ETy.setText(y);
-            ETdescription.setText(selected.getDescription());
         }
     }
 
@@ -58,10 +56,10 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     public void addRoom(View view) {
         //todo: validate here?? also check x and y if exist marker at that loc?
-        String description = ETdescription.getText().toString();
+
         double x = Double.parseDouble(ETx.getText().toString());
         double y = Double.parseDouble(ETy.getText().toString());
-        Database.getInstance().addRoom(description, x, y);
+        //Database.getInstance().addRoom(description, x, y);
         startActivity(new Intent(this, MainActivity.class));
     }
 
@@ -75,7 +73,7 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     public void delete(View view) {
         if(selected != null){
-            Database.getInstance().deleteRoom(selected.getRoomID());
+            //Database.getInstance().deleteRoom(selected.getRoomID());
         }
         startActivity(new Intent(this, MainActivity.class));
         finish();

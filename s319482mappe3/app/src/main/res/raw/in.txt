@@ -4,17 +4,26 @@ $con=mysqli_connect('student.cs.hioa.no','s319482','','s319482');
 $inntable=$_REQUEST['Table'];
 $table=(String)$inntable;
 
+if($table=='Marker')
+{
+    $inncoordinatex=$_REQUEST['Cordx'];
+    $inncoordinatey=$_REQUEST['Cordy'];
+
+    $coordinatex=(String)$inncoordinatex;
+    $coordinatey=(String)$inncoordinatey;
+
+    $sql=mysqli_query($con,"insert into $table (CoordinateX, CoordinateY) values ('$coordinatex','$coordinatey');");
+}
+
 if($table=='Room')
 {
    $innbeskrivelse=$_REQUEST['Beskrivelse'];
-   $inncoordinatex=$_REQUEST['Cordx'];
-   $inncoordinatey=$_REQUEST['Cordy'];
+   $innmarkerid=$_REQUEST['Markerid'];
 
    $beskrivelse=(String)$innbeskrivelse;
-   $coordinatex=(String)$inncoordinatex;
-   $coordinatey=(String)$inncoordinatey;
+   $markerid=(String)$innmarkerid;
 
-  $sql=mysqli_query($con,"insert into $table (Description, CoordinateX, CoordinateY) values ('$beskrivelse','$coordinatex','$coordinatey');");
+  $sql=mysqli_query($con,"insert into $table (Description, FKMarkerID) values ('$beskrivelse','$markerid');");
 }
 
 if($table=='Reservation')
