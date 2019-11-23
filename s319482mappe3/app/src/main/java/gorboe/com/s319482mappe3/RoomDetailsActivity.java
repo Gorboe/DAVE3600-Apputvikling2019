@@ -130,6 +130,9 @@ public class RoomDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        intent.putExtra("markerID", selected.getMarkerID());
+        startActivity(intent);
         finish();
     }
 

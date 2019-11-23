@@ -54,6 +54,7 @@ public class MarkerDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(MarkerDetailsActivity.this, RoomDetailsActivity.class);
                 intent.putExtra("roomID", rooms.get(position).getRoomID());
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -68,5 +69,6 @@ public class MarkerDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateRoomActivity.class);
         intent.putExtra("markerID", selected.getMarkerID());
         startActivity(intent);
+        finish();
     }
 }

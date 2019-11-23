@@ -48,12 +48,16 @@ public class CreateRoomActivity extends AppCompatActivity {
         //TODO: validate
         if(current != null){
             //UPDATE
+            markerID = current.getMarkerID();
             current.setDescription(ETdescription.getText().toString());
             Database.getInstance().updateRoom(current);
         }else{
             //ADD
             Database.getInstance().addRoom(ETdescription.getText().toString(), markerID);
         }
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        intent.putExtra("markerID", markerID);
+        startActivity(intent);
         finish();
     }
 
@@ -61,8 +65,13 @@ public class CreateRoomActivity extends AppCompatActivity {
     public void delete(View view) {
         if(current != null){
             //DELETE
+            markerID = current.getMarkerID();
             Database.getInstance().deleteRoom(current.getRoomID());
         }
+
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        intent.putExtra("markerID", markerID);
+        startActivity(intent);
         finish();
     }
 }
