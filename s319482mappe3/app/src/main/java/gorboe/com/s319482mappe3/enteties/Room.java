@@ -1,5 +1,7 @@
 package gorboe.com.s319482mappe3.enteties;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class Room {
@@ -23,11 +25,21 @@ public class Room {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getMarkerID() {
         return markerID;
     }
 
     public List<Reservation> getReservations() {
         return reservations;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return description;
     }
 }

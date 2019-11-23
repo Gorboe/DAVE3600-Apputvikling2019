@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".CreateRoomActivity">
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_save"
+        android:onClick="addRoom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.0" />
+
     <EditText
         android:id="@+id/description"
         android:layout_width="300dp"
@@ -19,46 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/cordx"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:hint="x coordinate"
-        android:inputType="text"
-        android:maxLength="20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:layout_constraintVertical_bias="0.302" />
-
-    <EditText
-        android:id="@+id/cordy"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="104dp"
-        android:hint="y coordinate"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/cordx"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cordx"
-        app:layout_constraintVertical_bias="0.165" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/ic_save"
-        android:onClick="addRoom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cordy" />
-
     <Button
         android:id="@+id/button7"
         android:layout_width="50dp"
@@ -68,5 +41,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toTopOf="@+id/button2" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

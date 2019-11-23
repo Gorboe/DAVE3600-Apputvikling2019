@@ -1,7 +1,5 @@
 package gorboe.com.s319482mappe3;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -17,8 +15,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.HashMap;
-
-import gorboe.com.s319482mappe3.enteties.Room;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
 
@@ -77,18 +73,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onMarkerClick(Marker marker) {
         Integer id = markerHashMap.get(marker);
         System.out.println(id);
-        Intent intent = new Intent(this, RoomDetailsActivity.class);
-        intent.putExtra("roomID", id);
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        intent.putExtra("markerID", id);
         startActivity(intent);
         finish();
         return false;
     }
 
-    public void addRoom(View view) {
-        Intent intent = new Intent(this, CreateRoomActivity.class);
-        intent.putExtra("keyX", x);
-        intent.putExtra("keyY", y);
-        startActivity(intent);
+    public void addMarker(View view) {
+        Database.getInstance().addMarker(x, y);
         finish();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

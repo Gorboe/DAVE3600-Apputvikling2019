@@ -15,6 +15,11 @@ public class Marker {
         this.rooms = rooms;
     }
 
+    public Marker(double coordinateX, double coordinateY){
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+    }
+
     public double getCoordinateX() {
         return coordinateX;
     }

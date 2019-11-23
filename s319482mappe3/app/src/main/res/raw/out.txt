@@ -6,12 +6,6 @@ $sqlroom=("select * from Room");
 $sqlreservation=("select * from Reservation");
 $sqlmarker=("select * from Marker");
 
-$tabellmarker=mysqli_query($con, $sqlmarker);
-while ($row=mysqli_fetch_assoc($tabellmarker))
-{
-$output[]=$row;
-}
-
 $tabellreservation=mysqli_query($con,$sqlreservation);
 while ($row=mysqli_fetch_assoc($tabellreservation))
 {
@@ -20,6 +14,12 @@ $output[]=$row;
 
 $tabellroom=mysqli_query($con,$sqlroom);
 while ($row=mysqli_fetch_assoc($tabellroom))
+{
+$output[]=$row;
+}
+
+$tabellmarker=mysqli_query($con, $sqlmarker);
+while ($row=mysqli_fetch_assoc($tabellmarker))
 {
 $output[]=$row;
 }

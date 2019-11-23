@@ -24,7 +24,7 @@ import gorboe.com.s319482mappe3.enteties.Reservation;
 public class CreateReservationActivity extends AppCompatActivity {
 
     private int roomID;
-    private TextView TVDate;
+    private String date;
     private Spinner STimeTo;
     private Spinner STimeFrom;
     private EditText ETDescription;
@@ -41,7 +41,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reservation);
 
-        TVDate = findViewById(R.id.txt_date);
+
         STimeFrom = findViewById(R.id.timefrom);
         STimeTo = findViewById(R.id.timeto);
         ETDescription = findViewById(R.id.reservationdescription);
@@ -73,7 +73,7 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     private void populateTimeFromDropdown(){
-        List<String> availableFromTimes = Database.getInstance().getAvailableTimes(TVDate.getText().toString(), roomID);
+        List<String> availableFromTimes = Database.getInstance().getAvailableTimes(date, roomID);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableFromTimes);
         STimeFrom.setAdapter(adapter);
         if(existing_reservation != null){
@@ -108,7 +108,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         if(existing_reservation != null){
             id = existing_reservation.getReservationID();
         }
-        availableToTimes.addAll(Database.getInstance().getAvailableToTimes(TVDate.getText().toString(), fromTime, roomID, id));
+        availableToTimes.addAll(Database.getInstance().getAvailableToTimes(date, fromTime, roomID, id));
         Collections.sort(availableToTimes, new TimeComparator());
         System.out.println("TEEEEST: " + availableToTimes);
 
@@ -135,29 +135,24 @@ public class CreateReservationActivity extends AppCompatActivity {
 
         if(reservationID != -1){
             existing_reservation = Database.getInstance().getReservation(reservationID);
-            TVDate.setText(existing_reservation.getDate());
+            date = existing_reservation.getDate();
             ETDescription.setText(existing_reservation.getDescription());
             ETName.setText(existing_reservation.getName());
             times_in_existing_reservation = Database.getInstance().getTimesInReservation(existing_reservation.getReservationID());
-        }else{
-            String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
-                    (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/" + //+1 because Calender MONTH start at 0. so January = 0
-                    Calendar.getInstance().get(Calendar.YEAR);
-
-            TVDate.setText(currentDate);
         }
     }
 
     private void tryGetID(){
         Intent intent = getIntent();
         roomID = intent.getIntExtra("roomID", -1);
+        date = intent.getStringExtra("date");
     }
 
     public void addReservation(View view) {
         //todo: validation?
 
         Reservation reservation = new Reservation(roomID,
-                TVDate.getText().toString(),
+                date,
                 (String)STimeFrom.getSelectedItem(),
                 (String)STimeTo.getSelectedItem(),
                 ETName.getText().toString(),
@@ -170,7 +165,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             Database.getInstance().addReservation(reservation);
         }
 
-        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();
@@ -182,61 +177,15 @@ public class CreateReservationActivity extends AppCompatActivity {
             Database.getInstance().deleteReservation(existing_reservation.getReservationID());
         }
 
-        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();
     }
 
-    public void openDatePicker(View view) {
-        //TODO: when selected new date reinitialize dropdowns..
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-                int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-                int currentDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-
-                //VALIDATION OF SELECTED DATE
-                if(year < currentYear){
-                    new AlertDialog.Builder(CreateReservationActivity.this)
-                            .setTitle("Advarsel")
-                            .setIcon(R.drawable.ic_warning_yellow)
-                            .setMessage("Året du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
-                            .show();
-                    return;
-                }
-                if(year == currentYear){
-                    if(month < currentMonth){
-                        new AlertDialog.Builder(CreateReservationActivity.this)
-                                .setTitle("Advarsel")
-                                .setIcon(R.drawable.ic_warning_yellow)
-                                .setMessage("Måneden du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
-                                .show();
-                        return;
-                    }
-                    if(month == currentMonth){
-                        if(day < currentDayOfMonth){
-                            new AlertDialog.Builder(CreateReservationActivity.this)
-                                    .setTitle("Advarsel")
-                                    .setIcon(R.drawable.ic_warning_yellow)
-                                    .setMessage("Dagen du valgte er i fortiden, venligst velg dagens dato eller en dato som ikke har vært enda")
-                                    .show();
-                            return;
-                        }
-                    }
-                }
-
-                String date = day + "/" + (month + 1) + "/" + year; //month start at 0
-                TVDate.setText(date);
-            }
-        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
-
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, RoomDetailsActivity.class);
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();
