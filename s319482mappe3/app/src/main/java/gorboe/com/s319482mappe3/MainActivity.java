@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     //TODO: MENTION IN BRIEF THAT IN MARKERS WE CAN HAVE MANY ROOMS BUT THAT ROOM NAMES DETERMINE WHAT FLOOR THEY ARE ON AND NO VALIDATION ON THIS BECAUSE OF LITTLE TIME.
     //TODO: ICON
     //TODO: DELETE AND UPDATE MARKERS.
+    //TODO: STRINGS IN VIEWS NEED TO BE IN STRINGS FILE.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
