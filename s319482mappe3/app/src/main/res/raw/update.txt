@@ -36,6 +36,7 @@ if($table=='Reservation')
    $innname=$_REQUEST['Name'];
    $inndescription=$_REQUEST['Description'];
    $innreservationid=$_REQUEST['Reservationid'];
+   $innfmarkerid=$_REQUEST['Fmarkerid'];
 
    $date=(String)$inndate;
    $timefrom=(String)$inntimefrom;
@@ -43,8 +44,9 @@ if($table=='Reservation')
    $name=(String)$innname;
    $description=(String)$inndescription;
    $reservationid=(String)$innreservationid;
+   $fmarkerid=(String)$innfmarkerid;
 
-  $sql=mysqli_query($con,"update Reservation set Date='$date', TimeFrom='$timefrom', TimeTo='$timeto', Name='$name', Description='$description' where ReservationID='$reservationid';");
+  $sql=mysqli_query($con,"update Reservation set Date='$date', TimeFrom='$timefrom', TimeTo='$timeto', Name='$name', Description='$description', FMarkerID='$fmarkerid' where ReservationID='$reservationid';");
 }
 
 mysqli_close($con);

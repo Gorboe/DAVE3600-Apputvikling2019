@@ -156,7 +156,8 @@ public class CreateReservationActivity extends AppCompatActivity {
                 (String)STimeFrom.getSelectedItem(),
                 (String)STimeTo.getSelectedItem(),
                 ETName.getText().toString(),
-                ETDescription.getText().toString());
+                ETDescription.getText().toString(),
+                Database.getInstance().getRoom(roomID).getMarkerID());
 
         if(existing_reservation != null){
             reservation.setReservationID(existing_reservation.getReservationID());
@@ -165,7 +166,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             Database.getInstance().addReservation(reservation);
         }
 
-        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();
@@ -177,7 +178,7 @@ public class CreateReservationActivity extends AppCompatActivity {
             Database.getInstance().deleteReservation(existing_reservation.getReservationID());
         }
 
-        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();
@@ -185,7 +186,7 @@ public class CreateReservationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        Intent intent = new Intent(this, RoomDetailsActivity.class);
         intent.putExtra("roomID", roomID);
         startActivity(intent);
         finish();

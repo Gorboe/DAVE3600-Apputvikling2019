@@ -74,4 +74,12 @@ public class CreateRoomActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MarkerDetailsActivity.class);
+        intent.putExtra("markerID", markerID);
+        startActivity(intent);
+        finish();
+    }
 }

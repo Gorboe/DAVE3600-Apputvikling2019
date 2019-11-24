@@ -10,8 +10,9 @@ public class Reservation {
     private String timeTo;
     private String name;
     private String description;
+    private int fMarkerID; //JUST HERE TO MAKE IT EASY TO DELETE WITH PHP
 
-    public Reservation(int ReservationID, int RoomID, String Date, String timeFrom, String timeTo, String name, String description){
+    public Reservation(int ReservationID, int RoomID, String Date, String timeFrom, String timeTo, String name, String description, int fMarkerID){
         this.reservationID = ReservationID;
         this.roomID = RoomID;
         this.date = Date;
@@ -19,15 +20,17 @@ public class Reservation {
         this.timeTo = timeTo;
         this.name = name;
         this.description = description;
+        this.fMarkerID = fMarkerID;
     }
 
-    public Reservation(int roomID, String date, String timeFrom, String timeTo, String name, String description){
+    public Reservation(int roomID, String date, String timeFrom, String timeTo, String name, String description, int fMarkerID){
         this.roomID = roomID;
         this.date = date;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.name = name;
         this.description = description;
+        this.fMarkerID = fMarkerID;
     }
 
     public int getReservationID() {
@@ -60,6 +63,10 @@ public class Reservation {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getfMarkerID() {
+        return fMarkerID;
     }
 
     @NonNull

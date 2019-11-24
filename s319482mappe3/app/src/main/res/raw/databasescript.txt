@@ -20,7 +20,9 @@ CREATE TABLE Reservation (
     TimeFrom VARCHAR(30) NOT NULL,
     TimeTo VARCHAR(30) NOT NULL,
     Name VARCHAR(50) NOT NULL,
+    FMarkerID int NOT NULL,
     Description VARCHAR(100),
     PRIMARY KEY(ReservationID),
-    FOREIGN KEY (RoomID) REFERENCES Room(RoomID)
+    FOREIGN KEY (RoomID) REFERENCES Room(RoomID),
+    FOREIGN KEY (FMarkerID) REFERENCES Room(FKMarkerID)
 );

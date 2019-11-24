@@ -2,11 +2,14 @@ package gorboe.com.s319482mappe3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
@@ -18,6 +21,8 @@ public class MarkerDetailsActivity extends AppCompatActivity {
 
     private Marker selected;
     private ListView roomList;
+    private EditText ETx;
+    private EditText ETy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,8 @@ public class MarkerDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_marker_details);
 
         roomList = findViewById(R.id.roomList);
+        ETx = findViewById(R.id.tvx);
+        ETy = findViewById(R.id.tvy);
 
         tryGetID();
         initializeRoomList();
@@ -35,8 +42,11 @@ public class MarkerDetailsActivity extends AppCompatActivity {
         int id = intent.getIntExtra("markerID", -1);
 
         if(id != -1){
-            System.out.println("TEST: " + id);
             selected = Database.getInstance().getMarker(id);
+            String x = selected.getCoordinateX() + "";
+            String y = selected.getCoordinateY() + "";
+            ETx.setText(x);
+            ETy.setText(y);
         }
     }
 
@@ -70,5 +80,51 @@ public class MarkerDetailsActivity extends AppCompatActivity {
         intent.putExtra("markerID", selected.getMarkerID());
         startActivity(intent);
         finish();
+    }
+
+    public void save(View view) {
+        new AlertDialog.Builder(MarkerDetailsActivity.this)
+                .setTitle("Advarsel")
+                .setIcon(R.drawable.ic_warning_yellow)
+                .setMessage("Dette vil endre koordinatene til markøren du har valgt, er du sikker på at du ønsker å gjøre dette?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Database.getInstance().updateMarker(selected);
+                        Intent intent = new Intent(MarkerDetailsActivity.this, MarkerDetailsActivity.class);
+                        intent.putExtra("markerID", selected.getMarkerID());
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Nei", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    public void delete(View view) {
+        new AlertDialog.Builder(MarkerDetailsActivity.this)
+                .setTitle("Advarsel")
+                .setIcon(R.drawable.ic_warning_yellow)
+                .setMessage("Dette vil slette markøren du har valgt, er du sikker på at du ønsker å gjøre dette?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Database.getInstance().deleteMarker(selected.getMarkerID());
+                        startActivity(new Intent(MarkerDetailsActivity.this, MainActivity.class));
+                        finish();
+                    }
+                })
+                .setNegativeButton("Nei", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
 }

@@ -34,6 +34,7 @@ if($table=='Reservation')
    $inntimeto=$_REQUEST['Timeto'];
    $innname=$_REQUEST['Name'];
    $inndescription=$_REQUEST['Description'];
+   $innfmarkerid=$_REQUEST['Fmarkerid'];
 
    $romid=(String)$innromid;
    $date=(String)$inndate;
@@ -41,8 +42,9 @@ if($table=='Reservation')
    $timeto=(String)$inntimeto;
    $name=(String)$innname;
    $description=(String)$inndescription;
+   $fmarkerid=(String)$innfmarkerid;
 
-  $sql=mysqli_query($con,"insert into $table (RoomID, Date, TimeFrom, TimeTo, Name, Description) values ('$romid','$date','$timefrom','$timeto','$name','$description');");
+  $sql=mysqli_query($con,"insert into $table (RoomID, Date, TimeFrom, TimeTo, Name, Description, FMarkerID) values ('$romid','$date','$timefrom','$timeto','$name','$description', '$fmarkerid');");
 }
 
 

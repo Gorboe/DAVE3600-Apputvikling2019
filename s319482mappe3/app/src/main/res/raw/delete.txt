@@ -10,6 +10,7 @@ if($table=='Marker')
 
     $markerid=(String)$innmarkerid;
 
+    $sql=mysqli_query($con,"delete from Reservation where FKMarkerID='$markerid';");
     $sql=mysqli_query($con,"delete from Room where FKMarkerID='$markerid';");
     $sql=mysqli_query($con,"delete from Marker where MarkerID='$markerid';");
 }

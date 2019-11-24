@@ -64,7 +64,8 @@ public class Database {
                     String timeTo = jsonObject.getString("TimeTo");
                     String name = jsonObject.getString("Name");
                     String description = jsonObject.getString("Description");
-                    Reservation reservation = new Reservation(reservationID, roomID, date, timeFrom, timeTo, name, description);
+                    int fMarkerID = jsonObject.getInt("FMarkerID");
+                    Reservation reservation = new Reservation(reservationID, roomID, date, timeFrom, timeTo, name, description, fMarkerID);
                     reservations.add(reservationID, reservation);
                 }else if(!jsonObject.isNull("FKMarkerID")){
                     //Is a room
@@ -169,7 +170,8 @@ public class Database {
                 "&Timefrom=" + reservation.getTimeFrom() +
                 "&Timeto=" + reservation.getTimeTo() +
                 "&Name=" + reservation.getName() +
-                "&Description=" + reservation.getDescription());
+                "&Description=" + reservation.getDescription() +
+                "&Fmarkerid=" + reservation.getfMarkerID());
         getAllItems();
     }
 
@@ -181,7 +183,8 @@ public class Database {
                 "&Timeto=" + reservation.getTimeTo() +
                 "&Name=" + reservation.getName() +
                 "&Description=" + reservation.getDescription() +
-                "&Reservationid=" + reservation.getReservationID());
+                "&Reservationid=" + reservation.getReservationID() +
+                "&Fmarkerid=" + reservation.getfMarkerID());
         getAllItems();
     }
 
@@ -197,6 +200,7 @@ public class Database {
     }
 
     public Room getRoom(int id){
+        System.out.println(rooms + " " + id);
         return rooms.get(id);
     }
 

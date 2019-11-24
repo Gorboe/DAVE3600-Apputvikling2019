@@ -26,7 +26,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private double y;
 
     //TODO: DESIGN STUFF
-    //TODO: FIX TIME AND DATE ROOM RESERVATIONS
+    //TODO: SORT RESERVATION BY DATE->HOUR
+    //TODO: ROOM DETAILS, SHOW ROOM NAME AND MAKE IT POSSIBLE TO EDIT ROOM/DELETE
+    //TODO: VALIDATION (VERY IMPORTANT FOR ANY INPUT FIELD DO NOT ALLOW & AS THIS WILL FUCK UP PHP)
+    //TODO: MENTION IN BRIEF THAT IN MARKERS WE CAN HAVE MANY ROOMS BUT THAT ROOM NAMES DETERMINE WHAT FLOOR THEY ARE ON AND NO VALIDATION ON THIS BECAUSE OF LITTLE TIME.
+    //TODO: ICON
+    //TODO: DELETE AND UPDATE MARKERS.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
-
+        System.out.println("STUFF: " + Database.getInstance().getMarkers());
         for(gorboe.com.s319482mappe3.enteties.Marker marker: Database.getInstance().getMarkers()){
             if(marker == null) continue;
             LatLng pos = new LatLng(marker.getCoordinateY(), marker.getCoordinateX());
@@ -55,7 +60,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         mMap.setMinZoomPreference(15);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(59.91943817362552, 10.7355922879354954), 17));
     }
 
@@ -81,6 +86,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void addMarker(View view) {
+        if(TVx.getText().toString().isEmpty() || TVy.getText().toString().isEmpty()){
+            //TODO: MSG BOX TO USER THAT YOU NEED TO PRESS SOMEWHERE FIRST
+        }
         Database.getInstance().addMarker(x, y);
         finish();
         startActivity(new Intent(this, MainActivity.class));
