@@ -26,6 +26,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
     private Room selected;
     private ListView reservationList;
     private TextView TVDate;
+    private EditText ETdescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
 
         reservationList = findViewById(R.id.reservationList);
         TVDate = findViewById(R.id.txt_date);
+        ETdescription = findViewById(R.id.desc);
 
         tryGetRoom();
         initializeReservationList();
@@ -45,6 +47,7 @@ public class RoomDetailsActivity extends AppCompatActivity {
 
         if(id != -1){
             selected = Database.getInstance().getRoom(id);
+            ETdescription.setText(selected.getDescription());
         }
 
         String currentDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + "/" +
@@ -141,5 +144,11 @@ public class RoomDetailsActivity extends AppCompatActivity {
         intent.putExtra("roomID", selected.getRoomID());
         intent.putExtra("date", TVDate.getText().toString());
         startActivity(intent);
+    }
+
+    public void save(View view) {
+    }
+
+    public void delete(View view) {
     }
 }

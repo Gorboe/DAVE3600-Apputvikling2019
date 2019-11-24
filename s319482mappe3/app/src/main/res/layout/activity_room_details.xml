@@ -7,57 +7,116 @@
     tools:context=".RoomDetailsActivity">
 
     <Button
+        android:id="@+id/button10"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_save"
+        android:onClick="save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/delete_icon"
+        android:onClick="delete"
+        app:layout_constraintStart_toStartOf="@+id/button10"
+        app:layout_constraintTop_toBottomOf="@+id/button10" />
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="413dp"
+        android:layout_height="128dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_marginTop="16dp"
+        android:text="Reserver rommet: "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/reservationList"
+        app:layout_constraintTop_toBottomOf="@+id/reservationList" />
+    
+    <EditText
+        android:id="@+id/desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
+
+    <Button
         android:id="@+id/btn_date"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_date_picker"
         android:onClick="openDatePicker"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintTop_toTopOf="@+id/button6" />
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="160dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:onClick="addReservation"
         android:text="Finn ledige tider"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.709"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationList" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_date" />
 
     <ListView
         android:id="@+id/reservationList"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="294dp"
+        android:layout_height="223dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+        app:layout_constraintVertical_bias="0.01999998" />
 
     <TextView
         android:id="@+id/txt_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/btn_date"
-        app:layout_constraintEnd_toStartOf="@+id/btn_date"
+        app:layout_constraintStart_toEndOf="@+id/btn_date"
         app:layout_constraintTop_toTopOf="@+id/btn_date" />
 
+
+
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reserver rommet: "
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reservationList"
-        app:layout_constraintVertical_bias="0.38" />
+        android:text="RomNr: "
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/desc"
+        app:layout_constraintStart_toStartOf="@+id/reservationList"
+        app:layout_constraintTop_toTopOf="@+id/desc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

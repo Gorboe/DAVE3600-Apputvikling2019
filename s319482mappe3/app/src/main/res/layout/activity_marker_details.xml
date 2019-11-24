@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MarkerDetailsActivity">
 
+    <TextView
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/roomList"
         android:layout_width="300dp"
@@ -50,6 +59,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,9 +67,9 @@
         android:id="@+id/tvx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:focusable="true"
+        android:inputType="numberSigned|numberDecimal"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,19 +77,20 @@
         android:id="@+id/tvy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned|numberDecimal"
         android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:focusable="true"
+        android:inputType="numberSigned|numberDecimal"
         app:layout_constraintStart_toStartOf="@+id/tvx"
         app:layout_constraintTop_toBottomOf="@+id/tvx" />
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/ic_save"
         android:onClick="save"
+        app:layout_constraintBottom_toBottomOf="@+id/tvx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tvx"
@@ -87,13 +98,13 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/delete_icon"
         android:onClick="delete"
+        app:layout_constraintBottom_toBottomOf="@+id/tvy"
         app:layout_constraintStart_toStartOf="@+id/button8"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toTopOf="@+id/tvy" />
 
     <TextView
         android:id="@+id/textView5"
