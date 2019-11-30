@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -95,11 +96,26 @@ public class CreateReservationActivity extends AppCompatActivity {
         }else {
             fromTime = (String)STimeFrom.getSelectedItem();
         }
+        
         if(availableFromTimes.isEmpty()){
-            //TODO: new dialog!
+            new AlertDialog.Builder(CreateReservationActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow)
+                    .setMessage("Det er ingen ledige tider for denne dagen!")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(CreateReservationActivity.this, RoomDetailsActivity.class);
+                            intent.putExtra("roomID", roomID);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .show();
+        }else {
+            populateTimeToDropdown(fromTime);
         }
-
-        populateTimeToDropdown(fromTime);
     }
 
     private void populateTimeToDropdown(String fromTime){
