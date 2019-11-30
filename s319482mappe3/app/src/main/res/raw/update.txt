@@ -25,7 +25,7 @@ if($table=='Room')
    $beskrivelse=(String)$innbeskrivelse;
    $roomid=(String)$innroomid;
 
-  $sql=mysqli_query($con,"update Room set Description='$beskrivelse', CoordinateX='$coordinatex', CoordinateY='$coordinatey' where RoomID='$roomid';");
+  $sql=mysqli_query($con,"update Room set Description='$beskrivelse' where RoomID='$roomid';");
 }
 
 if($table=='Reservation')

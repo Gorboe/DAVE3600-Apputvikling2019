@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -147,8 +148,50 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
+        new AlertDialog.Builder(RoomDetailsActivity.this)
+                .setTitle("Advarsel")
+                .setIcon(R.drawable.ic_warning_yellow)
+                .setMessage("Dette vil endre beskrivelsen til rommet du har valgt, er du sikker på at du ønsker å gjøre dette?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(RoomDetailsActivity.this, RoomDetailsActivity.class);
+                        intent.putExtra("roomID", selected.getRoomID());
+                        Database.getInstance().updateRoom(selected.getRoomID(), ETdescription.getText().toString());
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Nei", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
 
     public void delete(View view) {
+        new AlertDialog.Builder(RoomDetailsActivity.this)
+                .setTitle("Advarsel")
+                .setIcon(R.drawable.ic_warning_yellow)
+                .setMessage("Dette vil slette rommet du har valgt, er du sikker på at du ønsker å gjøre dette?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(RoomDetailsActivity.this, MarkerDetailsActivity.class);
+                        intent.putExtra("markerID", selected.getMarkerID());
+                        Database.getInstance().deleteRoom(selected.getMarkerID());
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("Nei", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .show();
     }
 }

@@ -13,7 +13,6 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     //TODO: maybe as a popup? because all we need is description
     private EditText ETdescription;
-    private Room current;
     private int markerID;
 
     @Override
@@ -23,21 +22,12 @@ public class CreateRoomActivity extends AppCompatActivity {
 
         ETdescription = findViewById(R.id.description);
 
-        tryGetRoom();
+        tryGetMarkerID();
     }
 
-    private void tryGetRoom(){
+    public void tryGetMarkerID(){
         Intent intent = getIntent();
         int mid = intent.getIntExtra("markerID", -1);
-        int id = intent.getIntExtra("roomID", -1);
-
-        //if old room
-        if(id != -1){
-            current = Database.getInstance().getRoom(id);
-            ETdescription.setText(current.getDescription());
-        }
-
-        //if new room
         if(mid != -1){
             markerID = mid;
         }
@@ -46,15 +36,8 @@ public class CreateRoomActivity extends AppCompatActivity {
     //(Save)
     public void addRoom(View view) {
         //TODO: validate
-        if(current != null){
-            //UPDATE
-            markerID = current.getMarkerID();
-            current.setDescription(ETdescription.getText().toString());
-            Database.getInstance().updateRoom(current);
-        }else{
-            //ADD
-            Database.getInstance().addRoom(ETdescription.getText().toString(), markerID);
-        }
+        //ADD
+        Database.getInstance().addRoom(ETdescription.getText().toString(), markerID);
         Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("markerID", markerID);
         startActivity(intent);
@@ -63,12 +46,6 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     //(Exit)
     public void delete(View view) {
-        if(current != null){
-            //DELETE
-            markerID = current.getMarkerID();
-            Database.getInstance().deleteRoom(current.getRoomID());
-        }
-
         Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("markerID", markerID);
         startActivity(intent);
