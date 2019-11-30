@@ -144,8 +144,6 @@ public class Database {
     }
 
     public void updateRoom(int roomID, String description){
-        //http://student.cs.hioa.no/~s319482/jsonupdate.php/?Table=Room&Beskrivelse=noenytt&Cordx=53.1&Cordy=32.5&Roomid=3
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Room&Beskrivelse=" +
                 description +

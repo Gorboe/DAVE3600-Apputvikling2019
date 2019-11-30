@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,8 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import gorboe.com.s319482mappe3.enteties.Reservation;
@@ -59,14 +63,31 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     private void initializeReservationList(){
-        List<Reservation> res;
-        if(selected != null){
-            res = selected.getReservations();
-        }else{
-            res = new ArrayList<>();
+        List<Reservation> res = selected.getReservations();
+
+        //REMOVE OLD RESERVATIONS
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Date todayDate = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            for(Reservation reservation: res){
+                Date reservationDate;
+                try {
+                    reservationDate = sdf.parse(reservation.getDate() + " " + reservation.getTimeFrom());
+                } catch (ParseException e) {
+                    continue;
+                }
+                if(reservationDate.before(todayDate)){
+                    Database.getInstance().deleteReservation(reservation.getReservationID()); //delete reservation from database and not list
+                    selected.removeReservation(reservation); //remove from runtime
+                }
+            }
         }
 
-        final List<Reservation> reservations = res;
+        final List<Reservation> reservations = selected.getReservations();
+
+        //SORT RESERVATIONS
+        Collections.sort(reservations, new DateComparator());
+
         ArrayAdapter<Reservation> arrayAdapter = new ArrayAdapter<>
                 (this, android.R.layout.simple_list_item_1, reservations);
 

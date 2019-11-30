@@ -2,6 +2,7 @@ package gorboe.com.s319482mappe3;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -26,10 +27,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private double y;
 
     //TODO: DESIGN STUFF
-    //TODO: SORT RESERVATION BY DATE->HOUR
-    //TODO: ROOM DETAILS, SHOW ROOM NAME AND MAKE IT POSSIBLE TO EDIT ROOM/DELETE
     //TODO: VALIDATION (VERY IMPORTANT FOR ANY INPUT FIELD DO NOT ALLOW & AS THIS WILL FUCK UP PHP)
     //TODO: MENTION IN BRIEF THAT IN MARKERS WE CAN HAVE MANY ROOMS BUT THAT ROOM NAMES DETERMINE WHAT FLOOR THEY ARE ON AND NO VALIDATION ON THIS BECAUSE OF LITTLE TIME.
+    //TODO: MENTION IN BRIEF IF YOU PICK TODAYS DATE AND PICK A TIME THAT HAS ALREADY BEEN IT WONT COME UP IN LIST
     //TODO: ICON
     //TODO: STRINGS IN VIEWS NEED TO BE IN STRINGS FILE.
 
@@ -50,7 +50,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setOnMapClickListener(this);
         mMap.setOnMarkerClickListener(this);
-        System.out.println("STUFF: " + Database.getInstance().getMarkers());
         for(gorboe.com.s319482mappe3.enteties.Marker marker: Database.getInstance().getMarkers()){
             if(marker == null) continue;
             LatLng pos = new LatLng(marker.getCoordinateY(), marker.getCoordinateX());
@@ -77,7 +76,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(Marker marker) {
         Integer id = markerHashMap.get(marker);
-        System.out.println(id);
         Intent intent = new Intent(this, MarkerDetailsActivity.class);
         intent.putExtra("markerID", id);
         startActivity(intent);
@@ -87,7 +85,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void addMarker(View view) {
         if(TVx.getText().toString().isEmpty() || TVy.getText().toString().isEmpty()){
-            //TODO: MSG BOX TO USER THAT YOU NEED TO PRESS SOMEWHERE FIRST
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Advarsel")
+                    .setIcon(R.drawable.ic_warning_yellow)
+                    .setMessage("Du må først trykke på kartet der du ønsker din markør for å hente ut koordinatene")
+                    .show();
+            return;
         }
         Database.getInstance().addMarker(x, y);
         finish();

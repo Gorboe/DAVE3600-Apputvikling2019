@@ -37,6 +37,10 @@ public class Room {
         return reservations;
     }
 
+    public void removeReservation(Reservation reservation){
+        reservations.remove(reservation);
+    }
+
     @NonNull
     @Override
     public String toString() {
