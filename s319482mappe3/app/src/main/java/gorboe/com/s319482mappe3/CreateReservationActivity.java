@@ -110,7 +110,6 @@ public class CreateReservationActivity extends AppCompatActivity {
         }
         availableToTimes.addAll(Database.getInstance().getAvailableToTimes(date, fromTime, roomID, id));
         Collections.sort(availableToTimes, new TimeComparator());
-        System.out.println("TEEEEST: " + availableToTimes);
 
         if(availableToTimes.isEmpty()){
             //TODO: new dialog!
@@ -149,8 +148,10 @@ public class CreateReservationActivity extends AppCompatActivity {
     }
 
     public void addReservation(View view) {
-        //todo: validation?
-
+        if(!Validator.validateName(ETName.getText().toString(), this) ||
+           !Validator.validateNotEmpty(ETDescription.getText().toString(), this)){
+            return;
+        }
         Reservation reservation = new Reservation(roomID,
                 date,
                 (String)STimeFrom.getSelectedItem(),

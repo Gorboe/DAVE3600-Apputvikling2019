@@ -83,6 +83,11 @@ public class MarkerDetailsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
+        if(!Validator.validateCoordinate(ETx.getText().toString(), this) ||
+           !Validator.validateCoordinate(ETy.getText().toString(), this)){
+            return;
+        }
+
         new AlertDialog.Builder(MarkerDetailsActivity.this)
                 .setTitle("Advarsel")
                 .setIcon(R.drawable.ic_warning_yellow)

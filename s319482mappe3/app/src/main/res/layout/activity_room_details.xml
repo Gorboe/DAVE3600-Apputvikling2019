@@ -58,6 +58,7 @@
         android:id="@+id/desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLength="15"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintStart_toEndOf="@+id/textView2"

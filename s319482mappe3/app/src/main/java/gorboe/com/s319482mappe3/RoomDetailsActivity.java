@@ -169,6 +169,9 @@ public class RoomDetailsActivity extends AppCompatActivity {
     }
 
     public void save(View view) {
+        if(!Validator.validateNotEmpty(ETdescription.getText().toString(), this)){
+            return;
+        }
         new AlertDialog.Builder(RoomDetailsActivity.this)
                 .setTitle("Advarsel")
                 .setIcon(R.drawable.ic_warning_yellow)

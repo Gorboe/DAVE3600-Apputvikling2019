@@ -35,7 +35,9 @@ public class CreateRoomActivity extends AppCompatActivity {
 
     //(Save)
     public void addRoom(View view) {
-        //TODO: validate
+        if(!Validator.validateNotEmpty(ETdescription.getText().toString(), this)){
+            return;
+        }
         //ADD
         Database.getInstance().addRoom(ETdescription.getText().toString(), markerID);
         Intent intent = new Intent(this, MarkerDetailsActivity.class);

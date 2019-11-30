@@ -8,15 +8,31 @@ import java.util.regex.Pattern;
 public class Validator {
 
     //todo: coordinates form: xx.xxxxx or x.xxxx or xxx.xxxx only numbers and 1 .
-
-
-    public static boolean validateNotEmpty(String name, Context context){
+    public static boolean validateCoordinate(String name, Context context){
         if(name.isEmpty()){
-            displayWarningMessage("Navn kan ikke være et tomt felt.", context);
+            displayWarningMessage("Koordinat kan ikke være et tomt felt.", context);
             return false;
         }
 
-        if(!Pattern.matches("[A-ZÆØÅa-zæøå 1-9,.]+", name)){
+        if(!Pattern.matches("[0-9]{1,3}.[0-9]+", name) &&
+           !Pattern.matches("-[0-9]{1,3}.[0-9]+", name) &&
+           !Pattern.matches("[0-9]{1,3}", name) &&
+           !Pattern.matches("-[0-9]{1,3}", name)){
+            displayWarningMessage("Kan inneholde 1-3tall før punktum og så mange du ønsker etter punktum. " +
+                    "Ekempel på gyldige koordinater: -32.323 eller 176.3232", context);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateNotEmpty(String name, Context context){
+        if(name.isEmpty()){
+            displayWarningMessage("Kan ikke være et tomt felt.", context);
+            return false;
+        }
+
+        if(!Pattern.matches("[A-ZÆØÅa-zæøå 0-9,.]+", name)){
             displayWarningMessage("Kan bare inneholde store bokstaver, små bokstaver og tall. Symboler er ikke lov!", context);
             return false;
         }
