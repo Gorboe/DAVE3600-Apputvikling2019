@@ -58,9 +58,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         STimeFrom.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("PRESSED");
                 if(position != null && position != i) {
-                    System.out.println("TEST:::" + adapterView.getItemAtPosition(i).toString());
                     populateTimeToDropdown(adapterView.getItemAtPosition(i).toString());
                 }
                 position = i;
@@ -96,7 +94,7 @@ public class CreateReservationActivity extends AppCompatActivity {
         }else {
             fromTime = (String)STimeFrom.getSelectedItem();
         }
-        
+
         if(availableFromTimes.isEmpty()){
             new AlertDialog.Builder(CreateReservationActivity.this)
                     .setTitle("Advarsel")
@@ -127,9 +125,6 @@ public class CreateReservationActivity extends AppCompatActivity {
         availableToTimes.addAll(Database.getInstance().getAvailableToTimes(date, fromTime, roomID, id));
         Collections.sort(availableToTimes, new TimeComparator());
 
-        if(availableToTimes.isEmpty()){
-            //TODO: new dialog!
-        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, availableToTimes);
         STimeTo.setAdapter(adapter);
         if(isInitialTimeTo && existing_reservation != null){
