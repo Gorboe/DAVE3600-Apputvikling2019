@@ -118,12 +118,12 @@ public class Database {
         getAllItems();
     }
 
-    public void updateMarker(Marker marker){
+    public void updateMarker(String x, String y, int markerID){
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/update.php/?Table=Marker" +
-                "&Cordx=" + marker.getCoordinateX() +
-                "&Cordy=" + marker.getCoordinateY() +
-                "&Markerid=" + marker.getMarkerID());
+                "&Cordx=" + x +
+                "&Cordy=" + y +
+                "&Markerid=" + markerID);
         getAllItems();
     }
 

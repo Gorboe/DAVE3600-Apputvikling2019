@@ -90,7 +90,7 @@ public class MarkerDetailsActivity extends AppCompatActivity {
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Database.getInstance().updateMarker(selected);
+                        Database.getInstance().updateMarker(ETx.getText().toString(), ETy.getText().toString(), selected.getMarkerID());
                         Intent intent = new Intent(MarkerDetailsActivity.this, MarkerDetailsActivity.class);
                         intent.putExtra("markerID", selected.getMarkerID());
                         startActivity(intent);
