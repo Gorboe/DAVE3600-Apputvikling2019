@@ -26,11 +26,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private double x;
     private double y;
 
-    //TODO: DESIGN STUFF
-    //TODO: MENTION IN BRIEF THAT IN MARKERS WE CAN HAVE MANY ROOMS BUT THAT ROOM NAMES DETERMINE WHAT FLOOR THEY ARE ON AND NO VALIDATION ON THIS BECAUSE OF LITTLE TIME.
-    //TODO: MENTION IN BRIEF IF YOU PICK TODAYS DATE AND PICK A TIME THAT HAS ALREADY BEEN IT WONT COME UP IN LIST
+    //TODO: ADD DUMMY DATA
+    //TODO: REMOVE SYSTEM OUT PRINTS
     //TODO: ICON
-    //TODO: STRINGS IN VIEWS NEED TO BE IN STRINGS FILE.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             if(marker == null) continue;
             LatLng pos = new LatLng(marker.getCoordinateY(), marker.getCoordinateX());
             Marker m = mMap.addMarker(new MarkerOptions().position(pos));
-            System.out.println("ID: " + marker.getMarkerID());
             markerHashMap.put(m, marker.getMarkerID());
         }
 

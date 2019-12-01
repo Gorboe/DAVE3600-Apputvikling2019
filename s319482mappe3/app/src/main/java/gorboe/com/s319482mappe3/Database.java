@@ -36,7 +36,7 @@ public class Database {
     }
 
     //getAllItems
-    private void getAllItems(){
+    public void getAllItems(){
         task = new Server();
         rooms = new FlexList<>();
         markers = new FlexList<>();

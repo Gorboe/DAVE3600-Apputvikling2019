@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-    //todo: coordinates form: xx.xxxxx or x.xxxx or xxx.xxxx only numbers and 1 .
     public static boolean validateCoordinate(String name, Context context){
         if(name.isEmpty()){
             displayWarningMessage("Koordinat kan ikke være et tomt felt.", context);
