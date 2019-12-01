@@ -69,10 +69,8 @@ public class RoomDetailsActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             Date todayDate = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
-            System.out.println("TEST: " + res);
             if(res != null && !res.isEmpty())
             for(Reservation reservation: res){
-                System.out.println("TESTYY: " + reservation);
                 Date reservationDate;
                 try {
                     reservationDate = sdf.parse(reservation.getDate() + " " + reservation.getTimeTo());
@@ -80,10 +78,8 @@ public class RoomDetailsActivity extends AppCompatActivity {
                     continue;
                 }
                 if(reservationDate.before(todayDate)){
-                    System.out.println("THIS HAPPENS: " + todayDate + " " + reservation);
                     Database.getInstance().deleteReservation(reservation.getReservationID()); //delete reservation from database and not list
                 }
-                System.out.println("DONE WITH: " + reservation.getName());
             }
         }
         Database.getInstance().getAllItems();

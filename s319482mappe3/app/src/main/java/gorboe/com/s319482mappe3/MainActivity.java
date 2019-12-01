@@ -26,9 +26,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private double x;
     private double y;
 
-    //TODO: ADD DUMMY DATA
-    //TODO: REMOVE SYSTEM OUT PRINTS
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
