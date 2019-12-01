@@ -51,7 +51,7 @@
         android:layout_marginTop="8dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:text="Reserver rommet: "
+        android:text="@string/reservation"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/reservationList"
@@ -85,7 +85,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimaryLight"
         android:onClick="addReservation"
-        android:text="Finn ledige tider"
+        android:text="@string/btn_find_reservations"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,12 +114,11 @@
         app:layout_constraintTop_toTopOf="@+id/btn_date" />
 
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RomNr: "
+        android:text="@string/room_nr"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/desc"

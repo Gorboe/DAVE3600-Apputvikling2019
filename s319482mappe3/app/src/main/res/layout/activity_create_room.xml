@@ -27,7 +27,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:hint="room number (short description)"
+        android:hint="@string/room_number"
         android:inputType="text|textMultiLine"
         android:maxLength="15"
         app:layout_constraintEnd_toEndOf="parent"

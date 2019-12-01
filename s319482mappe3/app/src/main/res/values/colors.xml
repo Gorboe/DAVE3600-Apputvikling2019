@@ -5,4 +5,5 @@
     <color name="colorPrimaryLight">#5e77c1</color>
     <color name="colorAccent">#000</color>
     <color name="white">#FFFFFF</color>
+    <color name="green">#fcd880</color>
 </resources>

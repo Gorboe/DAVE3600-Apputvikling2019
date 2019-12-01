@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">s319482mappe3</string>
+    <string name="prompt_reservation_description">kort; hva skal du bruke rommet til?</string>
+    <string name="name">Navn</string>
+    <string name="room_number">Rom nummer (kort besrkivelse)</string>
+    <string name="room">Rom:</string>
+    <string name="reservation">Reserver rommet:</string>
+    <string name="btn_find_reservations">Finn ledige tider</string>
+    <string name="x">x:</string>
+    <string name="y">y:</string>
+    <string name="prompt_x">x koordinat</string>
+    <string name="prompt_y">y koordinat</string>
+    <string name="room_nr">Rom nummer:</string>
 </resources>
