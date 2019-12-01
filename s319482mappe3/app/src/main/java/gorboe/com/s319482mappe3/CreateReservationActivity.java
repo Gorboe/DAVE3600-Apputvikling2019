@@ -90,7 +90,6 @@ public class CreateReservationActivity extends AppCompatActivity {
                 }
             }
             fromTime = (String)STimeFrom.getSelectedItem();
-            System.out.println(fromTime);
         }else {
             fromTime = (String)STimeFrom.getSelectedItem();
         }

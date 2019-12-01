@@ -12,8 +12,6 @@ import gorboe.com.s319482mappe3.enteties.Marker;
 import gorboe.com.s319482mappe3.enteties.Reservation;
 import gorboe.com.s319482mappe3.enteties.Room;
 
-//TODO: VALIDATION NOT ALLOW & SIGN IN ANY FIELDS WILL FUCK UP PHP.
-
 public class Database {
     private static Database INSTANCE = null;
     private Server task;
@@ -45,7 +43,6 @@ public class Database {
         try{
             result = task.execute("http://student.cs.hioa.no/~s319482/out.php").get();
         }catch (Exception e){
-            //todo: catch
             System.out.println("unable to get items async");
             return;
         }
@@ -104,7 +101,6 @@ public class Database {
                 }
             }
         }catch (Exception e){
-            //todo: catch
             System.out.println("unable to create jasonobjects");
             return;
         }
@@ -135,8 +131,6 @@ public class Database {
 
     //addRoom always call getAllItems after to update list items
     public void addRoom(String description, int markerID){
-        //todo: validation
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Room&Beskrivelse="
                 + description + "&Markerid=" + markerID);
@@ -159,8 +153,6 @@ public class Database {
 
     //addReservation always call getAllItems after to update list items
     public void addReservation(Reservation reservation){
-        //todo: validation (maybe to here? but in creates)
-
         task = new Server();
         task.execute("http://student.cs.hioa.no/~s319482/in.php/?Table=Reservation&Romid="
                 + reservation.getRoomID() +
@@ -198,7 +190,6 @@ public class Database {
     }
 
     public Room getRoom(int id){
-        System.out.println(rooms + " " + id);
         return rooms.get(id);
     }
 
@@ -312,7 +303,6 @@ public class Database {
                 possibleTimes.add(time);
             }
         }
-        System.out.println("STEP 5: " + possibleTimes);
 
         //6. Get the next times max 4hours
         int counter = 0;
@@ -325,7 +315,6 @@ public class Database {
                 times.add(time);
             }
         }
-        System.out.println("STEP 6: " + times);
         return times;
     }
 

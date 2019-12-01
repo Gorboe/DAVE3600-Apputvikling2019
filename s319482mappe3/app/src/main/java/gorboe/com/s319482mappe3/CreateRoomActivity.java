@@ -11,7 +11,6 @@ import gorboe.com.s319482mappe3.enteties.Room;
 
 public class CreateRoomActivity extends AppCompatActivity {
 
-    //TODO: maybe as a popup? because all we need is description
     private EditText ETdescription;
     private int markerID;
 

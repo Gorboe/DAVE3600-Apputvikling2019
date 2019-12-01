@@ -155,8 +155,6 @@ public class RoomDetailsActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    //TODO: DELETE ROOM REMEMBER TO ALSO DELETE ALL RESERVATIONS UNDER THAT ROOM.
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MarkerDetailsActivity.class);
